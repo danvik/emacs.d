@@ -64,6 +64,7 @@
 
 (use-package defuns
   :load-path "lisp/"
+  :demand
   :bind
   (("M-s o" . occur-dwim)
    ("C-M-=" . align-to-equals)
