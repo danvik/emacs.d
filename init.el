@@ -384,7 +384,7 @@
                (projectile-relevant-known-projects))
        projectile-known-projects)
      :action  #'my-projectile-eyebrowse))
-  
+
   (defun my-close-all-other-slots ()
     (interactive)
     (let ((all-slots (mapcar 'car (eyebrowse--get 'window-configs)))
@@ -423,14 +423,14 @@
              ("7" . eyebrowse-switch-to-window-config-7)
              ("8" . eyebrowse-switch-to-window-config-8)
              ("9" . eyebrowse-switch-to-window-config-9))
-  
+
   (setq eyebrowse-mode-line-style 'smart)
   (setq eyebrowse-close-window-config-prompt t)
   (setq eyebrowse-new-workspace t)
 
   (setq eyebrowse-keymap-prefix (kbd "C-c l"))
   (setq eyebrowse-wrap-around t)
-  
+
   (eyebrowse-mode t))
 
 ;;; projectile
@@ -445,7 +445,7 @@
   (add-to-list 'projectile-globally-ignored-directories "deps")
   (add-to-list 'projectile-globally-ignored-directories "node_modules")
   :init
-  (define-key key-translation-map (kbd "M-p") (kbd "C-c p"))
+
   ;; TODO: add support for this when not in git project
   (setq projectile-use-git-grep t
         projectile-completion-system 'ivy)
@@ -638,7 +638,14 @@
           ((neotree-dir default-directory))))
 
   (setq neo-theme 'nerd)
-  (setq neo-window-width 35))
+  (setq neo-window-width 35)
+
+  ;; https://www.emacswiki.org/emacs/NeoTree#toc8
+  (when neo-persist-show
+    (add-hook 'popwin:before-popup-hook
+              (lambda () (setq neo-persist-show nil)))
+    (add-hook 'popwin:after-popup-hook
+              (lambda () (setq neo-persist-show t)))))
 
 ;;; golang
 
