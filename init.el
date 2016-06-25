@@ -677,9 +677,7 @@
           ((neotree-dir default-directory))))
 
   (setq neo-theme 'nerd)
-  (setq neo-window-width 35)
-  (when (fboundp 'evil-set-initial-state)
-    (evil-set-initial-state 'neotree-mode 'emacs)))
+  (setq neo-window-width 35))
 
 ;;; golang
 
