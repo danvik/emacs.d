@@ -473,11 +473,14 @@
 (use-package projectile
   ;; NOTE: handled by smart-mode-line
   :diminish projectile-mode
+  :bind (("M-7" . projectile-switch-to-buffer-other-window)
+         ("M-8" . projectile-switch-to-buffer))
   :config
   (add-to-list 'projectile-globally-ignored-directories "_build")
   (add-to-list 'projectile-globally-ignored-directories "deps")
   (add-to-list 'projectile-globally-ignored-directories "node_modules")
   :init
+  (define-key key-translation-map (kbd "M-p") (kbd "C-c p"))
   ;; TODO: add support for this when not in git project
   (setq projectile-use-git-grep t
         projectile-completion-system 'ivy)
