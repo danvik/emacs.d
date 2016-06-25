@@ -26,7 +26,6 @@
 (depends-on "easy-kill")
 (depends-on "editorconfig")
 (depends-on "elixir-mode")
-(depends-on "embrace")
 (depends-on "epl")
 (depends-on "erlang")
 (depends-on "exec-path-from-shell")

@@ -829,12 +829,6 @@
   (setq alchemist-goto-elixir-source-dir "/users/daniel/Downloads/elixir-1.2.3/")
   )
 
-;;; embrace
-
-(use-package embrace
-  :disabled t
-  :bind ("C-c s" . embrace-commander))
-
 ;;; misc
 
 (bind-keys
