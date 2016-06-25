@@ -7,7 +7,6 @@
 (depends-on "ag")
 (depends-on "alchemist")
 (depends-on "async")
-(depends-on "auctex")
 (depends-on "avy")
 (depends-on "bind-key")
 (depends-on "browse-kill-ring")
