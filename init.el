@@ -566,26 +566,6 @@
   (add-hook 'org-mode-hook 'smartscan-mode)
   (add-hook 'yaml-mode-hook 'smartscan-mode))
 
-;;; god-mode
-
-(use-package god-mode
-  :disabled t
-  ;; https://github.com/chrisdone/god-mode/issues/77
-  :config
-  (progn
-    (when (memq window-system '(mac ns))
-      (bind-key "<escape>" 'god-local-mode))
-    (define-key god-local-mode-map (kbd "i") 'god-local-mode)
-    (define-key god-local-mode-map (kbd ".") 'repeat)
-    (add-hook 'god-mode-enabled-hook
-              (lambda ()
-                (local-set-key (kbd "V") 'scroll-down-command)
-                (hl-line-mode 1)))
-    (add-hook 'god-mode-disabled-hook
-              (lambda ()
-                (local-set-key (kbd "V") 'self-insert-command)
-                (hl-line-mode -1)))))
-
 ;;; ace-window
 
 (use-package ace-window
