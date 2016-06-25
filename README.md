@@ -20,6 +20,22 @@ $ cd ~/.emacs.d
 $ cask
 ```
 
+### Run Emacs as service
+
+The `$ emacs --daemon` starts a daemon that can be connected to by using `$ emacsclient`.
+
+Using [homebrew-servies](https://github.com/Homebrew/homebrew-services) that integrates with `launchctl` this can be a bit simplified.
+
+Do `$ brew tap homebrew/services` and then Emacs daemon can be started with `$ brew services start emacs`
+
+Some handy aliases for this
+
+```sh
+alias ec="emacsclient -a '' -c -n"
+alias e="emacsclient -a '' -n"
+alias et="emacsclient -a '' -t"
+```
+
 ## Description of some of the packages used
 
 ### General
@@ -29,7 +45,7 @@ Search in buffers with `C-s` using [Swiper](https://github.com/abo-abo/swiper).
 
 [counsel](https://github.com/abo-abo/swiper) uses [Ivy](https://github.com/abo-abo/swiper) and provides commands like `counsel-git-grep` for fast grep in a git repository and `counsel-M-x` that replaces emacs `execute-extended-command`.
 
-[Org mode](http://orgmode.org/) is enhanced with vi-like bindings with [worf](https://github.com/abo-abo/worf) and prettified with [org-bullets](https://github.com/sabof/org-bullets). 
+[Org mode](http://orgmode.org/) is enhanced with vi-like bindings with [worf](https://github.com/abo-abo/worf) and prettified with [org-bullets](https://github.com/sabof/org-bullets).
 
 Package [ox-twbs](https://github.com/marsmining/ox-twbs) exports org-mode files as HTML compatible with Twitter Bootstrap.
 
@@ -43,7 +59,7 @@ Kill text using [easy-kill](https://github.com/leoliu/easy-kill) with `M-w` foll
 
 Select and edit symbol or region using [iedit](https://github.com/victorhge/iedit). Bound to `C-;`.
 
-Multiple cursors using [multiple-cursors](https://github.com/magnars/multiple-cursors.el). 
+Multiple cursors using [multiple-cursors](https://github.com/magnars/multiple-cursors.el).
 
 Text pairing with [smartparens](https://github.com/Fuco1/smartparens).
 
@@ -109,7 +125,7 @@ Jump quickly to lines, characters, words with [avy](https://github.com/abo-abo/a
 
 Better window switching with [ace-window](https://github.com/abo-abo/ace-window).
 
-Manage popup windows and show them in a smaller window than normal with [popwin-el](https://github.com/m2ym/popwin-el). 
+Manage popup windows and show them in a smaller window than normal with [popwin-el](https://github.com/m2ym/popwin-el).
 Make them go away with `C-g` and re-open them in their normal view with `C-c w C-o`.
 
 Window config handling using [eyebrowse](https://github.com/wasamasa/eyebrowse).
@@ -164,11 +180,4 @@ Use `ibuffer` to list buffers and [ibuffer-vc](http://github.com/purcell/ibuffer
 export EDITOR="emacsclient -a ''"
 export GIT_EDITOR="emacsclient -a ''"
 export SVN_EDITOR="emacsclient -a ''"
-alias ec="emacsclient -a '' -c -n"
-alias e="emacsclient -a '' -n"
-alias et="emacsclient -a '' -t"
 ```
-
-## Running as daemon
-
-`emacs --daemon`
