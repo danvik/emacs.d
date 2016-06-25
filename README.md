@@ -4,7 +4,9 @@
 
 ### Install Emacs
 
-`$ brew install emacs --HEAD --use-git-head --cocoa --srgb`
+For stable `$ brew install emacs --with-cocoa --srgb`
+
+For latest `$ brew install emacs --HEAD --use-git-head --with-cocoa --srgb`
 
 ### Install [Cask](https://github.com/cask/cask)
 
@@ -71,9 +73,9 @@ Besides the built in `ruby-mode` some other packages makes editing Ruby code eas
 
 [bundler](https://github.com/tobiassvn/bundler.el) interacts with Bundler for Ruby. Use `bundle-open` to open a dired buffer for specific gem.
 
-[yard-mode](https://github.com/pd/yard-mode.el) syntax highlighting for YARD style documentation.
+[yard-mode](https://github.com/pd/yard-mode.el) syntax highlighting and editing of [YARD](http://yardoc.org/) documentation.
 
-[inf-ruby](http://github.com/nonsequitur/inf-ruby) ruby repl.
+[inf-ruby](http://github.com/nonsequitur/inf-ruby) Ruby repl.
 
 Use the correct Ruby version for a buffer by calling `rvm-activate-corresponding-ruby` provided by  [rvm](https://github.com/senny/rvm.el).
 
@@ -128,7 +130,7 @@ Help on key bindings with [which-key](https://github.com/justbur/emacs-which-key
 
 Stats on commands used [keyfreq](https://github.com/dacap/keyfreq).
 
-With [hydra](https://github.com/abo-abo/hydra) it easy to bind shortcuts to just one prefix key.
+With [hydra](https://github.com/abo-abo/hydra) it is easy to bind shortcuts to just one prefix key.
 
 [undo-tree](http://www.dr-qubit.org/tags/computing-code-emacs.html) makes it easy to undo and redo.
 
@@ -150,6 +152,7 @@ Use `ibuffer` to list buffers and [ibuffer-vc](http://github.com/purcell/ibuffer
 - [Inconsolata font](http://www.levien.com/type/myfonts/inconsolata.html)
 - [rubocop](https://github.com/bbatsov/rubocop) Ruby style checker
 - [markdown](https://daringfireball.net/projects/markdown/) `$ brew install markdown`
+- [gnupg](https://www.gnupg.org) `brew install gnupg`
 
 ## Handy stuff
 
