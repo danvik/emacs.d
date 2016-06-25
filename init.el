@@ -355,7 +355,6 @@
   (add-hook 'yaml-mode-hook 'highlight-numbers-mode))
 
 (use-package which-key
-  :disabled t
   :diminish which-key-mode
   :init
   (setq which-key-popup-type 'side-window
