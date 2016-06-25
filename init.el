@@ -796,7 +796,6 @@
  ("M-0"   . next-buffer)
  ("M-1"   . delete-other-windows)
  ("M-2"   . company-complete)
- ("C-c e" . eshell)
  ("C-M-0" . delete-window)
  ("C-x O" . other-frame))
 
