@@ -81,7 +81,6 @@
    ("C-M-=" . align-to-equals)
    ("C-c d" . duplicate-current-line-or-region)
    :map my-custom-key-map
-   ("p" . ivy-switch-project)
    ("t" . my-insert-current-time)
    ("c" . my-paste-to-new-buffer)
    ("o" . my-org-scratch-buffer)
