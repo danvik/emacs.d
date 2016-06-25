@@ -1,5 +1,40 @@
 ;;; defuns
 
+(defun my--projectile-active ()
+  (condition-case nil
+      (projectile-project-root)
+    (error nil)))
+
+(defun my-find-file-or-projectile-find-file ()
+  (interactive)
+  (if (my--projectile-active)
+      (call-interactively
+       'projectile-find-file)
+    (call-interactively 'find-file)))
+
+(defun my-org-link-at-point ()
+  "Generate org link with line number to current buffer position"
+  (interactive)
+  (save-excursion
+    (let ((filename (buffer-file-name)))
+      (when filename
+        (kill-new (format "[[%s::%s][%s]]"
+                          filename
+                          (line-number-at-pos)
+                          (concat (file-name-base filename) "." (file-name-extension filename))))))))
+
+(defun my-init-terminal (&optional frame)
+  (interactive)
+  (unless (window-system frame)
+    (progn
+      (menu-bar-mode -1)
+      (require 'mouse)
+      (xterm-mouse-mode t)
+      (global-set-key [mouse-4] '(lambda () (interactive) (scroll-down 1)))
+      (global-set-key [mouse-5] '(lambda () (interactive) (scroll-up 1)))
+      (defun track-mouse (e))
+      (setq mouse-sel-mode t))))
+
 (defun my-insert-current-time ()
   (interactive)
   (let ((time-str (format-time-string "%R ")))
@@ -38,22 +73,22 @@
         (insert count)
       (message count))))
 
-(defun my-statistic-count-p ()
+(defun my--statistic-count-p ()
   (string-match "\\[[0-9]+/[0-9]+\\]$" (thing-at-point 'line t)))
 
-(defun my-statistic-percent-p ()
+(defun my--statistic-percent-p ()
   (string-match "\\[[[:digit:]]\\{1,3\\}%\\]$" (thing-at-point 'line t)))
 
 (defun my-toggle-statistic-cookie-type ()
   (interactive)
   (save-excursion
     (outline-up-heading 1)
-    (cond ((my-statistic-count-p) (progn
+    (cond ((my--statistic-count-p) (progn
                                     (end-of-line)
                                     (kill-sexp -1)
                                     (insert "[%]")
                                     (org-update-statistics-cookies nil)))
-          ((my-statistic-percent-p) (progn
+          ((my--statistic-percent-p) (progn
                                       (end-of-line)
                                       (kill-sexp -1)))
           (t (progn
@@ -120,4 +155,5 @@ there's a region, all lines that region covers will be duplicated."
    (process-lines "find" root "-type" "file" "-name" pattern)
    :action #'find-file-other-window))
 
+(message "defuns")
 (provide 'defuns)

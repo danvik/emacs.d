@@ -45,20 +45,8 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-(defun my-init-terminal (&optional frame)
-  (interactive)
-  (unless (window-system frame)
-    (progn
-      (menu-bar-mode -1)
-      (require 'mouse)
-      (xterm-mouse-mode t)
-      (global-set-key [mouse-4] '(lambda () (interactive) (scroll-down 1)))
-      (global-set-key [mouse-5] '(lambda () (interactive) (scroll-up 1)))
-      (defun track-mouse (e))
-      (setq mouse-sel-mode t))))
 
-(add-hook 'after-init-hook #'my-init-terminal)
-(add-hook 'after-make-frame-functions #'my-init-terminal)
+
 
 ;;; packages setup
 
@@ -85,7 +73,10 @@
    ("c" . my-paste-to-new-buffer)
    ("o" . my-org-scratch-buffer)
    ("q" . my-count-words-in-org-subtree)
-   ("s" . my-toggle-statistic-cookie-type)))
+   ("s" . my-toggle-statistic-cookie-type))
+  :config
+  (add-hook 'after-init-hook #'my-init-terminal)
+  (add-hook 'after-make-frame-functions #'my-init-terminal))
 
 ;;; built in's
 
@@ -243,17 +234,6 @@
 
 (use-package org
   :config
-  (defun my-org-link-at-point ()
-    "Generate org link with line number to current buffer position"
-    (interactive)
-    (save-excursion
-      (let ((filename (buffer-file-name)))
-        (when filename
-          (kill-new (format "[[%s::%s][%s]]"
-                            filename
-                            (line-number-at-pos)
-                            (concat (file-name-base filename) "." (file-name-extension filename))))))))
-
   ;; Markdown export http://stackoverflow.com/a/22990257
   (eval-after-load "org" '(require 'ox-md nil t))
 
@@ -476,21 +456,8 @@
 
 ;;; hydra
 
-(defun my-projectile-active ()
-  (condition-case nil
-      (projectile-project-root)
-    (error nil)))
-
-(defun my-find-file-or-projectile-find-file ()
-  (interactive)
-  (if (my-projectile-active)
-      (call-interactively
-       'projectile-find-file)
-    (call-interactively 'find-file)))
-
 (use-package hydra
   :init
-  
   (defhydra hydra-my-compilation (global-map "M-g"  :color red)
     "Compilation"
     ("p" previous-error "Previous error")
@@ -662,7 +629,7 @@
   :config
   (defun my-neotree-toggle ()
     (interactive)
-    (cond ((my-projectile-active) (neotree-projectile-action))
+    (cond ((my--projectile-active) (neotree-projectile-action))
           ((buffer-file-name) (neotree-find))
           ((neotree-dir default-directory))))
 
