@@ -232,15 +232,6 @@
   (setq counsel-find-file-at-point t)
   :init (counsel-mode 1))
 
-;;; themes
-
-(use-package zerodark-theme
-  :defer t)
-(use-package solarized-theme
-  :defer t)
-(use-package tango-plus-theme
-  :defer t)
-
 ;;; org mode
 
 (use-package htmlize)
