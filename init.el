@@ -496,11 +496,7 @@
 
 ;;; avy
 
-(defun my-kill-line-with-avy ()
-  (interactive)
-  (save-excursion
-    (avy-goto-line)
-    (kill-whole-line)))
+
 
 (use-package avy
   :bind
@@ -512,7 +508,13 @@
    ("M-g M-l" . avy-copy-line)
    ("M-g M-m" . avy-move-line)
    ("M-g M-k" . my-kill-line-with-avy)
-   ("M-g g" . avy-goto-line)))
+   ("M-g g" . avy-goto-line))
+  :init
+  (defun my-kill-line-with-avy ()
+    (interactive)
+    (save-excursion
+      (avy-goto-line)
+      (kill-whole-line))))
 
 ;;; ace-window
 
