@@ -119,7 +119,7 @@
   :bind
   ("C-x C-r" . ivy-recentf)
   :config
-  (add-to-list 'recentf-exclude "deft/")
+  (setq recentf-exclude '("deft/" ".gpg"))
   (setq recentf-max-saved-items 500)
   :init
   (recentf-mode t))
@@ -832,4 +832,5 @@
            ("h" . hl-line-mode)
            ("s" . scroll-bar-mode)
            ("b" . blink-cursor-mode)
+           ("v" . visual-line-mode)
            ("w" . whitespace-mode))
