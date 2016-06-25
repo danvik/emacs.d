@@ -557,15 +557,6 @@
    ("M-g M-k" . my-kill-line-with-avy)
    ("M-g g" . avy-goto-line)))
 
-;;; smartscan
-
-(use-package smartscan
-  :disabled t
-  :config
-  (add-hook 'prog-mode-hook 'smartscan-mode)
-  (add-hook 'org-mode-hook 'smartscan-mode)
-  (add-hook 'yaml-mode-hook 'smartscan-mode))
-
 ;;; ace-window
 
 (use-package ace-window
