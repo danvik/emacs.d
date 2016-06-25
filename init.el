@@ -361,11 +361,6 @@
         which-key-side-window-location 'bottom)
   (which-key-mode))
 
-;;; auctex
-
-;; (use-package auctex
-;;   :disabled t)
-
 ;;; eyebrowse
 
 (use-package eyebrowse
