@@ -310,7 +310,8 @@
              ("k" . easy-kill-shrink)))
 
 (use-package iedit
-  :bind ("C-c i" . iedit-mode))
+  :bind (("C-c i" . iedit-mode)
+          ("C-;" . iedit-mode)))
 
 (use-package multiple-cursors
   :bind
