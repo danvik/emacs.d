@@ -595,7 +595,8 @@
 
 (use-package ibuffer
   :bind
-  ("C-x C-b" . ibuffer))
+  (("C-x C-b" . ibuffer)
+   ("M-3" . ibuffer)))
 
 (use-package ibuffer-vc
   :config
