@@ -76,7 +76,7 @@
    ("o" . my-org-scratch-buffer)
    ("q" . my-count-words-in-org-subtree)
    ("s" . my-toggle-statistic-cookie-type))
-  :config
+  :init
   (add-hook 'after-init-hook #'my-init-terminal)
   (add-hook 'after-make-frame-functions #'my-init-terminal))
 
@@ -84,12 +84,12 @@
 
 (use-package eldoc
   :diminish eldoc-mode
-  :config
+  :init
   (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
 
 (use-package outline
   :diminish outline-minor-mode
-  :config (add-hook 'emacs-lisp-mode-hook 'outline-minor-mode)
+  :init (add-hook 'emacs-lisp-mode-hook 'outline-minor-mode)
 
   (bind-keys :prefix-map my-outline-prefix-map
              :prefix "C-c o"
@@ -770,8 +770,8 @@
 ;;; mode-line
 
 (use-package smart-mode-line
-  :config
-  (setq sml/theme 'automatic)
+  :init
+  (setq sml/theme 'light)
   (sml/setup)
   (add-to-list 'sml/replacer-regexp-list '("^~/Dropbox/" ":DB:")))
 
