@@ -800,7 +800,12 @@
 ;;; hl-todo
 
 (use-package hl-todo
-  :config (add-hook #'prog-mode-hook #'hl-todo-mode))
+  :bind (:map hl-todo-mode-map
+              ("C-c h n" . hl-todo-next)
+              ("C-c h p" . hl-todo-previous)
+              ("C-c h o" . hl-todo-occur))
+
+  :init (add-hook #'prog-mode-hook #'hl-todo-mode))
 
 ;;; mode-line
 
