@@ -353,6 +353,21 @@
         which-key-side-window-location 'bottom)
   (which-key-mode))
 
+(use-package bm
+  :config
+  (setq bm-highlight-style 'bm-highlight-only-fringe)
+  (bind-keys :map bm-show-mode-map
+             ("n" . bm-show-next)
+             ("p" . bm-show-prev))
+  :init
+  (bind-keys :prefix-map my-bm-prefix-map
+             :prefix "C-c b"
+             ("b" . bm-toggle)
+             ("n" . bm-next)
+             ("p" . bm-previous)
+             ("o" . bm-show)
+             ("a" . bm-show-all)))
+
 ;;; eyebrowse
 
 (use-package eyebrowse
