@@ -158,7 +158,7 @@ Use `ibuffer` to list buffers and [ibuffer-vc](http://github.com/purcell/ibuffer
 
 ### Other packages used
 
-`rainbow-mode`, `clojure-mode`, `css-mode`, `erlang`, `feature-mode`, `json-mode`, `markdown-mode`, `yaml-mode`
+`rainbow-mode`, `clojure-mode`, `css-mode`, `erlang`, `feature-mode`, `json-mode`, `markdown-mode`, `yaml-mode`, `orglink`, `bm`
 
 ## Non-Emacs things used in this config
 
