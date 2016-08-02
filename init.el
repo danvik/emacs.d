@@ -572,7 +572,7 @@
 ;;; exec-path-from-shell
 
 (use-package exec-path-from-shell
-  :if (memq window-system '(mac ns))
+  :if (eq system-type 'darwin)
   :init
   (exec-path-from-shell-copy-env "GOPATH")
   (exec-path-from-shell-initialize))
