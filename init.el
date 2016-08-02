@@ -823,12 +823,7 @@
 (use-package elixir-mode)
 
 (use-package alchemist
-  :config
   ;; https://github.com/tonini/alchemist.el/issues/71
-  ;; (setq alchemist-goto-erlang-source-dir "/usr/local/Cellar/erlang/18.2.1/lib/erlang/")
-  (setq alchemist-goto-erlang-source-dir "/Users/daniel/Downloads/otp_src_18.3")
-  ;; (setq alchemist-goto-elixir-source-dir "/usr/local/Cellar/elixir/1.2.3/")
-  (setq alchemist-goto-elixir-source-dir "/users/daniel/Downloads/elixir-1.2.3/")
   )
 
 ;;; misc
