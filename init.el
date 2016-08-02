@@ -238,6 +238,10 @@
 
 ;;; org mode
 
+(use-package orglink
+  :diminish orglink-mode
+  :init (global-orglink-mode))
+
 (use-package htmlize)
 (use-package worf
   :config (add-hook 'org-mode-hook 'worf-mode))

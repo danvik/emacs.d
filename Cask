@@ -64,6 +64,7 @@
 (depends-on "neotree")
 (depends-on "org")
 (depends-on "org-bullets")
+(depends-on "orglink")
 (depends-on "ox-twbs")
 (depends-on "package-build")
 (depends-on "pallet")
