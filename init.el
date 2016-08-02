@@ -18,7 +18,8 @@
       ns-pop-up-frames nil
       ring-bell-function 'ignore
       delete-by-moving-to-trash t
-      recenter-positions '(top middle bottom))
+      recenter-positions '(top middle bottom)
+      save-interprogram-paste-before-kill t)
 
 (setq-default indent-tabs-mode nil
               tab-width 4
