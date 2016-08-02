@@ -155,5 +155,4 @@ there's a region, all lines that region covers will be duplicated."
    (process-lines "find" root "-type" "file" "-name" pattern)
    :action #'find-file-other-window))
 
-(message "defuns")
 (provide 'defuns)
