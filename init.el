@@ -231,7 +231,8 @@
              ("a" . counsel-ag)
              ("y" . counsel-yank-pop)
              ("m" . counsel-tmm)
-             ("o" . counsel-outline))
+             ("o" . counsel-outline)
+             ("j" . counsel-file-jump))
 
   (setq counsel-find-file-at-point t)
   :init (counsel-mode 1))
