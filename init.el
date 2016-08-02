@@ -228,7 +228,10 @@
              ("g" . counsel-git-grep)
              ("i" . counsel-imenu)
              ("f" . counsel-git)
-             ("a" . counsel-ag))
+             ("a" . counsel-ag)
+             ("y" . counsel-yank-pop)
+             ("m" . counsel-tmm)
+             ("o" . counsel-outline))
 
   (setq counsel-find-file-at-point t)
   :init (counsel-mode 1))
