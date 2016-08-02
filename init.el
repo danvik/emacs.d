@@ -138,6 +138,14 @@
 (use-package winner
   :config (winner-mode t))
 
+(use-package saveplace
+  :config
+  (if (fboundp 'save-place-mode)
+      (save-place-mode 1)
+    ;; for (version< emacs-version "25.1")
+    (setq-default save-place t))
+  (setq save-place-file (concat user-emacs-directory "places")))
+
 ;;; dired-details
 
 (use-package dired-details
