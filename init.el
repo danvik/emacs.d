@@ -326,11 +326,20 @@
 ;;; utils
 
 (use-package deft
-  :bind (:map my-custom-key-map ("d" . deft))
+  :bind (:map my-custom-key-map ("d" . my-deft))
   :init
   (setq deft-extensions '("org")
         deft-text-mode 'org-mode
-        deft-directory "~/.deft/"))
+        deft-directory "~/.deft/"
+        deft-auto-save-interval 5.0)
+  (defun my-deft (&optional arg)
+    (interactive "P")
+    (let ((deft-dir (cond
+                     (arg (read-directory-name "Deft dir " default-directory))
+                     (t deft-directory))))
+      (expand-file-name deft-dir)
+      (let ((deft-directory deft-dir))
+        (deft)))))
 
 (use-package highlight-numbers
   :config
