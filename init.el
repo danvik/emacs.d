@@ -87,35 +87,6 @@
   :init
   (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
 
-(use-package outline
-  :diminish outline-minor-mode
-  :init (add-hook 'emacs-lisp-mode-hook 'outline-minor-mode)
-
-  (bind-keys :prefix-map my-outline-prefix-map
-             :prefix "C-c o"
-             ("a" . outline-show-all)
-             ("b" . outline-backward-same-level)
-             ("c" . outline-hide-entry)
-             ("d" . outline-hide-subtree)
-             ("e" . outline-show-entry)
-             ("f" . outline-forward-same-level)
-             ("TAB" . outline-show-children)
-             ("k" . outline-show-branches)
-             ("l" . outline-hide-leaves)
-             ("RET" . outline-insert-heading)
-             ("n" . outline-next-visible-heading)
-             ("o" . outline-hide-other)
-             ("p" . outline-previous-visible-heading)
-             ("q" . outline-hide-sublevels)
-             ("s" . outline-show-subtree)
-             ("t" . outline-hide-body)
-             ("u" . outline-up-heading)
-             ("j" . outline-move-subtree-down)
-             ("k" . outline-move-subtree-up)
-             ("@" . outline-mark-subtree)
-             ("<" . outline-promote)
-             (">" . outline-demote)))
-
 (use-package recentf
   :bind
   ("C-x C-r" . ivy-recentf)
