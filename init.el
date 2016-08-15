@@ -332,7 +332,8 @@
 
 (use-package bm
   :config
-  (setq bm-highlight-style 'bm-highlight-only-fringe)
+  (setq bm-highlight-style 'bm-highlight-only-fringe
+        bm-cycle-all-buffers t)
   (bind-keys :map bm-show-mode-map
              ("n" . bm-show-next)
              ("p" . bm-show-prev))
