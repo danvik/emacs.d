@@ -579,8 +579,8 @@
 ;;; magit
 
 (use-package magit
-  :bind
-  (:map my-custom-key-map ("m" . magit-status))
+  :bind (("C-c m" . magit-status)
+         (:map my-custom-key-map ("m" . magit-status)))
   :config
   (setq magit-completing-read-function 'ivy-completing-read))
 
