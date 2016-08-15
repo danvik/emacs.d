@@ -846,3 +846,6 @@
            ("b" . blink-cursor-mode)
            ("v" . visual-line-mode)
            ("w" . whitespace-mode))
+
+(load-theme 'leuven t)
+
