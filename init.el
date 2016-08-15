@@ -681,7 +681,6 @@
 ;;; programming
 
 (use-package clojure-mode)
-(use-package css-mode)
 (use-package erlang
   :config
   (setq erlang-root-dir "/usr/local/lib/erlang"))
