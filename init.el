@@ -207,6 +207,9 @@
              ("j" . counsel-file-jump))
 
   (setq counsel-find-file-at-point t)
+  (bind-key "C-c g"
+          (lambda () (interactive) (counsel-git-grep nil (thing-at-point 'symbol t))))
+
   :init (counsel-mode 1))
 
 ;;; org mode
