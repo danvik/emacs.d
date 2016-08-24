@@ -654,7 +654,7 @@
   :config
   (defun my-neotree-toggle ()
     (interactive)
-    (cond ((my--projectile-active) (neotree-projectile-action))
+    (cond ((projectile-project-p) (neotree-projectile-action))
           ((buffer-file-name) (neotree-find))
           ((neotree-dir default-directory))))
 

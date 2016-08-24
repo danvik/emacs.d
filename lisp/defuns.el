@@ -1,13 +1,8 @@
 ;;; defuns
 
-(defun my--projectile-active ()
-  (condition-case nil
-      (projectile-project-root)
-    (error nil)))
-
 (defun my-find-file-or-projectile-find-file ()
   (interactive)
-  (if (my--projectile-active)
+  (if (projectile-project-p)
       (call-interactively
        'projectile-find-file)
     (call-interactively 'find-file)))
