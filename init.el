@@ -358,36 +358,15 @@
 
 (use-package eyebrowse
   :init
-  (setq my-skip-slot-0 t)
-  (defun my--next-free-slot ()
-    (let ((slot (if my-skip-slot-0
-                    1
-                  0))
-          (free-slot nil))
-      (while (and (not free-slot) (> 10 slot))
-        (if (eyebrowse--window-config-present-p slot)
-            (setq slot (1+ slot))
-          (setq free-slot slot)))
-      free-slot))
-
-  (defun my-switch-to-next-free-slot ()
-    (interactive)
-    (let ((slot (my--next-free-slot)))
-      (when slot
-        (let ((new-tag nil))
-          (when current-prefix-arg
-            (setq new-tag (read-string "Tag: ")))
-          (funcall (intern (format "%s%d" "eyebrowse-switch-to-window-config-" slot)))
-          (when new-tag (eyebrowse-rename-window-config (eyebrowse--get 'current-slot) new-tag))))))
 
   (defun my-move-buffer-to-next-free-slot (&optional buffer)
     (interactive "b")
-    (call-interactively 'my-switch-to-next-free-slot)
+    (call-interactively 'eyebrowse-create-window-config)
     (switch-to-buffer buffer))
 
   (defun my-projectile-eyebrowse (p)
     (interactive)
-    (my-switch-to-next-free-slot)
+    (eyebrowse-create-window-config)
     (eyebrowse-rename-window-config (eyebrowse--get 'current-slot) (projectile-default-project-name p))
     (projectile-switch-project-by-name p))
 
@@ -425,7 +404,7 @@
 
   (bind-keys :prefix-map my-eyebrowse-prefix-map
              :prefix "C-c l"
-             ("c" . my-switch-to-next-free-slot)
+             ("c" . eyebrowse-create-window-config)
              ("ko" . my-close-all-other-slots)
              ("kr" . my-close-slots-to-the-right)
              ("n" . eyebrowse-next-window-config)
