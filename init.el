@@ -567,6 +567,7 @@
 ;;; magit
 
 (use-package magit
+  :defer 5
   :bind ("C-c v" . magit-status)
   :config
   (setq magit-completing-read-function 'ivy-completing-read))
