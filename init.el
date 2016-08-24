@@ -208,7 +208,12 @@
 
   (setq counsel-find-file-at-point t)
   (bind-key "C-c g"
-          (lambda () (interactive) (counsel-git-grep nil (thing-at-point 'symbol t))))
+          (lambda ()
+            (interactive)
+            (let ((initial-input (if (region-active-p)
+                                     (buffer-substring-no-properties (region-beginning) (region-end))
+                                   (thing-at-point 'symbol t))))
+              (counsel-git-grep  nil initial-input))))
 
   :init (counsel-mode 1))
 
