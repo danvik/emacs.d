@@ -236,7 +236,6 @@
   ;; Markdown export http://stackoverflow.com/a/22990257
   (eval-after-load "org" '(require 'ox-md nil t))
 
-  :init
   (setq org-hide-emphasis-markers t)
   (setq org-log-done 'time)
   (setq org-babel-load-languages (quote
