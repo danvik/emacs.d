@@ -214,7 +214,9 @@
                                      (buffer-substring-no-properties (region-beginning) (region-end))
                                    (thing-at-point 'symbol t))))
               (counsel-git-grep  nil initial-input))))
-
+  (ivy-set-actions
+   'counsel-recentf
+   '(("j" find-file-other-window "other window")))
   :init (counsel-mode 1))
 
 ;;; org mode
