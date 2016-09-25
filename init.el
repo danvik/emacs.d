@@ -36,8 +36,6 @@
 (setq mac-option-modifier 'none)
 (setq mac-command-modifier 'meta)
 
-;; FIXME: Fix when starting with `emacs --daemon' or similar
-;; (when (member "Inconsolata" (font-family-list)))
 (set-frame-font "Inconsolata-14")
 (add-to-list 'default-frame-alist '(font . "Inconsolata-14"))
 
@@ -434,7 +432,6 @@
 ;;; projectile
 
 (use-package projectile
-  ;; NOTE: handled by smart-mode-line
   :diminish projectile-mode
   :bind (("M-7" . projectile-switch-to-buffer-other-window)
          ("M-8" . projectile-switch-to-buffer))
@@ -443,7 +440,6 @@
   (add-to-list 'projectile-globally-ignored-directories "deps")
   (add-to-list 'projectile-globally-ignored-directories "node_modules")
 
-  ;; TODO: add support for this when not in git project
   (setq projectile-use-git-grep t
         projectile-completion-system 'ivy)
   (setq projectile-switch-project-action #'projectile-commander)
