@@ -550,7 +550,6 @@
 ;;; editorconfig
 
 (use-package editorconfig
-  :if (executable-find "editorconfig")
   :config (editorconfig-mode 1))
 
 ;;; exec-path-from-shell
