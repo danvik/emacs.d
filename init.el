@@ -226,13 +226,13 @@
   :init (global-orglink-mode))
 
 (use-package htmlize)
-(use-package org-bullets
-  :config (add-hook 'org-mode-hook 'org-bullets-mode))
 (use-package ox-twbs)
 
 (use-package org
   :config
-  (add-hook 'org-mode-hook #'worf-mode)
+  (add-hook 'org-mode-hook #'worf-mode
+            'org-mode-hook #'org-bullets-mode)
+
   ;; Markdown export http://stackoverflow.com/a/22990257
   (eval-after-load "org" '(require 'ox-md nil t))
 
