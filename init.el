@@ -178,8 +178,6 @@
      ("r" projectile-remove-known-project "Remove project(s)"))))
 
 (use-package swiper
-  ;; TODO: fix a advice before to exlude .gpg files
-  ;; :bind ("C-s" . counsel-grep-or-swiper)
   :bind (("C-s" . swiper)
          ("C-c a" . swiper-all)))
 
