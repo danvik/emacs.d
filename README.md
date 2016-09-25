@@ -163,7 +163,6 @@ Use `ibuffer` to list buffers and [ibuffer-vc](http://github.com/purcell/ibuffer
 ## Non-Emacs things used in this config
 
 - [aspell](http://aspell.net/) `$ brew install aspell`
-- [editorconfig](http://editorconfig.org/)
 - [ag, the silver searcher](https://github.com/ggreer/the_silver_searcher) `$ brew install silver_searcher`
 - [Inconsolata font](http://www.levien.com/type/myfonts/inconsolata.html)
 - [rubocop](https://github.com/bbatsov/rubocop) Ruby style checker
