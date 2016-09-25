@@ -445,20 +445,20 @@
   (add-to-list 'projectile-globally-ignored-directories "_build")
   (add-to-list 'projectile-globally-ignored-directories "deps")
   (add-to-list 'projectile-globally-ignored-directories "node_modules")
-  :init
 
   ;; TODO: add support for this when not in git project
   (setq projectile-use-git-grep t
         projectile-completion-system 'ivy)
   (setq projectile-switch-project-action #'projectile-commander)
-  (projectile-global-mode)
   (def-projectile-commander-method ?G
     "Run `counsel-git-grep' in project."
     (call-interactively #'counsel-git-grep))
-
   (def-projectile-commander-method ?n
     "Run `neotree-projectile-action' in project."
-    (call-interactively #'neotree-projectile-action)))
+    (call-interactively #'neotree-projectile-action))
+
+  :init
+  (projectile-global-mode))
 
 ;;; hydra
 
