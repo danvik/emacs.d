@@ -226,14 +226,13 @@
   :init (global-orglink-mode))
 
 (use-package htmlize)
-(use-package worf
-  :config (add-hook 'org-mode-hook 'worf-mode))
 (use-package org-bullets
   :config (add-hook 'org-mode-hook 'org-bullets-mode))
 (use-package ox-twbs)
 
 (use-package org
   :config
+  (add-hook 'org-mode-hook #'worf-mode)
   ;; Markdown export http://stackoverflow.com/a/22990257
   (eval-after-load "org" '(require 'ox-md nil t))
 
@@ -870,4 +869,3 @@ using `fit-window-to-buffer'."
            ("w" . whitespace-mode))
 
 (load-theme 'leuven t)
-
