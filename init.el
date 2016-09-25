@@ -178,8 +178,7 @@
      ("r" projectile-remove-known-project "Remove project(s)"))))
 
 (use-package swiper
-  :bind (("C-s" . swiper)
-         ("C-c a" . swiper-all)))
+  :bind ("C-s" . swiper))
 
 (use-package counsel
   :diminish counsel-mode
