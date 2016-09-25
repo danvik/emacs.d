@@ -89,7 +89,7 @@
 
 (use-package recentf
   :bind
-  ("C-x C-r" . ivy-recentf)
+  ("C-x C-r" . counsel-recentf)
   :config
   (setq recentf-exclude '("deft/" ".gpg"))
   (setq recentf-max-saved-items 500)
@@ -491,7 +491,7 @@
     ("pv" projectile-vc "projectile-vc")
 
     ("v" magit-status "magit-status")
-    ("r" ivy-recentf "ivy-recentf")
+    ("r" counsel-recentf "counsel-recentf")
     ("b" ivy-switch-buffer "ivy-switch-buffer")
 
     ("q" nil "cancel"))
@@ -843,7 +843,7 @@ using `fit-window-to-buffer'."
            :prefix "C-c f"
            ("u" . revert-buffer)
            ("f" . counsel-find-file)
-           ("r" . ivy-recentf)
+           ("r" . counsel-recentf)
            ("s" . save-buffer)
            ("b" . bookmark-set)
            ("o" . find-file-other-window))
