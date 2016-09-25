@@ -637,7 +637,6 @@
           (t (neotree-dir default-directory))))
 
   ;; From https://github.com/jaypei/emacs-neotree/pull/110
-
   (defun neotree-resize-window (&rest _args)
     "Resize neotree window.
 https://github.com/jaypei/emacs-neotree/pull/110"
@@ -645,6 +644,7 @@ https://github.com/jaypei/emacs-neotree/pull/110"
     (neo-buffer--with-resizable-window
      (let ((fit-window-to-buffer-horizontally t))
        (fit-window-to-buffer))))
+
   (defun my-neo-window-toggle-size ()
     "Toggle neotree window size between `neo-window-width' and
 using `fit-window-to-buffer'."
