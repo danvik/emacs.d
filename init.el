@@ -454,7 +454,11 @@
   (projectile-global-mode)
   (def-projectile-commander-method ?G
     "Run `counsel-git-grep' in project."
-    (call-interactively #'counsel-git-grep)))
+    (call-interactively #'counsel-git-grep))
+
+  (def-projectile-commander-method ?n
+    "Run `neotree-projectile-action' in project."
+    (call-interactively #'neotree-projectile-action)))
 
 ;;; hydra
 
