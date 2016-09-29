@@ -59,6 +59,11 @@
 (define-prefix-command 'my-custom-key-map)
 (global-set-key (kbd "C-c u") my-custom-key-map)
 
+(define-prefix-command 'my-toggle-prefix-map)
+(global-set-key (kbd "C-c t") my-toggle-prefix-map)
+
+
+
 ;;; defuns
 
 (use-package defuns
@@ -283,6 +288,8 @@
 
 (use-package smartparens
   :diminish (smartparens-mode . "()")
+  :bind (:map my-toggle-prefix-map
+              ("s" . smartparens-global-mode))
   :init
   (require 'smartparens-config)
   (bind-keys
@@ -554,7 +561,8 @@
 ;;; flycheck
 
 (use-package flycheck
-  :bind (:map my-custom-key-map ("f" . flycheck-mode))
+  :bind (:map my-toggle-prefix-map
+              ("f" . flycheck-mode))
   :init (setq flycheck-checker-error-threshold 500
               flycheck-check-syntax-automatically '(mode-enabled save)))
 
@@ -835,8 +843,7 @@ using `fit-window-to-buffer'."
            ("k" . avy-goto-line-above)
            ("f" . avy-goto-char-in-line))
 
-(bind-keys :prefix-map my-toggle-prefix-map
-           :prefix "C-c t"
+(bind-keys :map my-toggle-prefix-map
            ("l" . linum-mode)
            ("h" . hl-line-mode)
            ("s" . scroll-bar-mode)
