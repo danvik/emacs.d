@@ -710,21 +710,20 @@ using `fit-window-to-buffer'."
 ;;; ruby
 
 (use-package bundler)
-(use-package yard-mode)
+(use-package yard-mode
+  :diminish yard-mode
+  :config
+  (add-hook 'ruby-mode-hook 'yard-mode))
 (use-package inf-ruby)
 (use-package rvm)
 (use-package rubocop)
 (use-package ruby-mode
-  :diminish yard-mode
-
   :bind (:map ruby-mode-map
               ;; ("C-c m b" . my-insert-pry-binding)
               ("<C-return>" . my-insert-ruby-end))
 
   :config
   (add-hook 'ruby-mode-hook 'rvm-activate-corresponding-ruby)
-
-  (add-hook 'ruby-mode-hook 'yard-mode)
 
   (defun empty-line ()
     (= 0 (length (replace-regexp-in-string "^[ \t]*\n$" "" (thing-at-point 'line t)))))
