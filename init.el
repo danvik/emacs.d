@@ -86,8 +86,6 @@
   (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
 
 (use-package recentf
-  :bind
-  ("C-x C-r" . counsel-recentf)
   :config
   (setq recentf-exclude '("deft/" ".gpg"))
   (setq recentf-max-saved-items 500)
