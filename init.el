@@ -675,9 +675,6 @@ using `fit-window-to-buffer'."
 
 ;;; golang
 
-(use-package company-go)
-(use-package go-eldoc)
-(use-package go-gopath)
 (use-package go-mode
   :bind (:map go-mode-map ("C-c C-p" . godoc-at-point))
   :config
@@ -697,33 +694,26 @@ using `fit-window-to-buffer'."
 (use-package erlang
   :config
   (setq erlang-root-dir "/usr/local/lib/erlang"))
-
 (use-package lispy
   :config
   (add-hook 'emacs-lisp-mode-hook #'lispy-mode))
 
-(use-package feature-mode)
-(use-package json-mode)
-(use-package markdown-mode)
-(use-package yaml-mode)
-
 ;;; ruby
 
-(use-package bundler)
 (use-package yard-mode
   :diminish yard-mode
   :config
   (add-hook 'ruby-mode-hook 'yard-mode))
-(use-package inf-ruby)
-(use-package rvm)
-(use-package rubocop)
+(use-package rvm
+  :config
+  (add-hook 'ruby-mode-hook 'rvm-activate-corresponding-ruby))
 (use-package ruby-mode
   :bind (:map ruby-mode-map
               ;; ("C-c m b" . my-insert-pry-binding)
               ("<C-return>" . my-insert-ruby-end))
 
   :config
-  (add-hook 'ruby-mode-hook 'rvm-activate-corresponding-ruby)
+
 
   (defun empty-line ()
     (= 0 (length (replace-regexp-in-string "^[ \t]*\n$" "" (thing-at-point 'line t)))))
@@ -804,9 +794,6 @@ using `fit-window-to-buffer'."
   (add-to-list 'sml/replacer-regexp-list '("^~/Dropbox/" ":DB:")))
 
 ;;; wgrep
-
-(use-package wgrep-ag
-  :if (executable-find "ag"))
 
 (use-package wgrep
   :config (setq wgrep-enable-key "e"))
