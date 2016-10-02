@@ -860,4 +860,19 @@ using `fit-window-to-buffer'."
            ("v" . visual-line-mode)
            ("w" . whitespace-mode))
 
+(bind-keys :prefix-map my-section-sign-key-map
+           :prefix "§"
+           ("b" . my-bm-prefix-map)
+           ("c" . my-counsel-prefix-map)
+           ("f" . my-file-stuff-prefix-map)
+           ("g" . my-counsel-git-grep)
+           ("j" . my-jump-prefix-map)
+           ("l" . my-eyebrowse-prefix-map)
+           ("t" . my-toggle-prefix-map)
+           ("u" . my-custom-key-map)
+           ("p" . projectile-command-map)
+           ("§" . ivy-switch-buffer)
+           ("1" . delete-other-windows)
+           (";" . iedit-mode))
+
 (load-theme 'leuven t)
