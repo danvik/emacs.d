@@ -855,7 +855,6 @@ using `fit-window-to-buffer'."
 (bind-keys :map my-toggle-prefix-map
            ("l" . linum-mode)
            ("h" . hl-line-mode)
-           ("s" . scroll-bar-mode)
            ("b" . blink-cursor-mode)
            ("v" . visual-line-mode)
            ("w" . whitespace-mode))
