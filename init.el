@@ -641,12 +641,15 @@ otherwise start with empty initial input."
   :bind ("C-c n" . my-neotree-toggle)
   :config
   (defun my-neotree-toggle ()
-    "Toggle neotree window. Set root node to either
-`projectile-root', file directory or `default-directory'."
+    "Toggle neotree window. Hide it if already showing, else set
+root node to either `projectile-root', file directory or
+`default-directory'."
     (interactive)
-    (cond ((projectile-project-p) (neotree-projectile-action))
-          ((buffer-file-name) (neotree-find))
-          (t (neotree-dir default-directory))))
+    (if (neo-global--window-exists-p)
+        (neotree-hide)
+      (cond ((projectile-project-p) (neotree-projectile-action))
+            ((buffer-file-name) (neotree-find))
+            (t (neotree-dir default-directory)))))
 
   ;; From https://github.com/jaypei/emacs-neotree/pull/110
   (defun neotree-resize-window (&rest _args)
