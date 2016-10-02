@@ -205,13 +205,16 @@
              ("j" . counsel-file-jump))
 
   (setq counsel-find-file-at-point t)
-  (bind-key "C-c g"
-          (lambda ()
-            (interactive)
-            (let ((initial-input (if (region-active-p)
-                                     (buffer-substring-no-properties (region-beginning) (region-end))
-                                   (thing-at-point 'symbol t))))
-              (counsel-git-grep  nil initial-input))))
+  (defun my-counsel-git-grep ()
+    "Run `counsel-git-grep' with a preset initial input. If
+region active use that, if point is on a symbol use that
+otherwise start with empty initial input."
+    (interactive)
+    (let ((initial-input (if (region-active-p)
+                             (buffer-substring-no-properties (region-beginning) (region-end))
+                           (thing-at-point 'symbol t))))
+      (counsel-git-grep nil initial-input)))
+  (bind-key "C-c g" #'my-counsel-git-grep)
   (ivy-set-actions
    'counsel-recentf
    '(("j" find-file-other-window "other window")))
