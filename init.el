@@ -874,4 +874,16 @@ using `fit-window-to-buffer'."
            ("1" . delete-other-windows)
            (";" . iedit-mode))
 
+(use-package god-mode
+  :bind (("C-c u g" . god-local-mode)
+         :map god-local-mode-map
+         ("i" . god-local-mode)
+         ("w" . avy-goto-word-1)
+         ("." . repeat))
+  :init (when (memq window-system '(mac ns))
+          (global-set-key (kbd "<escape>") 'god-local-mode))
+  :config
+  (add-hook 'god-mode-enabled-hook (lambda () (hl-line-mode 1)))
+  (add-hook 'god-mode-disabled-hook (lambda () (hl-line-mode -1))))
+
 (load-theme 'leuven t)

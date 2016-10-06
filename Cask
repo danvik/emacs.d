@@ -40,6 +40,7 @@
 (depends-on "go-eldoc")
 (depends-on "go-gopath")
 (depends-on "go-mode")
+(depends-on "god-mode")
 (depends-on "highlight-numbers")
 (depends-on "hl-todo")
 (depends-on "ht")
