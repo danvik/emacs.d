@@ -54,6 +54,8 @@
 (require 'pallet)
 (pallet-mode t)
 
+(add-to-list 'load-path (concat user-emacs-directory "lisp"))
+
 ;;; custom prefix
 
 (define-prefix-command 'my-custom-key-map)
@@ -887,3 +889,4 @@ using `fit-window-to-buffer'."
   (add-hook 'god-mode-disabled-hook (lambda () (hl-line-mode -1))))
 
 (load-theme 'leuven t)
+(require 'local nil t)
