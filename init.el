@@ -268,7 +268,7 @@ otherwise start with empty initial input."
   :bind (:map my-toggle-prefix-map
               ("d" . drag-stuff-mode)
               ("D" . drag-stuff-global-mode))
-  :config
+  :init
   (drag-stuff-global-mode t))
 
 (use-package expand-region
