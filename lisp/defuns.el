@@ -18,18 +18,6 @@
                           (line-number-at-pos)
                           (concat (file-name-base filename) "." (file-name-extension filename))))))))
 
-(defun my-init-terminal (&optional frame)
-  (interactive)
-  (unless (window-system frame)
-    (progn
-      (menu-bar-mode -1)
-      (require 'mouse)
-      (xterm-mouse-mode t)
-      (global-set-key [mouse-4] '(lambda () (interactive) (scroll-down 1)))
-      (global-set-key [mouse-5] '(lambda () (interactive) (scroll-up 1)))
-      (defun track-mouse (e))
-      (setq mouse-sel-mode t))))
-
 (defun my-insert-current-time ()
   (interactive)
   (let ((time-str (format-time-string "%R ")))

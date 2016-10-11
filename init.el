@@ -80,10 +80,7 @@
    ("c" . my-paste-to-new-buffer)
    ("o" . my-org-scratch-buffer)
    ("q" . my-count-words-in-org-subtree)
-   ("s" . my-toggle-statistic-cookie-type))
-  :init
-  (add-hook 'after-init-hook #'my-init-terminal)
-  (add-hook 'after-make-frame-functions #'my-init-terminal))
+   ("s" . my-toggle-statistic-cookie-type)))
 
 ;;; built in's
 
