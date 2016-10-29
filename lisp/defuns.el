@@ -138,4 +138,18 @@ there's a region, all lines that region covers will be duplicated."
    (process-lines "find" root "-type" "file" "-name" pattern)
    :action #'find-file-other-window))
 
+(defun my-cask-outdated ()
+  (interactive)
+  (let ((default-directory user-emacs-directory))
+    (let ((outdated-packages (process-lines "cask" "outdated")))
+      (describe-package (intern (car (split-string (ivy-read "Outdated packages: " (cdr outdated-packages) :sort t))))))))
+
+(defun my-cask-info ()
+  (interactive)
+  (let ((default-directory user-emacs-directory))
+    (let ((dependencies (process-lines "cask" "list")))
+      (require 'dash)
+      (describe-package (intern (ivy-read "Dependencies: " (mapcar (lambda (x) (cdr (split-string x))) (-filter (lambda (x) (string= "-" (car (split-string x)))) dependencies)) :sort t))))))
+
+
 (provide 'defuns)
