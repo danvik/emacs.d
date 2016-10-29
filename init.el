@@ -91,11 +91,12 @@
 
 (use-package recentf
   :config
-  (setq recentf-exclude '("deft/" ".gpg"))
-  (setq recentf-max-saved-items 500)
+  (setq recentf-exclude '("deft/" ".gpg")
+        recentf-max-saved-items 500)
   :init
   (recentf-mode t))
 
+;; NOTE: Make this work with emacs --daemon ??
 (use-package server
   :config
   (when (and (fboundp 'server-running-p)
@@ -235,10 +236,9 @@ otherwise start with empty initial input."
 
   ;; Markdown export http://stackoverflow.com/a/22990257
   (eval-after-load "org" '(require 'ox-md nil t))
-
-  (setq org-hide-emphasis-markers t)
-  (setq org-log-done 'time)
-  (setq org-babel-load-languages (quote
+  (setq org-hide-emphasis-markers t
+        org-log-done 'time
+        org-babel-load-languages (quote
                                   ((ruby . t)
                                    (clojure . t)
                                    (sh . t)
@@ -449,10 +449,9 @@ otherwise start with empty initial input."
   (add-to-list 'projectile-globally-ignored-directories "_build")
   (add-to-list 'projectile-globally-ignored-directories "deps")
   (add-to-list 'projectile-globally-ignored-directories "node_modules")
-
   (setq projectile-use-git-grep t
-        projectile-completion-system 'ivy)
-  (setq projectile-switch-project-action #'projectile-commander)
+        projectile-completion-system 'ivy
+        projectile-switch-project-action #'projectile-commander)
   (def-projectile-commander-method ?G
     "Run `counsel-git-grep' in project."
     (call-interactively #'counsel-git-grep))
