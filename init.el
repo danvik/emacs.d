@@ -132,6 +132,7 @@
   :diminish ivy-mode
   :bind (:map my-custom-key-map ("p" . ivy-switch-project))
   :config
+  (setq ivy-use-virtual-buffers t)
   (defun my-eshell-from-dir (dir)
     (interactive)
     (let ((default-directory dir))
