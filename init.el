@@ -819,6 +819,9 @@ using `fit-window-to-buffer'."
 
 ;;; misc
 
+(use-package git-link
+  :config (setq git-link-open-in-browser t))
+
 (bind-keys
  ("C-\\"  . hippie-expand)
  ("M-9"   . previous-buffer)

@@ -36,6 +36,7 @@
 (depends-on "feature-mode")
 (depends-on "flycheck")
 (depends-on "git-commit")
+(depends-on "git-link")
 (depends-on "gitignore-mode")
 (depends-on "go-eldoc")
 (depends-on "go-gopath")
