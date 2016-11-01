@@ -216,9 +216,6 @@ otherwise start with empty initial input."
                            (thing-at-point 'symbol t))))
       (counsel-git-grep nil initial-input)))
   (bind-key "C-c g" #'my-counsel-git-grep)
-  (ivy-set-actions
-   'counsel-recentf
-   '(("j" find-file-other-window "other window")))
   :init (counsel-mode 1))
 
 ;;; org mode
