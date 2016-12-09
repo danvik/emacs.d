@@ -19,6 +19,8 @@
 (depends-on "company")
 (depends-on "company-go")
 (depends-on "counsel")
+(depends-on "creamsody-theme")
+(depends-on "darktooth-theme")
 (depends-on "dash")
 (depends-on "deft")
 (depends-on "diminish")
