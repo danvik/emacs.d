@@ -226,6 +226,7 @@ otherwise start with empty initial input."
 
 (use-package htmlize)
 (use-package ox-twbs)
+(use-package ox-reveal)
 
 (use-package org
   :config
