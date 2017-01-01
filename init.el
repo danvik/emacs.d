@@ -276,8 +276,11 @@ otherwise start with empty initial input."
   (global-set-key [remap mark-sexp] 'easy-mark)
   (setq easy-kill-unhighlight-key (kbd "RET"))
   (bind-keys :map easy-kill-base-map
-             ("j" . easy-kill-expand)
-             ("k" . easy-kill-shrink)))
+             ("DEL" . (lambda ()
+                        (interactive)
+                        (easy-kill-mark-region)
+                        (call-interactively #'delete-region)))
+             ("SPC" . easy-kill-mark-region)))
 
 (use-package iedit
   :bind (("C-c i" . iedit-mode)
