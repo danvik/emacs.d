@@ -518,7 +518,9 @@ otherwise start with empty initial input."
    ("M-g M-l" . avy-copy-line)
    ("M-g M-m" . avy-move-line)
    ("M-g M-k" . my-kill-line-with-avy)
-   ("M-g g" . avy-goto-line))
+   ("M-g g" . avy-goto-line)
+   ("M-g s" . avy-goto-char-timer))
+  :config (setq avy-timeout-seconds 0.2)
   :init
   (defun my-kill-line-with-avy ()
     (interactive)
