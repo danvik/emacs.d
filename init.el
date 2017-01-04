@@ -680,13 +680,6 @@ using `fit-window-to-buffer'."
   (bind-key "w" #'my-neo-window-toggle-size neotree-mode-map)
   (bind-key "v" (neotree-make-executor :file-fn 'my-neo-file-view) neotree-mode-map)
 
-  ;; From https://www.emacswiki.org/emacs/NeoTree#toc8
-  (when neo-persist-show
-    (add-hook 'popwin:before-popup-hook
-              (lambda () (setq neo-persist-show nil)))
-    (add-hook 'popwin:after-popup-hook
-              (lambda () (setq neo-persist-show t))))
-
   (setq neo-window-fixed-size nil
         neo-theme 'nerd
         neo-window-width 35))
