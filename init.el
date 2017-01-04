@@ -557,6 +557,7 @@ otherwise start with empty initial input."
 ;;; editorconfig
 
 (use-package editorconfig
+  :diminish editorconfig-mode
   :config (editorconfig-mode 1))
 
 ;;; exec-path-from-shell
