@@ -96,7 +96,6 @@
   :init
   (recentf-mode t))
 
-;; NOTE: Make this work with emacs --daemon ??
 (use-package server
   :config
   (when (and (fboundp 'server-running-p)
