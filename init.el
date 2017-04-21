@@ -638,57 +638,6 @@ using `fit-window-to-buffer'."
 (use-package rvm
   :config
   (add-hook 'ruby-mode-hook 'rvm-activate-corresponding-ruby))
-(use-package ruby-mode
-  :bind (:map ruby-mode-map
-              ;; ("C-c m b" . my-insert-pry-binding)
-              ("<C-return>" . my-insert-ruby-end))
-
-  :config
-
-
-  (defun empty-line ()
-    (= 0 (length (replace-regexp-in-string "^[ \t]*\n$" "" (thing-at-point 'line t)))))
-
-  (defun my-insert-ruby-end ()
-    (interactive)
-    (unless (empty-line)
-      (progn
-        (end-of-line)
-        (newline)))
-    (insert "end")
-    (indent-according-to-mode))
-
-  (defun my-insert-pry-binding ()
-    "Insert the string `require pry;binding.pry' at point. When line is non-empty insert
-  on a new line below."
-    (interactive)
-    (save-excursion
-      (if (string= "\n" (thing-at-point 'line))
-          (insert "require 'pry'; binding.pry")
-        (progn
-          (end-of-line)
-          (newline-and-indent)
-          (insert "require 'pry'; binding.pry")))))
-
-  (defun my-rubyfy-name (name)
-    (mapconcat 'identity (mapcar 'capitalize (split-string name "_" t)) ""))
-
-  (defun my-generate-ruby-class-or-module-name (buffer type)
-    (let ((filename (file-name-base (buffer-file-name buffer))))
-      (format "%s %s\n\nend" (symbol-name type) (my-rubyfy-name filename))))
-
-
-  (defun my-insert-ruby-class-or-module-name (buffer type)
-    (insert (my-generate-ruby-class-or-module-name buffer type))
-    (forward-line -1))
-
-  (defun my-insert-ruby-class-name ()
-    (interactive)
-    (my-insert-ruby-class-or-module-name (current-buffer) 'class))
-
-  (defun my-insert-ruby-module-name ()
-    (interactive)
-    (my-insert-ruby-class-or-module-name (current-buffer) 'module)))
 
 ;;; keyfreq
 
