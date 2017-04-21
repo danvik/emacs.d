@@ -201,7 +201,7 @@
              ("f" . counsel-git)
              ("a" . counsel-ag)
              ("y" . counsel-yank-pop)
-             ("m" . counsel-tmm)
+             ("m" . counsel-mark-ring)
              ("o" . counsel-outline)
              ("j" . counsel-file-jump))
 
