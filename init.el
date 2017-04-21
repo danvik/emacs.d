@@ -824,6 +824,19 @@ using `fit-window-to-buffer'."
 (use-package git-link
   :config (setq git-link-open-in-browser t))
 
+(use-package god-mode
+  :bind (("C-c u g" . god-local-mode)
+         :map god-local-mode-map
+         ("i" . god-local-mode)
+         ("w" . avy-goto-word-1)
+         ("." . repeat))
+  :init (when (memq window-system '(mac ns))
+          (global-set-key (kbd "<escape>") 'god-local-mode))
+  :config
+  (add-hook 'god-mode-enabled-hook (lambda () (hl-line-mode 1)))
+  (add-hook 'god-mode-disabled-hook (lambda () (hl-line-mode -1))))
+
+
 (bind-keys
  ("C-\\"  . hippie-expand)
  ("M-9"   . previous-buffer)
@@ -860,32 +873,25 @@ using `fit-window-to-buffer'."
            ("v" . visual-line-mode)
            ("w" . whitespace-mode))
 
-(bind-keys :prefix-map my-section-sign-key-map
-           :prefix "§"
-           ("b" . my-bm-prefix-map)
-           ("c" . my-counsel-prefix-map)
-           ("f" . my-file-stuff-prefix-map)
-           ("g" . my-counsel-git-grep)
-           ("j" . my-jump-prefix-map)
-           ("l" . my-eyebrowse-prefix-map)
-           ("t" . my-toggle-prefix-map)
-           ("u" . my-custom-key-map)
-           ("p" . projectile-command-map)
-           ("§" . ivy-switch-buffer)
-           ("1" . delete-other-windows)
-           (";" . iedit-mode))
+(progn
+  (bind-keys :prefix-map my-section-sign-key-map
+             :prefix "§"
+             ("b" . my-bm-prefix-map)
+             ("f" . my-file-stuff-prefix-map)
+             ("g" . my-counsel-git-grep)
+             ("j" . my-jump-prefix-map)
+             ("l" . my-eyebrowse-prefix-map)
+             ("t" . my-toggle-prefix-map)
+             ("u" . my-custom-key-map)
+             ("p" . projectile-command-map)
+             ("§" . ace-window)
+             (";" . iedit-mode)
+             ("1" . delete-other-windows))
 
-(use-package god-mode
-  :bind (("C-c u g" . god-local-mode)
-         :map god-local-mode-map
-         ("i" . god-local-mode)
-         ("w" . avy-goto-word-1)
-         ("." . repeat))
-  :init (when (memq window-system '(mac ns))
-          (global-set-key (kbd "<escape>") 'god-local-mode))
-  :config
-  (add-hook 'god-mode-enabled-hook (lambda () (hl-line-mode 1)))
-  (add-hook 'god-mode-disabled-hook (lambda () (hl-line-mode -1))))
+  (let ((control-c-prefix (lookup-key global-map (kbd "C-c")))
+        (control-x-prefix (lookup-key global-map (kbd "C-x"))))
+    (bind-key "c" control-c-prefix my-section-sign-key-map)
+    (bind-key "x" control-x-prefix my-section-sign-key-map)))
 
 (load-theme 'leuven t)
 (require 'local nil t)
