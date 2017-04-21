@@ -463,16 +463,10 @@ otherwise start with empty initial input."
    ("M-g f" . avy-goto-char-in-line)
    ("M-g M-l" . avy-copy-line)
    ("M-g M-m" . avy-move-line)
-   ("M-g M-k" . my-kill-line-with-avy)
+   ("M-g M-k" . avy-kill-whole-line)
    ("M-g g" . avy-goto-line)
    ("M-g s" . avy-goto-char-timer))
-  :config (setq avy-timeout-seconds 0.2)
-  :init
-  (defun my-kill-line-with-avy ()
-    (interactive)
-    (save-excursion
-      (avy-goto-line)
-      (kill-whole-line))))
+  :config (setq avy-timeout-seconds 0.2))
 
 ;;; ace-window
 
