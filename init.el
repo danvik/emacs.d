@@ -600,16 +600,16 @@ using `fit-window-to-buffer'."
 ;;; golang
 
 (use-package go-mode
-  :bind (:map go-mode-map ("C-c C-p" . godoc-at-point))
+  :bind (:map go-mode-map
+              ("C-c C-p" . godoc-at-point)
+              ("C-c C-e" . go-gopath-set-gopath)
+              ("C-c C-r" . go-remove-unused-imports))
   :config
   (add-hook 'before-save-hook #'gofmt-before-save)
   (add-hook 'go-mode-hook (lambda ()
                             (set (make-local-variable 'company-backends) '(company-go))
                             (company-mode)))
-  (add-hook 'go-mode-hook 'go-eldoc-setup)
-  (define-key go-mode-map (kbd "C-c C-e") #'go-gopath-set-gopath)
-
-  (bind-key "C-c C-r" 'go-remove-unused-imports go-mode-map))
+  (add-hook 'go-mode-hook 'go-eldoc-setup))
 
 
 ;;; programming
