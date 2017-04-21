@@ -111,6 +111,7 @@
 
 (use-package saveplace
   :config
+  (setq save-place-ignore-files-regexp "\\(?:COMMIT_EDITMSG\\|hg-editor-[[:alnum:]]+\\.txt\\|svn-commit\\.tmp\\|bzr_log\\.[[:alnum:]]+\\|.gpg\\)$")
   (if (fboundp 'save-place-mode)
       (save-place-mode 1)
     ;; for (version< emacs-version "25.1")
