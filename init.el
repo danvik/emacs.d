@@ -119,11 +119,15 @@
     (setq-default save-place t))
   (setq save-place-file (concat user-emacs-directory "places")))
 
+(use-package dired-x
+  :bind ("C-c j" . dired-jump-other-window)
+  :init
+  (setq dired-bind-jump nil))
+
 ;;; dired-details
 
 (use-package dired-details
   :config
-  (require 'dired-x)
   (setq-default dired-details-hidden-string "--- ")
   (dired-details-install))
 
@@ -721,16 +725,6 @@ using `fit-window-to-buffer'."
            ("b" . bookmark-set)
            ("o" . find-file-other-window))
 
-(bind-keys :prefix-map my-jump-prefix-map
-           :prefix "C-c j"
-           ("e" . avy-goto-word-0)
-           ("w" . avy-goto-word-1)
-           ("l" . avy-goto-line)
-           ("c" . avy-goto-char)
-           ("j" . avy-goto-line-below)
-           ("k" . avy-goto-line-above)
-           ("f" . avy-goto-char-in-line))
-
 (bind-keys :map my-toggle-prefix-map
            ("l" . linum-mode)
            ("h" . hl-line-mode)
@@ -741,9 +735,9 @@ using `fit-window-to-buffer'."
 (progn
   (bind-keys :prefix-map my-section-sign-key-map
              :prefix "§"
+             ("b" . ivy-switch-buffer)
              ("f" . my-file-stuff-prefix-map)
              ("g" . my-counsel-git-grep)
-             ("j" . my-jump-prefix-map)
              ("l" . my-eyebrowse-prefix-map)
              ("t" . my-toggle-prefix-map)
              ("u" . my-custom-key-map)
