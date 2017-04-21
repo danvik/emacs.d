@@ -130,54 +130,11 @@
 
 (use-package ivy
   :diminish ivy-mode
-  :bind (:map my-custom-key-map ("p" . ivy-switch-project))
-  :config
-  (setq ivy-use-virtual-buffers t)
-  (defun my-eshell-from-dir (dir)
-    (interactive)
-    (let ((default-directory dir))
-      (eshell)))
-
-  (defun my-projectile-switch-to-buffer (project)
-    (interactive)
-    (let ((default-directory project))
-      (projectile-switch-to-buffer)))
-
-  (defun my-ag-from-dir (dir)
-    (interactive)
-    (let ((input (read-from-minibuffer "Search string: ")))
-      (ag input dir)))
-
-  (defun ivy-switch-project ()
-    (interactive)
-    (ivy-read
-     "Switch to project: "
-     (if (projectile-project-p)
-         (cons (abbreviate-file-name (projectile-project-root))
-               (projectile-relevant-known-projects))
-       projectile-known-projects)
-     :action #'projectile-switch-project-by-name))
-
   :init
-  (ivy-mode)
-  (setq ivy-display-style 'fancy)
-
-  (setq ivy-wrap t)
-
-  (defun my-counsel-git-grep-in-directory (directory)
-    (interactive)
-    (let ((default-directory directory))
-      (counsel-git-grep)))
-
-  (ivy-set-actions
-   'ivy-switch-project
-   '(("d" dired "Open Dired in project's directory")
-     ("v" projectile-vc "Open project root in vc-dir or magit")
-     ("e" my-eshell-from-dir "Eshell")
-     ("a" my-ag-from-dir "Ag in project")
-     ("g" my-counsel-git-grep-in-directory "counsel-git-grep")
-     ("b" my-projectile-switch-to-buffer "Switch to buffer in project")
-     ("r" projectile-remove-known-project "Remove project(s)"))))
+  (setq ivy-use-virtual-buffers t
+        ivy-display-style 'fancy
+        ivy-wrap t)
+  (ivy-mode))
 
 (use-package swiper
   :bind ("C-s" . swiper))
