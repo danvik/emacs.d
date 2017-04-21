@@ -131,6 +131,11 @@
 
 (use-package ivy
   :diminish ivy-mode
+  :config
+  (eval-after-load "eyebrowse"
+    '(ivy-add-actions
+      'ivy-switch-buffer
+      '(("e" my-move-buffer-to-next-free-slot "new eyebrowse window config"))))
   :init
   (setq ivy-use-virtual-buffers t
         ivy-display-style 'fancy
