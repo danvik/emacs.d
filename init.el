@@ -513,13 +513,16 @@ otherwise start with empty initial input."
   :init (setq flycheck-checker-error-threshold 500
               flycheck-check-syntax-automatically '(mode-enabled save)))
 
-;;; magit
+;;; git
 
 (use-package magit
   :defer 5
   :bind ("C-c v" . magit-status)
   :config
   (setq magit-completing-read-function 'ivy-completing-read))
+
+(use-package git-link
+  :config (setq git-link-open-in-browser t))
 
 ;;; ag
 
@@ -681,9 +684,6 @@ using `fit-window-to-buffer'."
 (use-package alchemist)
 
 ;;; misc
-
-(use-package git-link
-  :config (setq git-link-open-in-browser t))
 
 (use-package god-mode
   :bind (("C-c u g" . god-local-mode)
