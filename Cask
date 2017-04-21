@@ -9,7 +9,6 @@
 (depends-on "async")
 (depends-on "avy")
 (depends-on "bind-key")
-(depends-on "bm")
 (depends-on "browse-kill-ring")
 (depends-on "bundler")
 (depends-on "cask")

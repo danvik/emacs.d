@@ -307,22 +307,6 @@ otherwise start with empty initial input."
         which-key-side-window-location 'bottom)
   (which-key-mode))
 
-(use-package bm
-  :config
-  (setq bm-highlight-style 'bm-highlight-only-fringe
-        bm-cycle-all-buffers t)
-  (bind-keys :map bm-show-mode-map
-             ("n" . bm-show-next)
-             ("p" . bm-show-prev))
-  :init
-  (bind-keys :prefix-map my-bm-prefix-map
-             :prefix "C-c b"
-             ("b" . bm-toggle)
-             ("n" . bm-next)
-             ("p" . bm-previous)
-             ("o" . bm-show)
-             ("a" . bm-show-all)))
-
 ;;; eyebrowse
 
 (use-package eyebrowse
@@ -836,7 +820,6 @@ using `fit-window-to-buffer'."
 (progn
   (bind-keys :prefix-map my-section-sign-key-map
              :prefix "§"
-             ("b" . my-bm-prefix-map)
              ("f" . my-file-stuff-prefix-map)
              ("g" . my-counsel-git-grep)
              ("j" . my-jump-prefix-map)
