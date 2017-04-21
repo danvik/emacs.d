@@ -680,11 +680,7 @@ using `fit-window-to-buffer'."
 
 ;;; elixir
 
-(use-package elixir-mode)
-
-(use-package alchemist
-  ;; https://github.com/tonini/alchemist.el/issues/71
-  )
+(use-package alchemist)
 
 ;;; misc
 
