@@ -1,6 +1,16 @@
 (package-initialize)
 
 
+;;; packages setup
+
+(require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
+(cask-initialize)
+(require 'pallet)
+(pallet-mode t)
+
+(add-to-list 'load-path (concat user-emacs-directory "lisp"))
+
+
 ;;; emacs settings
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -46,15 +56,6 @@
 
 
 
-
-;;; packages setup
-
-(require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
-(cask-initialize)
-(require 'pallet)
-(pallet-mode t)
-
-(add-to-list 'load-path (concat user-emacs-directory "lisp"))
 
 ;;; custom prefix
 
