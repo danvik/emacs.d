@@ -893,5 +893,5 @@ using `fit-window-to-buffer'."
     (bind-key "c" control-c-prefix my-section-sign-key-map)
     (bind-key "x" control-x-prefix my-section-sign-key-map)))
 
-(load-theme 'leuven t)
+(load-theme 'tango-plus t)
 (require 'local nil t)
