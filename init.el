@@ -236,12 +236,13 @@ otherwise start with empty initial input."
   ;; Markdown export http://stackoverflow.com/a/22990257
   (eval-after-load "org" '(require 'ox-md nil t))
   (setq org-hide-emphasis-markers t
-        org-log-done 'time
-        org-babel-load-languages (quote
-                                  ((ruby . t)
-                                   (clojure . t)
-                                   (sh . t)
-                                   (emacs-lisp . t))))
+        org-log-done 'time)
+  (org-babel-do-load-languages 'org-babel-load-languages (quote
+                                                          ((ruby . t)
+                                                           (clojure . t)
+                                                           (sh . t)
+                                                           (shell . t)
+                                                           (emacs-lisp . t))))
   (setq org-src-fontify-natively t))
 
 ;;; company
