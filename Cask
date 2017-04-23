@@ -6,6 +6,7 @@
 (depends-on "ace-window")
 (depends-on "ag")
 (depends-on "alchemist")
+(depends-on "all-the-icons")
 (depends-on "async")
 (depends-on "avy")
 (depends-on "bind-key")
