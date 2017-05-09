@@ -389,9 +389,9 @@ otherwise start with empty initial input."
              ("kr" . my-close-slots-to-the-right)
              ("n" . eyebrowse-next-window-config)
              ("p" . eyebrowse-prev-window-config)
-             ("l" . eyebrowse-last-window-config)
+             ("l" . my-ivy-eyebrowse)
              ("kk" . eyebrowse-close-window-config)
-             ("j" . eyebrowse-switch-to-window-config)
+             ("j" . my-ivy-eyebrowse)
              ("r" . eyebrowse-rename-window-config)
 
              ("0" . eyebrowse-switch-to-window-config-0)
