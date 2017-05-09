@@ -318,6 +318,27 @@ otherwise start with empty initial input."
 (use-package eyebrowse
   :init
 
+  (defun my-ivy-eyebrowse ()
+    (interactive)
+    (let* ((candidates (--map (cons (eyebrowse-format-slot it)
+                                    (car it))
+                              (eyebrowse--get 'window-configs))))
+      (ivy-read "Enter slot: " candidates
+                :action (lambda (slot)
+                          (eyebrowse-switch-to-window-config (cdr slot)))
+                :preselect (my-eyebrowse-current-tag)
+                :caller #'my-ivy-eyebrowse)))
+  (ivy-set-actions
+   'my-ivy-eyebrowse
+   '(("k"
+      (lambda (slot)
+        (eyebrowse--delete-window-config (cdr slot)))
+      "kill")
+     ("r"
+      (lambda (slot)
+        (eyebrowse-rename-window-config (cdr slot) nil))
+      "rename")))
+
   (defun my-move-buffer-to-next-free-slot (&optional buffer)
     (interactive "b")
     (call-interactively 'eyebrowse-create-window-config)
