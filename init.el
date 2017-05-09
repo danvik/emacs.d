@@ -294,7 +294,7 @@ otherwise start with empty initial input."
 ;;; utils
 
 (use-package deft
-  :bind (:map my-custom-key-map ("d" . my-deft))
+  :bind (:map my-custom-key-map ("d" . deft))
   :init
   (setq deft-extensions '("org")
         deft-text-mode 'org-mode
