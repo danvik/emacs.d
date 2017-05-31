@@ -137,7 +137,7 @@
   :diminish ivy-mode
   :config
   (eval-after-load "eyebrowse"
-    '(ivy-set-actions
+    '(ivy-add-actions
       'ivy-switch-buffer
       '(("e"
          (lambda (buffer)
