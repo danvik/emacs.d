@@ -738,7 +738,10 @@ using `fit-window-to-buffer'."
      "M-a"
      "M-e"
      "C-M-a"
-     "C-M-e")))
+     "C-M-e"
+     "C-k"
+     "C-d"
+     "M-d")))
 
 (load-theme 'tango-plus t)
 (require 'local nil t)
