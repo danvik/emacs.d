@@ -56,6 +56,7 @@
 (depends-on "inf-ruby")
 (depends-on "ivy")
 (depends-on "ivy-hydra")
+(depends-on "jq-mode")
 (depends-on "json-mode")
 (depends-on "json-reformat")
 (depends-on "json-snatcher")
