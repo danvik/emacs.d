@@ -19,6 +19,7 @@
 (depends-on "company")
 (depends-on "company-go")
 (depends-on "counsel")
+(depends-on "counsel-projectile")
 (depends-on "creamsody-theme")
 (depends-on "darktooth-theme")
 (depends-on "dash")

@@ -388,6 +388,9 @@ otherwise start with empty initial input."
   :init
   (projectile-global-mode))
 
+(use-package counsel-projectile
+  :init (counsel-projectile-on))
+
 ;;; hydra
 
 (use-package hydra
