@@ -714,5 +714,31 @@ using `fit-window-to-buffer'."
            ("v" . visual-line-mode)
            ("w" . whitespace-mode))
 
+(use-package my-no-repeat-mode
+  :load-path "lisp/"
+  :demand
+  :bind (:map my-toggle-prefix-map
+              ("q" . my-no-repeat-mode)
+              ("Q" . my-no-repeat-global-mode))
+
+  ;; (setq my-no-repeat-show-hint 't)
+  ;; (setq my-no-repeat-show-hint nil)
+  :init
+  (my-no-repeat-global-mode t)
+  (mapc
+   'my-no-repeat-kbd
+   '("C-n"
+     "C-p"
+     "C-f"
+     "C-b"
+     "C-v"
+     "M-v"
+     "M-f"
+     "M-b"
+     "M-a"
+     "M-e"
+     "C-M-a"
+     "C-M-e")))
+
 (load-theme 'tango-plus t)
 (require 'local nil t)
