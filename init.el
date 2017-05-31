@@ -317,55 +317,6 @@ otherwise start with empty initial input."
 
 (use-package eyebrowse
   :init
-
-  (defun my-ivy-eyebrowse ()
-    (interactive)
-    (let* ((candidates (--map (cons (eyebrowse-format-slot it)
-                                    (car it))
-                              (eyebrowse--get 'window-configs))))
-      (ivy-read "Enter slot: " candidates
-                :action (lambda (slot)
-                          (eyebrowse-switch-to-window-config (cdr slot)))
-                :preselect (my-eyebrowse-current-tag)
-                :caller #'my-ivy-eyebrowse)))
-  (ivy-set-actions
-   'my-ivy-eyebrowse
-   '(("k"
-      (lambda (slot)
-        (eyebrowse--delete-window-config (cdr slot)))
-      "kill")
-     ("r"
-      (lambda (slot)
-        (eyebrowse-rename-window-config (cdr slot) nil))
-      "rename")))
-
-  (defun my-move-buffer-to-next-free-slot (&optional buffer)
-    (interactive "b")
-    (call-interactively 'eyebrowse-create-window-config)
-    (switch-to-buffer buffer))
-
-  (defun my-projectile-eyebrowse (p)
-    (interactive)
-    (eyebrowse-create-window-config)
-    (eyebrowse-rename-window-config (eyebrowse--get 'current-slot) (projectile-default-project-name p))
-    (projectile-switch-project-by-name p))
-
-  (defun my-eyebrowse-current-tag ()
-    (interactive)
-    (let ((current-slot (eyebrowse--get 'current-slot))
-          (window-configs (eyebrowse--get 'window-configs)))
-      (nth 2 (assoc current-slot window-configs))))
-
-  (defun ivy-switch-project-with-eyebrowse ()
-    (interactive)
-    (ivy-read
-     "Switch to project: "
-     (if (projectile-project-p)
-         (cons (abbreviate-file-name (projectile-project-root))
-               (projectile-relevant-known-projects))
-       projectile-known-projects)
-     :action  #'my-projectile-eyebrowse))
-
   (defun my-close-all-other-slots ()
     (interactive)
     (let ((all-slots (mapcar 'car (eyebrowse--get 'window-configs)))
@@ -389,9 +340,9 @@ otherwise start with empty initial input."
              ("kr" . my-close-slots-to-the-right)
              ("n" . eyebrowse-next-window-config)
              ("p" . eyebrowse-prev-window-config)
-             ("l" . my-ivy-eyebrowse)
+             ("l" . eyebrowse-last-window-config)
              ("kk" . eyebrowse-close-window-config)
-             ("j" . my-ivy-eyebrowse)
+             ("j" . eyebrowse-switch-to-window-config)
              ("r" . eyebrowse-rename-window-config)
 
              ("0" . eyebrowse-switch-to-window-config-0)
@@ -405,7 +356,7 @@ otherwise start with empty initial input."
              ("8" . eyebrowse-switch-to-window-config-8)
              ("9" . eyebrowse-switch-to-window-config-9))
 
-  (setq eyebrowse-mode-line-style 'smart)
+  (setq eyebrowse-mode-line-style 'always)
   (setq eyebrowse-close-window-config-prompt t)
   (setq eyebrowse-new-workspace t)
 
