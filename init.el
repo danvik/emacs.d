@@ -394,10 +394,6 @@ otherwise start with empty initial input."
   :init
   (projectile-global-mode))
 
-(use-package counsel-projectile
-  :bind ("M-p" . counsel-projectile)
-  :init (counsel-projectile-on))
-
 ;;; hydra
 
 (use-package hydra
