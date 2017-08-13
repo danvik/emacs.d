@@ -398,10 +398,12 @@ otherwise start with empty initial input."
 
 (use-package hydra
   :init
-  (defhydra hydra-my-compilation (global-map "M-g"  :color red)
+  (defhydra hydra-my-compilation (global-map "M-g" :color red :columns 2)
     "Compilation"
     ("p" previous-error "Previous error")
     ("n" next-error "Next error")
+    ("l" recenter-top-bottom "recenter")
+    ("L" reposition-window "reposition")
     ("0" first-error "First error")
     ("q" nil "quit"))
 
