@@ -684,6 +684,10 @@ using `fit-window-to-buffer'."
   (add-hook 'god-mode-disabled-hook (lambda () (hl-line-mode -1))))
 
 
+(use-package goto-last-change
+  :bind ("M-g i" . goto-last-change))
+
+
 (bind-keys
  ("C-\\"  . hippie-expand)
  ("M-9"   . previous-buffer)

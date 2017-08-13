@@ -45,6 +45,7 @@
 (depends-on "go-gopath")
 (depends-on "go-mode")
 (depends-on "god-mode")
+(depends-on "goto-last-change")
 (depends-on "gruvbox-theme")
 (depends-on "highlight-numbers")
 (depends-on "hl-todo")
