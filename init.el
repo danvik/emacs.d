@@ -502,7 +502,8 @@ otherwise start with empty initial input."
   :defer 5
   :bind ("C-c v" . magit-status)
   :config
-  (setq magit-completing-read-function 'ivy-completing-read))
+  (setq magit-completing-read-function 'ivy-completing-read
+        magit-save-repository-buffers 'dontask))
 
 (use-package git-link
   :config (setq git-link-open-in-browser t))
