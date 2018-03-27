@@ -169,10 +169,8 @@
 
   (bind-keys :prefix-map my-counsel-prefix-map
              :prefix "C-c c"
-             ("g" . counsel-git-grep)
              ("i" . counsel-imenu)
              ("f" . counsel-git)
-             ("a" . counsel-ag)
              ("r" . counsel-rg)
              ("y" . counsel-yank-pop)
              ("m" . counsel-mark-ring)
@@ -180,16 +178,20 @@
              ("j" . counsel-file-jump))
 
   (setq counsel-find-file-at-point t)
-  (defun my-counsel-git-grep ()
-    "Run `counsel-git-grep' with a preset initial input. If
+
+  (defun my-counsel-rg ()
+    "Run `counsel-rg' with a preset initial input. If
 region active use that, if point is on a symbol use that
 otherwise start with empty initial input."
     (interactive)
     (let ((initial-input (if (region-active-p)
                              (buffer-substring-no-properties (region-beginning) (region-end))
                            (thing-at-point 'symbol t))))
-      (counsel-git-grep nil initial-input)))
-  (bind-key "C-c g" #'my-counsel-git-grep)
+      (counsel-rg initial-input)))
+
+
+  (bind-key "C-c g" #'my-counsel-rg)
+
   :init (counsel-mode 1))
 
 ;;; org mode
@@ -381,8 +383,8 @@ otherwise start with empty initial input."
         projectile-completion-system 'ivy
         projectile-switch-project-action #'projectile-commander)
   (def-projectile-commander-method ?G
-    "Run `counsel-git-grep' in project."
-    (call-interactively #'counsel-git-grep))
+    "Run `counsel-rg' in project."
+    (call-interactively #'counsel-rg))
   (def-projectile-commander-method ?n
     "Run `neotree-projectile-action' in project."
     (call-interactively #'neotree-projectile-action))
