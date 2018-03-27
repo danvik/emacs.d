@@ -85,6 +85,7 @@
 (depends-on "popwin")
 (depends-on "projectile")
 (depends-on "rainbow-mode")
+(depends-on "ranger")
 (depends-on "regex-tool")
 (depends-on "rich-minority")
 (depends-on "rotate")

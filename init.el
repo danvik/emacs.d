@@ -690,6 +690,15 @@ using `fit-window-to-buffer'."
   :bind ("M-g i" . goto-last-change))
 
 
+(use-package ranger
+  :config
+  (defun my-ranger ()
+    (interactive)
+    (if (projectile-project-p)
+        (ranger (projectile-project-root))
+      (ranger)))
+  (bind-key "C-c r" 'my-ranger))
+
 (use-package my-no-repeat-mode
   :load-path "lisp/"
   :demand
