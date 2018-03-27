@@ -131,12 +131,7 @@
   :init
   (setq dired-bind-jump nil))
 
-;;; dired-details
-
-(use-package dired-details
-  :config
-  (setq-default dired-details-hidden-string "--- ")
-  (dired-details-install))
+(add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
 ;;; ivy completion / swiper / counsel
 
