@@ -213,7 +213,6 @@ otherwise start with empty initial input."
   (org-babel-do-load-languages 'org-babel-load-languages (quote
                                                           ((ruby . t)
                                                            (clojure . t)
-                                                           (sh . t)
                                                            (shell . t)
                                                            (emacs-lisp . t))))
   (setq org-src-fontify-natively t))
