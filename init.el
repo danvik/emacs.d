@@ -690,32 +690,6 @@ using `fit-window-to-buffer'."
   :bind ("M-g i" . goto-last-change))
 
 
-(bind-keys
- ("C-\\"  . hippie-expand)
- ("M-9"   . previous-buffer)
- ("M-0"   . next-buffer)
- ("M-1"   . delete-other-windows)
- ("M-2"   . company-complete)
- ("C-M-0" . delete-window)
- ("C-x O" . other-frame))
-
-
-(bind-keys :prefix-map my-file-stuff-prefix-map
-           :prefix "C-c f"
-           ("u" . revert-buffer)
-           ("f" . counsel-find-file)
-           ("r" . counsel-recentf)
-           ("s" . save-buffer)
-           ("b" . bookmark-set)
-           ("o" . find-file-other-window))
-
-(bind-keys :map my-toggle-prefix-map
-           ("l" . linum-mode)
-           ("h" . hl-line-mode)
-           ("b" . blink-cursor-mode)
-           ("v" . visual-line-mode)
-           ("w" . whitespace-mode))
-
 (use-package my-no-repeat-mode
   :load-path "lisp/"
   :demand
@@ -744,6 +718,32 @@ using `fit-window-to-buffer'."
      "C-k"
      "C-d"
      "M-d")))
+
+
+(bind-keys
+ ("C-\\"  . hippie-expand)
+ ("M-9"   . previous-buffer)
+ ("M-0"   . next-buffer)
+ ("M-1"   . delete-other-windows)
+ ("M-2"   . company-complete)
+ ("C-M-0" . delete-window)
+ ("C-x O" . other-frame))
+
+(bind-keys :prefix-map my-file-stuff-prefix-map
+           :prefix "C-c f"
+           ("u" . revert-buffer)
+           ("f" . counsel-find-file)
+           ("r" . counsel-recentf)
+           ("s" . save-buffer)
+           ("b" . bookmark-set)
+           ("o" . find-file-other-window))
+
+(bind-keys :map my-toggle-prefix-map
+           ("l" . linum-mode)
+           ("h" . hl-line-mode)
+           ("b" . blink-cursor-mode)
+           ("v" . visual-line-mode)
+           ("w" . whitespace-mode))
 
 (load-theme 'tango-plus t)
 (require 'local nil t)
