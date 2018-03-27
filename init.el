@@ -173,6 +173,7 @@
              ("i" . counsel-imenu)
              ("f" . counsel-git)
              ("a" . counsel-ag)
+             ("r" . counsel-rg)
              ("y" . counsel-yank-pop)
              ("m" . counsel-mark-ring)
              ("o" . counsel-outline)
