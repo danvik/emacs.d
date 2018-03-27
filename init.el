@@ -46,8 +46,9 @@
 (setq mac-option-modifier 'none)
 (setq mac-command-modifier 'meta)
 
-(set-frame-font "Inconsolata-14")
-(add-to-list 'default-frame-alist '(font . "Inconsolata-14"))
+(when (member "Inconsolata" (font-family-list))
+  (set-frame-font "Inconsolata-14")
+  (add-to-list 'default-frame-alist '(font . "Inconsolata-14")))
 
 (setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
 (setq backup-directory-alist '((".*" . "~/.emacs.d/backups")))
