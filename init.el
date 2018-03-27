@@ -700,7 +700,6 @@ using `fit-window-to-buffer'."
   ;; (setq my-no-repeat-show-hint 't)
   ;; (setq my-no-repeat-show-hint nil)
   :config
-  (my-no-repeat-global-mode t)
   (mapc
    'my-no-repeat-kbd
    '("C-n"
