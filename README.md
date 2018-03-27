@@ -4,9 +4,7 @@
 
 ### Install Emacs
 
-For stable `$ brew install emacs --with-cocoa --srgb`
-
-For latest `$ brew install emacs --HEAD --use-git-head --with-cocoa --srgb`
+Get the latest `$ brew install emacs --with-cocoa --with-gnutls --HEAD`
 
 ### Install [Cask](https://github.com/cask/cask)
 
