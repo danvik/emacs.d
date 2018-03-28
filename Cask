@@ -39,6 +39,7 @@
 (depends-on "f")
 (depends-on "feature-mode")
 (depends-on "flycheck")
+(depends-on "ghub")
 (depends-on "git-commit")
 (depends-on "git-link")
 (depends-on "gitignore-mode")
@@ -110,3 +111,4 @@
 (depends-on "yaml-mode")
 (depends-on "yard-mode")
 (depends-on "zerodark-theme")
+(depends-on "zoutline")
