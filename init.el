@@ -511,14 +511,6 @@ otherwise start with empty initial input."
 (use-package git-link
   :config (setq git-link-open-in-browser t))
 
-;;; ag
-
-(use-package ag
-  :if (executable-find "ag")
-  :config
-  (require 'grep)
-  (setq ag-highlight-search t))
-
 ;;; rainbow-mode
 
 (use-package rainbow-mode

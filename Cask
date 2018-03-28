@@ -103,7 +103,6 @@
 (depends-on "use-package")
 (depends-on "visual-fill-column")
 (depends-on "wgrep")
-(depends-on "wgrep-ag")
 (depends-on "which-key")
 (depends-on "with-editor")
 (depends-on "worf")
