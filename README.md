@@ -99,11 +99,42 @@ Use the correct Ruby version for a buffer by calling `rvm-activate-corresponding
 
 [go-mode](https://github.com/dominikh/go-mode.el) as major mode.
 
+Above requires Go packages to be installed
+
+Install [gocode](https://github.com/nsf/gocode)
+
+`go get -u github.com/nsf/gocode`
+
+Install [godef](github.com/rogpeppe/godef)
+`go get -u github.com/rogpeppe/godef`
+
+Install [goimports](https://godoc.org/golang.org/x/tools/cmd/goimports)
+`go get golang.org/x/tools/cmd/goimports`
+
 Extend [company](http://company-mode.github.io/) with [company-go](https://github.com/nsf/gocode/blob/master/emacs-company/company-go.el) for completion.
 
 Help on functions with [go-eldoc](https://github.com/syohex/emacs-go-eldoc).
 
 Setup `GOPATH` with [go-gopath](http://github.com/iced/go-gopath/).
+
+##### Install Go and setup GOPATH
+
+Install go
+
+```sh
+brew install go
+```
+
+Setup working directory and `GOPATH`
+
+```sh
+mkdir ~/golang
+```
+
+```sh
+echo "export GOPATH=\$HOME/golang" >> ~/.bash_profile
+echo "export PATH=\$PATH:\$GOPATH/bin" >> ~/.bash_profile
+```
 
 #### Elixir
 
