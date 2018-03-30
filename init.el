@@ -684,12 +684,13 @@ using `fit-window-to-buffer'."
 
 (use-package ranger
   :config
-  (defun my-ranger ()
+  (defun my-projectile-ranger ()
     (interactive)
     (if (projectile-project-p)
         (ranger (projectile-project-root))
       (ranger)))
-  (bind-key "C-c r" 'my-ranger))
+  (bind-keys ("C-c R" . my-projectile-ranger)
+             ("C-c r" . ranger)))
 
 (use-package my-no-repeat-mode
   :load-path "lisp/"
