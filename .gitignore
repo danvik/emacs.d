@@ -14,4 +14,7 @@
 /places
 /lisp/local.el
 /TAGS
-/straight/
+/straight/build/
+/straight/repos/
+/straight/build-cache.el
+!/straight/versions/default.el
