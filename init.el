@@ -1,15 +1,26 @@
-;; (package-initialize)
+(progn
+  (defvar bootstrap-version)
+  (let ((bootstrap-file
+         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+        (bootstrap-version 5))
+    (unless (file-exists-p bootstrap-file)
+      (with-current-buffer
+          (url-retrieve-synchronously
+           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+           'silent 'inhibit-cookies)
+        (goto-char (point-max))
+        (eval-print-last-sexp)))
+    (load bootstrap-file nil 'nomessage))
+  (add-to-list 'load-path (concat user-emacs-directory "lisp"))
 
 
-;;; packages setup
+  ;; Specifying :straight t is unnecessary if you set
+  ;; straight-use-package-by-default to a non-nil value.
+  (straight-use-package 'use-package)
+  (straight-use-package 'diminish)
 
-;; (require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
-;; (cask-initialize)
-;; (require 'pallet)
-;; (pallet-mode t)
-
-(add-to-list 'load-path (concat user-emacs-directory "lisp"))
-
+  ;; (setq straight-use-package-by-default t)
+  )
 
 ;;; emacs settings
 
@@ -78,7 +89,7 @@
 
 (use-package defuns
   :load-path "lisp/"
-  :demand
+  :demand                             ;
   :bind
   (("M-s o" . occur-dwim)
    ("C-M-=" . align-to-equals)
@@ -89,6 +100,8 @@
    ("o" . my-org-scratch-buffer)
    ("q" . my-count-words-in-org-subtree)
    ("s" . my-toggle-statistic-cookie-type)))
+
+
 
 ;;; built in's
 
@@ -136,6 +149,7 @@
 ;;; ivy completion / swiper / counsel
 
 (use-package ivy
+  :straight t
   :diminish ivy-mode
   :config
   (eval-after-load "eyebrowse"
@@ -153,9 +167,11 @@
   (ivy-mode))
 
 (use-package swiper
+  :straight t
   :bind ("C-s" . swiper))
 
 (use-package counsel
+  :straight t
   :diminish counsel-mode
   :bind
   (("M-x" . counsel-M-x)
@@ -197,14 +213,16 @@ otherwise start with empty initial input."
 ;;; org mode
 
 (use-package orglink
+  :straight t
   :diminish orglink-mode
   :init (global-orglink-mode))
 
-(use-package htmlize)
-(use-package ox-twbs)
-(use-package ox-reveal)
+(straight-use-package 'htmlize)
+(straight-use-package 'ox-twbs)
+(straight-use-package 'ox-reveal)
 
 (use-package org
+  :straight t
   :config
   (add-hook 'org-mode-hook #'worf-mode)
   (add-hook 'org-mode-hook #'org-bullets-mode)
@@ -223,6 +241,7 @@ otherwise start with empty initial input."
 ;;; company
 
 (use-package company
+  :straight t
   :diminish company-mode
   :config
   (setq company-tooltip-align-annotations t
@@ -232,10 +251,12 @@ otherwise start with empty initial input."
 ;;; editing / text related
 
 (use-package comment-dwim-2
+  :straight t
   :bind
   ("M-;" . comment-dwim-2))
 
 (use-package drag-stuff
+  :straight t
   :diminish drag-stuff-mode
   :bind (:map my-toggle-prefix-map
               ("d" . drag-stuff-mode)
@@ -247,10 +268,12 @@ otherwise start with empty initial input."
   (add-hook 'yaml-mode-hook 'drag-stuff-mode))
 
 (use-package expand-region
+  :straight t
   :bind
   ("C-=" . er/expand-region))
 
 (use-package easy-kill
+  :straight t
   :config
   (global-set-key [remap kill-ring-save] 'easy-kill)
   (global-set-key [remap mark-sexp] 'easy-mark)
@@ -263,10 +286,12 @@ otherwise start with empty initial input."
              ("SPC" . easy-kill-mark-region)))
 
 (use-package iedit
+  :straight t
   :bind (("C-c i" . iedit-mode)
           ("C-;" . iedit-mode)))
 
 (use-package multiple-cursors
+  :straight t
   :bind
   (("C->"         . mc/mark-next-like-this)
    ("C-<"         . mc/mark-previous-like-this)
@@ -274,6 +299,7 @@ otherwise start with empty initial input."
    ("C-S-c C-S-c" . mc/edit-lines)))
 
 (use-package smartparens
+  :straight t
   :diminish (smartparens-mode . "()")
   :bind (:map my-toggle-prefix-map
               ("s" . smartparens-global-mode))
@@ -298,6 +324,7 @@ otherwise start with empty initial input."
 ;;; utils
 
 (use-package deft
+  :straight t
   :bind (:map my-custom-key-map ("d" . deft))
   :init
   (setq deft-extensions '("org")
@@ -306,11 +333,13 @@ otherwise start with empty initial input."
         deft-auto-save-interval 5.0))
 
 (use-package highlight-numbers
+  :straight t
   :config
   (add-hook 'prog-mode-hook 'highlight-numbers-mode)
   (add-hook 'yaml-mode-hook 'highlight-numbers-mode))
 
 (use-package which-key
+  :straight t
   :diminish which-key-mode
   :init
   (setq which-key-popup-type 'side-window
@@ -320,6 +349,7 @@ otherwise start with empty initial input."
 ;;; eyebrowse
 
 (use-package eyebrowse
+  :straight t
   :init
   (defun my-close-all-other-slots ()
     (interactive)
@@ -372,6 +402,7 @@ otherwise start with empty initial input."
 ;;; projectile
 
 (use-package projectile
+  :straight t
   :diminish projectile-mode
   :bind (("M-7" . projectile-switch-to-buffer-other-window)
          ("M-8" . projectile-switch-to-buffer))
@@ -395,6 +426,7 @@ otherwise start with empty initial input."
 ;;; hydra
 
 (use-package hydra
+  :straight t
   :init
   (defhydra hydra-my-compilation (global-map "M-g" :color red :columns 2)
     "Compilation"
@@ -439,6 +471,7 @@ otherwise start with empty initial input."
 
 
 (use-package avy
+  :straight t
   :bind
   (("M-g e" . avy-goto-word-0)
    ("M-g w" . avy-goto-word-1)
@@ -455,17 +488,20 @@ otherwise start with empty initial input."
 ;;; ace-window
 
 (use-package ace-window
+  :straight t
   :bind ("C-x o" . ace-window))
 
 ;;; writeroom-mode
 
 (use-package writeroom-mode
+  :straight t
   :bind (:map my-custom-key-map ("w" . writeroom-mode))
   :init (setq writeroom-width 0.7))
 
 ;;; rotate
 
 (use-package rotate
+  :straight t
   :bind
   (:map my-custom-key-map
         ("SPC" . rotate-layout)
@@ -474,18 +510,21 @@ otherwise start with empty initial input."
 ;;; browse-kill-ring
 
 (use-package browse-kill-ring
+  :straight t
   :bind
   ("M-y" . browse-kill-ring))
 
 ;;; editorconfig
 
 (use-package editorconfig
+  :straight t
   :diminish editorconfig-mode
   :config (editorconfig-mode 1))
 
 ;;; exec-path-from-shell
 
 (use-package exec-path-from-shell
+  :straight t
   :if (eq system-type 'darwin)
   :init
   (exec-path-from-shell-copy-env "GOPATH")
@@ -494,6 +533,7 @@ otherwise start with empty initial input."
 ;;; flycheck
 
 (use-package flycheck
+  :straight t
   :bind (:map my-toggle-prefix-map
               ("f" . flycheck-mode))
   :init (setq flycheck-checker-error-threshold 500
@@ -502,6 +542,7 @@ otherwise start with empty initial input."
 ;;; git
 
 (use-package magit
+  :straight t
   :defer 5
   :bind ("C-c v" . magit-status)
   :config
@@ -509,28 +550,33 @@ otherwise start with empty initial input."
         magit-save-repository-buffers 'dontask))
 
 (use-package git-link
+  :straight t
   :config (setq git-link-open-in-browser t))
 
 ;;; rainbow-mode
 
 (use-package rainbow-mode
+  :straight t
   :config
   (add-hook 'css-mode-hook 'rainbow-mode))
 
 ;;; undo-tree
 
 (use-package undo-tree
+  :straight t
   :diminish undo-tree-mode
   :config (global-undo-tree-mode t))
 
 ;;; ibuffer
 
 (use-package ibuffer
+  :straight t
   :bind
   (("C-x C-b" . ibuffer)
    ("M-3" . ibuffer)))
 
 (use-package ibuffer-vc
+  :straight t
   :config
   (add-hook 'ibuffer-hook
             (lambda ()
@@ -541,6 +587,7 @@ otherwise start with empty initial input."
 ;;; neotree
 
 (use-package neotree
+  :straight t
   :bind ("C-c n" . my-neotree-toggle)
   :config
   (defun my-neotree-toggle ()
@@ -587,6 +634,7 @@ using `fit-window-to-buffer'."
 ;;; golang
 
 (use-package go-mode
+  :straight t
   :bind (:map go-mode-map
               ("C-c C-p" . godoc-at-point)
               ("C-c C-e" . go-gopath-set-gopath)
@@ -602,27 +650,32 @@ using `fit-window-to-buffer'."
 
 ;;; programming
 
-(use-package clojure-mode)
+(straight-use-package 'clojure-mode)
 (use-package erlang
+  :straight t
   :config
   (setq erlang-root-dir "/usr/local/lib/erlang"))
 (use-package lispy
+  :straight t
   :config
   (add-hook 'emacs-lisp-mode-hook #'lispy-mode))
 
 ;;; ruby
 
 (use-package yard-mode
+  :straight t
   :diminish yard-mode
   :config
   (add-hook 'ruby-mode-hook 'yard-mode))
 (use-package rvm
+  :straight t
   :config
   (add-hook 'ruby-mode-hook 'rvm-activate-corresponding-ruby))
 
 ;;; keyfreq
 
 (use-package keyfreq
+  :straight t
   :init
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
@@ -630,6 +683,7 @@ using `fit-window-to-buffer'."
 ;;; popwin
 
 (use-package popwin
+  :straight t
   :config
   (popwin-mode t)
   (global-set-key (kbd "C-c w") popwin:keymap)
@@ -639,6 +693,7 @@ using `fit-window-to-buffer'."
 ;;; hl-todo
 
 (use-package hl-todo
+  :straight t
   :bind (:map hl-todo-mode-map
               ("C-c h n" . hl-todo-next)
               ("C-c h p" . hl-todo-previous)
@@ -649,6 +704,7 @@ using `fit-window-to-buffer'."
 ;;; mode-line
 
 (use-package smart-mode-line
+  :straight t
   :init
   (setq sml/theme 'light)
   (sml/setup)
@@ -657,15 +713,17 @@ using `fit-window-to-buffer'."
 ;;; wgrep
 
 (use-package wgrep
+  :straight t
   :config (setq wgrep-enable-key "e"))
 
 ;;; elixir
 
-(use-package alchemist)
+(straight-use-package 'alchemist)
 
 ;;; misc
 
 (use-package god-mode
+  :straight t
   :bind (("C-c u g" . god-local-mode)
          :map god-local-mode-map
          ("i" . god-local-mode)
@@ -679,10 +737,12 @@ using `fit-window-to-buffer'."
 
 
 (use-package goto-last-change
+  :straight t
   :bind ("M-g i" . goto-last-change))
 
 
 (use-package ranger
+  :straight t
   :config
   (defun my-projectile-ranger ()
     (interactive)
@@ -746,5 +806,18 @@ using `fit-window-to-buffer'."
            ("v" . visual-line-mode)
            ("w" . whitespace-mode))
 
-(load-theme 'tango-plus t)
+(progn
+  (straight-use-package 'apropospriate-theme)
+  (straight-use-package 'creamsody-theme)
+  (straight-use-package 'darktooth-theme)
+  (straight-use-package 'dracula-theme)
+  (straight-use-package 'gruvbox-theme)
+  (straight-use-package 'leuven-theme)
+  (straight-use-package 'nord-theme)
+  (straight-use-package 'solarized-theme)
+  (straight-use-package 'tango-plus-theme)
+  (straight-use-package 'zerodark-theme)
+  (load-theme 'tango-plus t))
+
+
 (require 'local nil t)
