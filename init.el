@@ -1,12 +1,12 @@
-(package-initialize)
+;; (package-initialize)
 
 
 ;;; packages setup
 
-(require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
-(cask-initialize)
-(require 'pallet)
-(pallet-mode t)
+;; (require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
+;; (cask-initialize)
+;; (require 'pallet)
+;; (pallet-mode t)
 
 (add-to-list 'load-path (concat user-emacs-directory "lisp"))
 
