@@ -148,6 +148,8 @@
 
 ;;; ivy completion / swiper / counsel
 
+(straight-use-package 'ivy-hydra)
+
 (use-package ivy
   :straight t
   :diminish ivy-mode
