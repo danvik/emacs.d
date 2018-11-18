@@ -238,6 +238,10 @@ otherwise start with empty initial input."
                                                            (emacs-lisp . t))))
   (setq org-src-fontify-natively t))
 
+;;; markdown
+
+(straight-use-package 'markdown-mode)
+
 ;;; company
 
 (use-package company
