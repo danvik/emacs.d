@@ -223,6 +223,8 @@ otherwise start with empty initial input."
 (straight-use-package 'htmlize)
 (straight-use-package 'ox-twbs)
 (straight-use-package 'ox-reveal)
+(straight-use-package 'worf)
+(straight-use-package 'org-bullets)
 
 (use-package org
   :straight t
