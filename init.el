@@ -148,7 +148,7 @@
 
 ;;; ivy completion / swiper / counsel
 
-(straight-use-package 'smex)
+(straight-use-package 'amx)
 (straight-use-package 'ivy-hydra)
 
 (use-package ivy

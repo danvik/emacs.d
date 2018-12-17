@@ -10,7 +10,6 @@
 /backups/
 /eshell/
 /semanticdb/
-/smex-items
 /places
 /lisp/local.el
 /TAGS
@@ -18,3 +17,4 @@
 /straight/repos/
 /straight/build-cache.el
 !/straight/versions/default.el
+/amx-items
