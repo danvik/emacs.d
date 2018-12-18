@@ -61,9 +61,6 @@
   (set-frame-font "Inconsolata-14")
   (add-to-list 'default-frame-alist '(font . "Inconsolata-14")))
 
-(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t)))
-(setq backup-directory-alist '((".*" . "~/.emacs.d/backups")))
-
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 
@@ -760,6 +757,18 @@ using `fit-window-to-buffer'."
       (ranger)))
   (bind-keys ("C-c R" . my-projectile-ranger)
              ("C-c r" . ranger)))
+
+(use-package super-save
+  :straight t
+  :diminish super-save-mode
+  :config
+  (setq super-save-auto-save-when-idle t)
+  (setq auto-save-list-file-prefix nil
+        auto-save-default nil
+        make-backup-files nil)
+  (add-to-list 'super-save-triggers 'ace-window)
+  :init
+  (super-save-mode +1))
 
 (use-package my-no-repeat-mode
   :load-path "lisp/"
