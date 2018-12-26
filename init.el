@@ -658,10 +658,13 @@ using `fit-window-to-buffer'."
 ;;; programming
 
 (straight-use-package 'clojure-mode)
+
 (use-package erlang
   :straight t
   :config
-  (setq erlang-root-dir "/usr/local/lib/erlang"))
+  (when (executable-find "erl")
+    (setq erlang-root-dir (replace-regexp-in-string "\n$" "" (shell-command-to-string "brew --prefix erlang")))))
+
 (use-package lispy
   :straight t
   :config
