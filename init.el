@@ -71,14 +71,6 @@
 (define-prefix-command 'my-toggle-prefix-map)
 (global-set-key (kbd "C-c t") my-toggle-prefix-map)
 
-(define-prefix-command 'my-section-sign-prefix-map)
-(global-set-key (kbd "§") my-section-sign-prefix-map)
-
-(let ((control-c-prefix (lookup-key global-map (kbd "C-c")))
-      (control-x-prefix (lookup-key global-map (kbd "C-x"))))
-  (bind-key "c" control-c-prefix my-section-sign-prefix-map)
-  (bind-key "x" control-x-prefix my-section-sign-prefix-map))
-
 ;;; defuns
 
 (use-package defuns
