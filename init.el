@@ -333,7 +333,11 @@ otherwise start with empty initial input."
   (setq deft-extensions '("org")
         deft-text-mode 'org-mode
         deft-directory "~/.deft/"
-        deft-auto-save-interval 5.0))
+        deft-auto-save-interval 5.0)
+  (unless (file-exists-p deft-directory)
+    (mkdir deft-directory)))
+
+
 
 (use-package highlight-numbers
   :straight t
