@@ -770,6 +770,21 @@ using `fit-window-to-buffer'."
   :init
   (super-save-mode +1))
 
+(use-package elfeed
+  :straight t
+  :bind ("C-c e" . elfeed)
+  :config
+  (setq elfeed-feeds
+        '("http://elpa.brause.cc/gnu.xml"
+          "http://elpa.brause.cc/melpa.xml"
+          "http://elpa.brause.cc/melpa-stable.xml"
+          "https://www.reddit.com/r/emacs.rss"
+          "http://planet.emacsen.org/atom.xml"
+          "https://emacsredux.com/atom.xml"
+          "https://www.with-emacs.com/rss.xml"
+          "http://pragmaticemacs.com/feed/"
+          "https://oremacs.com/atom.xml")))
+
 (use-package my-no-repeat-mode
   :load-path "lisp/"
   :demand
