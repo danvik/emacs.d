@@ -785,6 +785,11 @@ using `fit-window-to-buffer'."
           "http://pragmaticemacs.com/feed/"
           "https://oremacs.com/atom.xml")))
 
+(use-package deadgrep
+  :straight t
+  :bind ("C-c G" . deadgrep))
+
+
 (use-package my-no-repeat-mode
   :load-path "lisp/"
   :demand
