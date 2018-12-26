@@ -1,3 +1,6 @@
+
+;;; straight.el
+
 (progn
   (defvar bootstrap-version)
   (let ((bootstrap-file
@@ -13,14 +16,8 @@
     (load bootstrap-file nil 'nomessage))
   (add-to-list 'load-path (concat user-emacs-directory "lisp"))
 
-
-  ;; Specifying :straight t is unnecessary if you set
-  ;; straight-use-package-by-default to a non-nil value.
   (straight-use-package 'use-package)
-  (straight-use-package 'diminish)
-
-  ;; (setq straight-use-package-by-default t)
-  )
+  (straight-use-package 'diminish))
 
 ;;; emacs settings
 
