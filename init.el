@@ -585,53 +585,6 @@ Inserted by installing org-mode or when a release is made."
               (unless (eq ibuffer-sorting-mode 'alphabetic)
                 (ibuffer-do-sort-by-alphabetic)))))
 
-;;; neotree
-
-(use-package neotree
-  :straight t
-  :bind ("C-c n" . my-neotree-toggle)
-  :config
-  (defun my-neotree-toggle ()
-    "Toggle neotree window. Hide it if already showing, else set
-root node to either `projectile-root', file directory or
-`default-directory'."
-    (interactive)
-    (if (neo-global--window-exists-p)
-        (neotree-hide)
-      (cond ((projectile-project-p) (neotree-projectile-action))
-            ((buffer-file-name) (neotree-find))
-            (t (neotree-dir default-directory)))))
-
-  ;; From https://github.com/jaypei/emacs-neotree/pull/110
-  (defun neotree-resize-window (&rest _args)
-    "Resize neotree window.
-https://github.com/jaypei/emacs-neotree/pull/110"
-    (interactive)
-    (neo-buffer--with-resizable-window
-     (let ((fit-window-to-buffer-horizontally t))
-       (fit-window-to-buffer))))
-
-  (defun my-neo-window-toggle-size ()
-    "Toggle neotree window size between `neo-window-width' and
-using `fit-window-to-buffer'."
-    (interactive)
-    (if (eq (window-body-width) neo-window-width)
-        (call-interactively #'neotree-resize-window)
-      (neo-window--zoom 'minimize)))
-
-  (defun my-neo-file-view (full-path &optional arg)
-    "Open file at at point in neotree in `view-mode'."
-    (neo-global--select-mru-window arg)
-    (find-file full-path)
-    (view-mode t))
-
-  (bind-key "w" #'my-neo-window-toggle-size neotree-mode-map)
-  (bind-key "v" (neotree-make-executor :file-fn 'my-neo-file-view) neotree-mode-map)
-
-  (setq neo-window-fixed-size nil
-        neo-theme 'nerd
-        neo-window-width 35))
-
 ;;; golang
 
 (use-package go-mode
