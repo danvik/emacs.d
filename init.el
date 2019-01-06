@@ -90,10 +90,7 @@
 
 ;;; built in's
 
-(use-package eldoc
-  :diminish eldoc-mode
-  :init
-  (add-hook 'emacs-lisp-mode-hook 'eldoc-mode))
+(diminish 'eldoc-mode)
 
 (use-package recentf
   :config
