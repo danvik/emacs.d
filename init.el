@@ -756,7 +756,10 @@ using `fit-window-to-buffer'."
 
 ;;; elixir
 
-(straight-use-package 'alchemist)
+(straight-use-package 'elixir-mode)
+
+(use-package alchemist
+  :straight t)
 
 ;;; misc
 
