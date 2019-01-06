@@ -465,36 +465,7 @@ Inserted by installing org-mode or when a release is made."
     ("l" recenter-top-bottom "recenter")
     ("L" reposition-window "reposition")
     ("0" first-error "First error")
-    ("q" nil "quit"))
-
-
-  (defhydra hydra-my-utils (:color blue :columns 2)
-    "Utils"
-    ;; row 1
-    ("s" save-buffer "save buffer")
-    ("pf" projectile-find-file "projectile-find-file")
-
-    ;; row 2
-    ("f" my-find-file-or-projectile-find-file "find file")
-    ("pr" projectile-recentf "projectile-recentf" )
-
-    ;; row 3
-    ("x" counsel-M-x "M-x")
-    ("pb" projectile-switch-to-buffer "projectile-switch-to-buffer")
-
-    ;; row 4
-    ("/" query-replace-regexp "query-replace-regexp")
-    ("pv" projectile-vc "projectile-vc")
-
-    ("v" magit-status "magit-status")
-    ("r" counsel-recentf "counsel-recentf")
-    ("b" ivy-switch-buffer "ivy-switch-buffer")
-
-    ("q" nil "cancel"))
-
-  (bind-key "M-§" 'hydra-my-utils/body)
-  (bind-key "C-0" 'hydra-my-utils/body)
-  (bind-key "h" 'hydra-my-utils/body my-custom-key-map))
+    ("q" nil "quit")))
 
 ;;; avy
 
