@@ -405,6 +405,7 @@ otherwise start with empty initial input."
   :bind (("M-7" . projectile-switch-to-buffer-other-window)
          ("M-8" . projectile-switch-to-buffer))
   :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (add-to-list 'projectile-globally-ignored-directories "_build")
   (add-to-list 'projectile-globally-ignored-directories "deps")
   (add-to-list 'projectile-globally-ignored-directories "node_modules")
