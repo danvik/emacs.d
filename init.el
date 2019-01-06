@@ -245,8 +245,6 @@ Inserted by installing org-mode or when a release is made."
                                                            (emacs-lisp . t))))
   (setq org-src-fontify-natively t))
 
-(use-package org-tempo)
-
 (use-package orglink
   :straight t
   :diminish orglink-mode
