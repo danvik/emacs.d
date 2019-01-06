@@ -786,6 +786,8 @@ using `fit-window-to-buffer'."
   :bind ("C-c G" . deadgrep))
 
 
+(straight-use-package 'dockerfile-mode)
+
 (use-package my-no-repeat-mode
   :load-path "lisp/"
   :demand
