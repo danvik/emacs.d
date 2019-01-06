@@ -91,6 +91,7 @@
 ;;; built in's
 
 (diminish 'eldoc-mode)
+(diminish 'auto-revert-mode)
 
 (use-package recentf
   :config
