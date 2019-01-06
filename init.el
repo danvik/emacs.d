@@ -200,23 +200,40 @@ otherwise start with empty initial input."
 
 ;;; org mode
 
-(use-package orglink
-  :straight t
-  :diminish orglink-mode
-  :init (global-orglink-mode))
+(require 'subr-x)
+(straight-use-package 'git)
 
-(straight-use-package 'htmlize)
-(straight-use-package 'ox-twbs)
-(straight-use-package 'ox-reveal)
-(straight-use-package 'worf)
-(straight-use-package 'org-bullets)
+(defun org-git-version ()
+  "The Git version of org-mode.
+Inserted by installing org-mode or when a release is made."
+  (require 'git)
+  (let ((git-repo (expand-file-name
+                   "straight/repos/org/" user-emacs-directory)))
+    (string-trim
+     (git-run "describe"
+              "--match=release\*"
+              "--abbrev=6"
+              "HEAD"))))
+
+(defun org-release ()
+  "The release version of org-mode.
+Inserted by installing org-mode or when a release is made."
+  (require 'git)
+  (let ((git-repo (expand-file-name
+                   "straight/repos/org/" user-emacs-directory)))
+    (string-trim
+     (string-remove-prefix
+      "release_"
+      (git-run "describe"
+               "--match=release\*"
+               "--abbrev=0"
+               "HEAD")))))
+
+(provide 'org-version)
 
 (use-package org
   :straight t
   :config
-  (add-hook 'org-mode-hook #'worf-mode)
-  (add-hook 'org-mode-hook #'org-bullets-mode)
-
   ;; Markdown export http://stackoverflow.com/a/22990257
   (eval-after-load "org" '(require 'ox-md nil t))
   (setq org-hide-emphasis-markers t
@@ -227,6 +244,25 @@ otherwise start with empty initial input."
                                                            (shell . t)
                                                            (emacs-lisp . t))))
   (setq org-src-fontify-natively t))
+
+(use-package org-tempo)
+
+(use-package orglink
+  :straight t
+  :diminish orglink-mode
+  :init (global-orglink-mode))
+
+(use-package worf
+  :straight t
+  :config (add-hook 'org-mode-hook #'worf-mode))
+
+(use-package org-bullets
+  :straight t
+  :config (add-hook 'org-mode-hook #'org-bullets-mode))
+
+(straight-use-package 'htmlize)
+(straight-use-package 'ox-twbs)
+(straight-use-package 'ox-reveal)
 
 ;;; markdown
 
