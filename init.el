@@ -16,8 +16,7 @@
     (load bootstrap-file nil 'nomessage))
   (add-to-list 'load-path (concat user-emacs-directory "lisp"))
 
-  (straight-use-package 'use-package)
-  (straight-use-package 'diminish))
+  (straight-use-package 'use-package))
 
 ;;; emacs settings
 
@@ -92,8 +91,6 @@
 
 ;;; built in's
 
-(diminish 'eldoc-mode)
-(diminish 'auto-revert-mode)
 
 (use-package recentf
   :config
@@ -122,6 +119,13 @@
 
 (add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
+
+;;; mode line
+
+(use-package minions
+  :straight t
+  :config (minions-mode 1))
+
 ;;; ivy completion / swiper / counsel
 
 (straight-use-package 'amx)
@@ -129,7 +133,6 @@
 
 (use-package ivy
   :straight t
-  :diminish ivy-mode
   :config
   (eval-after-load "eyebrowse"
     '(ivy-add-actions
@@ -151,7 +154,6 @@
 
 (use-package counsel
   :straight t
-  :diminish counsel-mode
   :bind
   (("M-x" . counsel-M-x)
    ("C-c C-m" . counsel-M-x)
@@ -238,7 +240,6 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package orglink
   :straight t
-  :diminish orglink-mode
   :init (global-orglink-mode))
 
 (use-package worf
@@ -261,7 +262,6 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package company
   :straight t
-  :diminish company-mode
   :config
   (setq company-tooltip-align-annotations t
         company-show-numbers t)
@@ -276,7 +276,6 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package drag-stuff
   :straight t
-  :diminish drag-stuff-mode
   :bind (:map my-toggle-prefix-map
               ("d" . drag-stuff-mode)
               ("D" . drag-stuff-global-mode))
@@ -319,7 +318,6 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package smartparens
   :straight t
-  :diminish (smartparens-mode . "()")
   :bind (:map my-toggle-prefix-map
               ("s" . smartparens-global-mode))
   :init
@@ -349,7 +347,6 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package which-key
   :straight t
-  :diminish which-key-mode
   :init
   (setq which-key-popup-type 'side-window
         which-key-side-window-location 'bottom)
@@ -412,7 +409,6 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package projectile
   :straight t
-  :diminish projectile-mode
   :bind (("M-7" . projectile-switch-to-buffer-other-window)
          ("M-8" . projectile-switch-to-buffer))
   :config
@@ -504,7 +500,6 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package editorconfig
   :straight t
-  :diminish editorconfig-mode
   :config (editorconfig-mode 1))
 
 ;;; exec-path-from-shell
@@ -550,7 +545,6 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package undo-tree
   :straight t
-  :diminish undo-tree-mode
   :config (global-undo-tree-mode t))
 
 ;;; ibuffer
@@ -606,7 +600,6 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package yard-mode
   :straight t
-  :diminish yard-mode
   :config
   (add-hook 'ruby-mode-hook 'yard-mode))
 (use-package rvm
@@ -686,7 +679,6 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package super-save
   :straight t
-  :diminish super-save-mode
   :config
   (setq super-save-auto-save-when-idle t)
   (setq auto-save-list-file-prefix nil
