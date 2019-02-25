@@ -61,6 +61,8 @@
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (setq sentence-end-double-space nil)
+(setq epa-pinentry-mode 'loopback)
+
 
 ;;; custom prefix
 
