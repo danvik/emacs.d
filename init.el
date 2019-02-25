@@ -115,15 +115,6 @@
 (use-package winner
   :config (winner-mode t))
 
-(use-package saveplace
-  :config
-  (setq save-place-ignore-files-regexp "\\(?:COMMIT_EDITMSG\\|hg-editor-[[:alnum:]]+\\.txt\\|svn-commit\\.tmp\\|bzr_log\\.[[:alnum:]]+\\|.gpg\\)$")
-  (if (fboundp 'save-place-mode)
-      (save-place-mode 1)
-    ;; for (version< emacs-version "25.1")
-    (setq-default save-place t))
-  (setq save-place-file (concat user-emacs-directory "places")))
-
 (use-package dired-x
   :bind ("C-c j" . dired-jump-other-window)
   :init
