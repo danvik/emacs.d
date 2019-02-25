@@ -660,7 +660,6 @@ Inserted by installing org-mode or when a release is made."
   :bind (("C-c u g" . god-local-mode)
          :map god-local-mode-map
          ("i" . god-local-mode)
-         ("w" . avy-goto-word-1)
          ("." . repeat))
   :init (when (memq window-system '(mac ns))
           (global-set-key (kbd "<escape>") 'god-local-mode))
