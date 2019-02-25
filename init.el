@@ -698,7 +698,6 @@ Inserted by installing org-mode or when a release is made."
 
 (use-package elfeed
   :straight t
-  :bind ("C-c e" . elfeed)
   :config
   (setq elfeed-feeds
         '("http://elpa.brause.cc/gnu.xml"
