@@ -642,15 +642,6 @@ Inserted by installing org-mode or when a release is made."
               ("M-g t o" . hl-todo-occur))
   :init (add-hook #'prog-mode-hook #'hl-todo-mode))
 
-;;; mode-line
-
-(use-package smart-mode-line
-  :straight t
-  :init
-  (setq sml/theme 'light)
-  (sml/setup)
-  (add-to-list 'sml/replacer-regexp-list '("^~/Dropbox/" ":DB:")))
-
 ;;; wgrep
 
 (use-package wgrep
