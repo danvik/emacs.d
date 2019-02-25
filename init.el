@@ -324,20 +324,6 @@ Inserted by installing org-mode or when a release is made."
               ("s" . smartparens-global-mode))
   :init
   (require 'smartparens-config)
-  (bind-keys
-   :map smartparens-mode-map
-   ("C-M-a" . sp-beginning-of-sexp)
-   ("C-M-e" . sp-end-of-sexp)
-   ("C-M-f" . sp-forward-sexp)
-   ("C-M-b" . sp-backward-sexp)
-   ("C-M-k" . sp-kill-sexp)
-   ("C-k"   . sp-kill-hybrid-sexp)
-   ("M-k"   . sp-backward-kill-sexp)
-   ("C-M-w" . sp-copy-sexp)
-   ("C-M-d" . delete-sexp)
-   ("M-["   . sp-backward-unwrap-sexp)
-   ("M-]"   . sp-unwrap-sexp))
-
   (smartparens-global-mode t))
 
 ;;; utils
