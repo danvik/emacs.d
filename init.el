@@ -781,7 +781,7 @@ Inserted by installing org-mode or when a release is made."
   (straight-use-package 'nord-theme)
   (straight-use-package 'solarized-theme)
   (straight-use-package 'tango-plus-theme)
-  (straight-use-package 'zerodark-theme)
+  (straight-use-package 'spacemacs-theme)
   (load-theme 'tango-plus t))
 
 
