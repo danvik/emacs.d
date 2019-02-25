@@ -665,18 +665,6 @@ Inserted by installing org-mode or when a release is made."
   :straight t
   :bind ("M-g i" . goto-last-change))
 
-
-(use-package ranger
-  :straight t
-  :config
-  (defun my-projectile-ranger ()
-    (interactive)
-    (if (projectile-project-p)
-        (ranger (projectile-project-root))
-      (ranger)))
-  (bind-keys ("C-c R" . my-projectile-ranger)
-             ("C-c r" . ranger)))
-
 (use-package super-save
   :straight t
   :config
