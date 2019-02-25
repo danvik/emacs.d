@@ -433,6 +433,11 @@ Inserted by installing org-mode or when a release is made."
   :init
   (projectile-global-mode))
 
+(use-package counsel-projectile
+  :straight t
+  :init
+  (counsel-projectile-mode))
+
 ;;; hydra
 
 (use-package hydra
