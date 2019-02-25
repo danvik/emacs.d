@@ -637,10 +637,9 @@ Inserted by installing org-mode or when a release is made."
 (use-package hl-todo
   :straight t
   :bind (:map hl-todo-mode-map
-              ("C-c h n" . hl-todo-next)
-              ("C-c h p" . hl-todo-previous)
-              ("C-c h o" . hl-todo-occur))
-
+              ("M-g t n" . hl-todo-next)
+              ("M-g t p" . hl-todo-previous)
+              ("M-g t o" . hl-todo-occur))
   :init (add-hook #'prog-mode-hook #'hl-todo-mode))
 
 ;;; mode-line
