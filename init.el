@@ -668,7 +668,8 @@ Inserted by installing org-mode or when a release is made."
 (use-package super-save
   :straight t
   :config
-  (setq super-save-auto-save-when-idle t)
+  (setq super-save-auto-save-when-idle t
+        super-save-exclude '(".gpg"))
   (setq auto-save-list-file-prefix nil
         auto-save-default nil
         make-backup-files nil)
