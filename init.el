@@ -768,6 +768,7 @@ Inserted by installing org-mode or when a release is made."
   (straight-use-package 'solarized-theme)
   (straight-use-package 'tango-plus-theme)
   (straight-use-package 'spacemacs-theme)
+  (straight-use-package 'doom-themes)
   (load-theme 'tango-plus t))
 
 
