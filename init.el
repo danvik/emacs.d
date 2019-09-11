@@ -581,6 +581,9 @@ Inserted by installing org-mode or when a release is made."
   (add-hook 'go-mode-hook 'go-eldoc-setup))
 
 
+(straight-use-package 'go-eldoc)
+(straight-use-package 'company-go)
+
 ;;; programming
 
 (straight-use-package 'clojure-mode)
