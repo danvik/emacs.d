@@ -610,6 +610,8 @@ Inserted by installing org-mode or when a release is made."
   :config
   (add-hook 'ruby-mode-hook 'rvm-activate-corresponding-ruby))
 
+(straight-use-package 'inf-ruby)
+
 ;;; keyfreq
 
 (use-package keyfreq
