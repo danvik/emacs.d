@@ -462,13 +462,6 @@ Inserted by installing org-mode or when a release is made."
   :straight t
   :bind ("C-x o" . ace-window))
 
-;;; writeroom-mode
-
-(use-package writeroom-mode
-  :straight t
-  :bind (:map my-custom-key-map ("w" . writeroom-mode))
-  :init (setq writeroom-width 0.7))
-
 ;;; rotate
 
 (use-package rotate
