@@ -516,13 +516,6 @@ Inserted by installing org-mode or when a release is made."
   :straight t
   :config (setq git-link-open-in-browser t))
 
-;;; rainbow-mode
-
-(use-package rainbow-mode
-  :straight t
-  :config
-  (add-hook 'css-mode-hook 'rainbow-mode))
-
 ;;; undo-tree
 
 (use-package undo-tree
