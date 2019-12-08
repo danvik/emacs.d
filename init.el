@@ -677,7 +677,8 @@ Inserted by installing org-mode or when a release is made."
         super-save-exclude '(".gpg"))
   (setq auto-save-list-file-prefix nil
         auto-save-default nil
-        make-backup-files nil)
+        make-backup-files nil
+        super-save-idle-duration 30)
   (add-to-list 'super-save-triggers 'ace-window)
   :init
   (super-save-mode +1))
