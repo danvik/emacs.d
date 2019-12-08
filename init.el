@@ -274,17 +274,6 @@ Inserted by installing org-mode or when a release is made."
   :bind
   ("M-;" . comment-dwim-2))
 
-(use-package drag-stuff
-  :straight t
-  :bind (:map my-toggle-prefix-map
-              ("d" . drag-stuff-mode)
-              ("D" . drag-stuff-global-mode))
-  :config
-  (drag-stuff-define-keys)
-  :init
-  (add-hook 'prog-mode-hook 'drag-stuff-mode)
-  (add-hook 'yaml-mode-hook 'drag-stuff-mode))
-
 (use-package expand-region
   :straight t
   :bind
