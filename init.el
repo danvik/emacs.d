@@ -595,16 +595,6 @@ Inserted by installing org-mode or when a release is made."
   (keyfreq-mode 1)
   (keyfreq-autosave-mode 1))
 
-;;; popwin
-
-(use-package popwin
-  :straight t
-  :config
-  (popwin-mode t)
-  (global-set-key (kbd "C-c w") popwin:keymap)
-  (push '(godoc-mode :noselect t) popwin:special-display-config)
-  (push '(flycheck-error-list-mode :noselect t) popwin:special-display-config))
-
 ;;; hl-todo
 
 (use-package hl-todo
