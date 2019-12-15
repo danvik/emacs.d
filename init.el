@@ -453,7 +453,8 @@ Inserted by installing org-mode or when a release is made."
    ("M-g M-k" . avy-kill-whole-line)
    ("M-g g" . avy-goto-line)
    ("M-g s" . avy-goto-char-timer))
-  :config (setq avy-timeout-seconds 0.2))
+  :config (setq avy-timeout-seconds 0.2
+                avy-all-windows nil))
 
 ;;; ace-window
 
