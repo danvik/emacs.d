@@ -289,8 +289,7 @@ Inserted by installing org-mode or when a release is made."
              ("DEL" . (lambda ()
                         (interactive)
                         (easy-kill-mark-region)
-                        (call-interactively #'delete-region)))
-             ("SPC" . easy-kill-mark-region)))
+                        (call-interactively #'delete-region)))))
 
 (use-package iedit
   :straight t
