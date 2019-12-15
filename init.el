@@ -659,7 +659,8 @@ Inserted by installing org-mode or when a release is made."
           "https://emacsredux.com/atom.xml"
           "https://www.with-emacs.com/rss.xml"
           "http://pragmaticemacs.com/feed/"
-          "https://oremacs.com/atom.xml")))
+          "https://oremacs.com/atom.xml"
+          "http://emacsninja.com/feed.atom")))
 
 (use-package deadgrep
   :straight t
