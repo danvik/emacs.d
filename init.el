@@ -1,5 +1,5 @@
 
-;;; straight.el
+;;; straight.el setup
 
 (progn
   (defvar bootstrap-version)
@@ -17,6 +17,54 @@
   (add-to-list 'load-path (concat user-emacs-directory "lisp"))
 
   (straight-use-package 'use-package))
+
+;;; keys
+
+(define-prefix-command 'my-custom-key-map)
+(global-set-key (kbd "C-c u") my-custom-key-map)
+
+(define-prefix-command 'my-toggle-prefix-map)
+(global-set-key (kbd "C-c t") my-toggle-prefix-map)
+
+(setq mac-option-modifier 'none)
+(setq mac-command-modifier 'meta)
+
+(use-package god-mode
+  :straight t
+  :bind (("C-c u g" . god-local-mode)
+         :map god-local-mode-map
+         ("i" . god-local-mode)
+         ("." . repeat))
+  :init (when (memq window-system '(mac ns))
+          (global-set-key (kbd "<escape>") 'god-local-mode))
+  :config
+  (add-hook 'god-mode-enabled-hook (lambda () (hl-line-mode 1)))
+  (add-hook 'god-mode-disabled-hook (lambda () (hl-line-mode -1))))
+
+(bind-keys
+ ("C-\\"  . hippie-expand)
+ ("M-9"   . previous-buffer)
+ ("M-0"   . next-buffer)
+ ("M-1"   . delete-other-windows)
+ ("C-M-0" . delete-window)
+ ("C-x O" . other-frame))
+
+(bind-keys :prefix-map my-file-stuff-prefix-map
+           :prefix "C-c f"
+           ("u" . revert-buffer)
+           ;; TODO: move counsel bindings
+           ("f" . counsel-find-file)
+           ("r" . counsel-recentf)
+           ("s" . save-buffer)
+           ("b" . bookmark-set)
+           ("o" . find-file-other-window))
+
+(bind-keys :map my-toggle-prefix-map
+           ("l" . linum-mode)
+           ("h" . hl-line-mode)
+           ("b" . blink-cursor-mode)
+           ("v" . visual-line-mode)
+           ("w" . whitespace-mode))
 
 ;;; emacs settings
 
@@ -50,8 +98,7 @@
 (blink-cursor-mode -1)
 (show-paren-mode t)
 
-(setq mac-option-modifier 'none)
-(setq mac-command-modifier 'meta)
+
 
 (when (member "Inconsolata" (font-family-list))
   (set-frame-font "Inconsolata-14")
@@ -62,42 +109,7 @@
 (setq sentence-end-double-space nil)
 (setq epa-pinentry-mode 'loopback)
 
-
-;;; custom prefix
-
-(define-prefix-command 'my-custom-key-map)
-(global-set-key (kbd "C-c u") my-custom-key-map)
-
-(define-prefix-command 'my-toggle-prefix-map)
-(global-set-key (kbd "C-c t") my-toggle-prefix-map)
-
-;;; defuns
-
-(use-package defuns
-  :load-path "lisp/"
-  :demand                             ;
-  :bind
-  (("M-s o" . occur-dwim)
-   ("C-M-=" . align-to-equals)
-   ("C-c d" . duplicate-current-line-or-region)
-   :map my-custom-key-map
-   ("t" . my-insert-current-time)
-   ("c" . my-paste-to-new-buffer)
-   ("o" . my-org-scratch-buffer)
-   ("q" . my-count-words-in-org-subtree)
-   ("s" . my-toggle-statistic-cookie-type)))
-
-
-
-;;; built in's
-
-
-(use-package recentf
-  :config
-  (setq recentf-exclude '("deft/" ".gpg")
-        recentf-max-saved-items 500)
-  :init
-  (recentf-mode t))
+;;; server
 
 (use-package server
   :config
@@ -105,32 +117,13 @@
            (not (server-running-p)))
       (server-start)))
 
-(use-package uniquify
-  :config
-  (setq uniquify-buffer-name-style 'forward))
-
-(use-package winner
-  :config (winner-mode t))
-
-(use-package dired-x
-  :bind ("C-c j" . dired-jump-other-window)
-  :init
-  (setq dired-bind-jump nil))
-
-(add-hook 'dired-mode-hook #'dired-hide-details-mode)
-
-
-;;; mode line
+;;; emacs enhancements
 
 (use-package minions
   :straight t
   :config (minions-mode 1))
 
-;;; ivy completion / swiper / counsel
-
-(straight-use-package 'amx)
 (straight-use-package 'ivy-hydra)
-
 (use-package ivy
   :straight t
   :config
@@ -148,11 +141,7 @@
         ivy-wrap t)
   (ivy-mode))
 
-(use-package swiper
-  :straight t
-  :bind (("C-s" . swiper-isearch)
-         ("M-s ." . swiper-isearch-thing-at-point)))
-
+(straight-use-package 'amx)
 (use-package counsel
   :straight t
   :bind
@@ -191,6 +180,31 @@ otherwise start with empty initial input."
   (bind-key "C-c g" #'my-counsel-rg)
 
   :init (counsel-mode 1))
+
+(use-package which-key
+  :straight t
+  :init
+  (setq which-key-popup-type 'side-window
+        which-key-side-window-location 'bottom)
+  (which-key-mode))
+
+(use-package browse-kill-ring
+  :straight t
+  :bind
+  ("M-y" . browse-kill-ring))
+
+(use-package undo-tree
+  :straight t
+  :config (global-undo-tree-mode t))
+
+(use-package ibuffer-vc
+  :straight t
+  :config
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (ibuffer-vc-set-filter-groups-by-vc-root)
+              (unless (eq ibuffer-sorting-mode 'alphabetic)
+                (ibuffer-do-sort-by-alphabetic)))))
 
 ;;; org mode
 
@@ -247,28 +261,25 @@ Inserted by installing org-mode or when a release is made."
   :straight t
   :config (add-hook 'org-mode-hook #'worf-mode))
 
-(use-package org-bullets
-  :straight t
-  :config (add-hook 'org-mode-hook #'org-bullets-mode))
-
 (straight-use-package 'htmlize)
 (straight-use-package 'ox-twbs)
 (straight-use-package 'ox-reveal)
 
-;;; markdown
+;;; git
 
-(straight-use-package 'markdown-mode)
-
-;;; company
-
-(use-package company
+(use-package magit
   :straight t
+  :defer 5
+  :bind ("C-c v" . magit-status)
   :config
-  (setq company-tooltip-align-annotations t
-        company-show-numbers t)
-  (global-company-mode))
+  (setq magit-completing-read-function 'ivy-completing-read
+        magit-save-repository-buffers 'dontask))
 
-;;; editing / text related
+(use-package git-link
+  :straight t
+  :config (setq git-link-open-in-browser t))
+
+;;; text editing and selection
 
 (use-package comment-dwim-2
   :straight t
@@ -313,35 +324,148 @@ Inserted by installing org-mode or when a release is made."
   (require 'smartparens-config)
   (smartparens-global-mode t))
 
-;;; utils
+;;; hydra
 
-(use-package deft
+(use-package hydra
   :straight t
-  :bind (:map my-custom-key-map ("d" . deft))
   :init
-  (setq deft-extensions '("org")
-        deft-text-mode 'org-mode
-        deft-directory "~/.deft/"
-        deft-auto-save-interval 5.0)
-  (unless (file-exists-p deft-directory)
-    (mkdir deft-directory)))
+  (defhydra hydra-my-compilation (global-map "M-g" :color red :columns 2)
+  "Compilation"
+  ("p" previous-error "Previous error")
+  ("n" next-error "Next error")
+  ("l" recenter-top-bottom "recenter")
+  ("L" reposition-window "reposition")
+  ("0" first-error "First error")
+  ("q" nil "quit")))
 
+;;; navigating
 
+(use-package avy
+  :straight t
+  :bind
+  (("M-g e" . avy-goto-word-0)
+   ("M-g w" . avy-goto-word-1)
+   ("M-g l" . avy-goto-line)
+   ("M-g c" . avy-goto-char)
+   ("M-g f" . avy-goto-char-in-line)
+   ("M-g M-l" . avy-copy-line)
+   ("M-g M-m" . avy-move-line)
+   ("M-g M-k" . avy-kill-whole-line)
+   ("M-g g" . avy-goto-line)
+   ("M-g s" . avy-goto-char-timer))
+  :config (setq avy-timeout-seconds 0.2
+                avy-all-windows nil))
 
-(use-package highlight-numbers
+(use-package goto-last-change
+  :straight t
+  :bind ("M-g i" . goto-last-change))
+
+;;; code completion and navigation
+
+(use-package company
+  :straight t
+  :bind ("M-2" . company-complete)
+  :config
+  (setq company-tooltip-align-annotations t
+        company-show-numbers t)
+  (global-company-mode))
+
+(straight-use-package 'dumb-jump)
+
+;;; flycheck
+
+(use-package flycheck
+  :straight t
+  :bind (:map my-toggle-prefix-map
+              ("f" . flycheck-mode))
+  :init (setq flycheck-checker-error-threshold 500
+              flycheck-check-syntax-automatically '(mode-enabled save)))
+
+;;; programming
+
+(progn
+  (use-package go-mode
+    :straight t
+    :bind (:map go-mode-map
+                ("C-c C-p" . godoc-at-point)
+                ("C-c C-e" . go-gopath-set-gopath)
+                ("C-c C-r" . go-remove-unused-imports))
+    :config
+    (setq gofmt-command "goimports")
+    (add-hook 'before-save-hook #'gofmt-before-save)
+    (add-hook 'go-mode-hook (lambda ()
+                              (set (make-local-variable 'company-backends) '(company-go))
+                              (company-mode)))
+    (add-hook 'go-mode-hook 'go-eldoc-setup))
+
+  (straight-use-package 'go-eldoc)
+  (straight-use-package 'company-go)
+  (straight-use-package 'go-rename)
+  (straight-use-package 'go-playground))
+
+(use-package erlang
   :straight t
   :config
-  (add-hook 'prog-mode-hook 'highlight-numbers-mode)
-  (add-hook 'yaml-mode-hook 'highlight-numbers-mode))
+  (when (executable-find "erl")
+    (setq erlang-root-dir (replace-regexp-in-string "\n$" "" (shell-command-to-string "brew --prefix erlang")))))
 
-(use-package which-key
+(use-package lispy
+  :straight t
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'lispy-mode))
+
+(progn
+  (use-package yard-mode
+    :straight t
+    :config
+    (add-hook 'ruby-mode-hook 'yard-mode))
+
+  (use-package rvm
+    :straight t
+    :config
+    (add-hook 'ruby-mode-hook 'rvm-activate-corresponding-ruby))
+
+  (straight-use-package 'inf-ruby))
+
+(use-package alchemist
+  :straight t)
+
+;;; projectile
+
+(use-package projectile
+  :straight t
+  :bind (("M-7" . projectile-switch-to-buffer-other-window)
+         ("M-8" . projectile-switch-to-buffer))
+  :config
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (add-to-list 'projectile-globally-ignored-directories "_build")
+  (add-to-list 'projectile-globally-ignored-directories "deps")
+  (add-to-list 'projectile-globally-ignored-directories "node_modules")
+  (setq projectile-use-git-grep t
+        projectile-completion-system 'ivy
+        projectile-switch-project-action #'projectile-commander)
+  (def-projectile-commander-method ?G
+    "Run `counsel-rg' in project."
+    (call-interactively #'counsel-rg))
+  :init
+  (projectile-mode))
+
+(use-package counsel-projectile
   :straight t
   :init
-  (setq which-key-popup-type 'side-window
-        which-key-side-window-location 'bottom)
-  (which-key-mode))
+  (counsel-projectile-mode))
 
-;;; eyebrowse
+;;; minor modes
+
+(straight-use-package 'markdown-mode)
+(straight-use-package 'dockerfile-mode)
+
+;;; window & layout
+
+(straight-use-package 'olivetti)
+
+(use-package winner
+  :config (winner-mode t))
 
 (use-package eyebrowse
   :straight t
@@ -388,82 +512,16 @@ Inserted by installing org-mode or when a release is made."
   (setq eyebrowse-mode-line-style 'always)
   (setq eyebrowse-close-window-config-prompt t)
   (setq eyebrowse-new-workspace t)
+  (setq eyebrowse-mode-line-style 'current)
 
   (setq eyebrowse-keymap-prefix (kbd "C-c l"))
   (setq eyebrowse-wrap-around t)
 
   (eyebrowse-mode t))
 
-;;; projectile
-
-(use-package projectile
-  :straight t
-  :bind (("M-7" . projectile-switch-to-buffer-other-window)
-         ("M-8" . projectile-switch-to-buffer))
-  :config
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (add-to-list 'projectile-globally-ignored-directories "_build")
-  (add-to-list 'projectile-globally-ignored-directories "deps")
-  (add-to-list 'projectile-globally-ignored-directories "node_modules")
-  (setq projectile-use-git-grep t
-        projectile-completion-system 'ivy
-        projectile-switch-project-action #'projectile-commander)
-  (def-projectile-commander-method ?G
-    "Run `counsel-rg' in project."
-    (call-interactively #'counsel-rg))
-  (def-projectile-commander-method ?n
-    "Run `neotree-projectile-action' in project."
-    (call-interactively #'neotree-projectile-action))
-
-  :init
-  (projectile-global-mode))
-
-(use-package counsel-projectile
-  :straight t
-  :init
-  (counsel-projectile-mode))
-
-;;; hydra
-
-(use-package hydra
-  :straight t
-  :init
-  (defhydra hydra-my-compilation (global-map "M-g" :color red :columns 2)
-    "Compilation"
-    ("p" previous-error "Previous error")
-    ("n" next-error "Next error")
-    ("l" recenter-top-bottom "recenter")
-    ("L" reposition-window "reposition")
-    ("0" first-error "First error")
-    ("q" nil "quit")))
-
-;;; avy
-
-
-
-(use-package avy
-  :straight t
-  :bind
-  (("M-g e" . avy-goto-word-0)
-   ("M-g w" . avy-goto-word-1)
-   ("M-g l" . avy-goto-line)
-   ("M-g c" . avy-goto-char)
-   ("M-g f" . avy-goto-char-in-line)
-   ("M-g M-l" . avy-copy-line)
-   ("M-g M-m" . avy-move-line)
-   ("M-g M-k" . avy-kill-whole-line)
-   ("M-g g" . avy-goto-line)
-   ("M-g s" . avy-goto-char-timer))
-  :config (setq avy-timeout-seconds 0.2
-                avy-all-windows nil))
-
-;;; ace-window
-
 (use-package ace-window
   :straight t
   :bind ("C-x o" . ace-window))
-
-;;; rotate
 
 (use-package rotate
   :straight t
@@ -472,169 +530,40 @@ Inserted by installing org-mode or when a release is made."
         ("SPC" . rotate-layout)
         ("r" . rotate-window)))
 
-;;; browse-kill-ring
+;;; text search
 
-(use-package browse-kill-ring
+(use-package swiper
   :straight t
-  :bind
-  ("M-y" . browse-kill-ring))
+  :bind (("C-s" . swiper-isearch)
+         ("M-s ." . swiper-isearch-thing-at-point)))
 
-;;; editorconfig
+(use-package deadgrep
+  :straight t
+  :bind ("C-c G" . deadgrep))
+
+;;; handy defuns
+
+(use-package defuns
+  :load-path "lisp/"
+  :demand                             ;
+  :bind
+  (("M-s o" . occur-dwim)
+   ("C-M-=" . align-to-equals)
+   ("C-c d" . duplicate-current-line-or-region)
+   :map my-custom-key-map
+   ("t" . my-insert-current-time)
+   ("c" . my-paste-to-new-buffer)
+   ("o" . my-org-scratch-buffer)
+   ("q" . my-count-words-in-org-subtree)
+   ("s" . my-toggle-statistic-cookie-type)))
+
+;;; syntax and style
 
 (use-package editorconfig
   :straight t
   :config (editorconfig-mode 1))
 
-;;; exec-path-from-shell
-
-(use-package exec-path-from-shell
-  :straight t
-  :if (eq system-type 'darwin)
-  :init
-  (exec-path-from-shell-copy-env "GOPATH")
-  (exec-path-from-shell-initialize))
-
-;;; flycheck
-
-(use-package flycheck
-  :straight t
-  :bind (:map my-toggle-prefix-map
-              ("f" . flycheck-mode))
-  :init (setq flycheck-checker-error-threshold 500
-              flycheck-check-syntax-automatically '(mode-enabled save)))
-
-;;; git
-
-(use-package magit
-  :straight t
-  :defer 5
-  :bind ("C-c v" . magit-status)
-  :config
-  (setq magit-completing-read-function 'ivy-completing-read
-        magit-save-repository-buffers 'dontask))
-
-(use-package git-link
-  :straight t
-  :config (setq git-link-open-in-browser t))
-
-;;; undo-tree
-
-(use-package undo-tree
-  :straight t
-  :config (global-undo-tree-mode t))
-
-;;; ibuffer
-
-(use-package ibuffer
-  :straight t
-  :bind
-  (("C-x C-b" . ibuffer)
-   ("M-3" . ibuffer)))
-
-(use-package ibuffer-vc
-  :straight t
-  :config
-  (add-hook 'ibuffer-hook
-            (lambda ()
-              (ibuffer-vc-set-filter-groups-by-vc-root)
-              (unless (eq ibuffer-sorting-mode 'alphabetic)
-                (ibuffer-do-sort-by-alphabetic)))))
-
-;;; golang
-
-(use-package go-mode
-  :straight t
-  :bind (:map go-mode-map
-              ("C-c C-p" . godoc-at-point)
-              ("C-c C-e" . go-gopath-set-gopath)
-              ("C-c C-r" . go-remove-unused-imports))
-  :config
-  (setq gofmt-command "goimports")
-  (add-hook 'before-save-hook #'gofmt-before-save)
-  (add-hook 'go-mode-hook (lambda ()
-                            (set (make-local-variable 'company-backends) '(company-go))
-                            (company-mode)))
-  (add-hook 'go-mode-hook 'go-eldoc-setup))
-
-
-(straight-use-package 'go-eldoc)
-(straight-use-package 'company-go)
-(straight-use-package 'go-rename)
-(straight-use-package 'go-playground)
-
-;;; programming
-
-(use-package erlang
-  :straight t
-  :config
-  (when (executable-find "erl")
-    (setq erlang-root-dir (replace-regexp-in-string "\n$" "" (shell-command-to-string "brew --prefix erlang")))))
-
-(use-package lispy
-  :straight t
-  :config
-  (add-hook 'emacs-lisp-mode-hook #'lispy-mode))
-
-;;; ruby
-
-(use-package yard-mode
-  :straight t
-  :config
-  (add-hook 'ruby-mode-hook 'yard-mode))
-(use-package rvm
-  :straight t
-  :config
-  (add-hook 'ruby-mode-hook 'rvm-activate-corresponding-ruby))
-
-(straight-use-package 'inf-ruby)
-
-;;; keyfreq
-
-(use-package keyfreq
-  :straight t
-  :init
-  (keyfreq-mode 1)
-  (keyfreq-autosave-mode 1))
-
-;;; hl-todo
-
-(use-package hl-todo
-  :straight t
-  :bind (:map hl-todo-mode-map
-              ("M-g t n" . hl-todo-next)
-              ("M-g t p" . hl-todo-previous)
-              ("M-g t o" . hl-todo-occur))
-  :init (add-hook #'prog-mode-hook #'hl-todo-mode))
-
-;;; wgrep
-
-(use-package wgrep
-  :straight t
-  :config (setq wgrep-enable-key "e"))
-
-;;; elixir
-
-(use-package alchemist
-  :straight t)
-
-;;; misc
-
-(use-package god-mode
-  :straight t
-  :bind (("C-c u g" . god-local-mode)
-         :map god-local-mode-map
-         ("i" . god-local-mode)
-         ("." . repeat))
-  :init (when (memq window-system '(mac ns))
-          (global-set-key (kbd "<escape>") 'god-local-mode))
-  :config
-  (add-hook 'god-mode-enabled-hook (lambda () (hl-line-mode 1)))
-  (add-hook 'god-mode-disabled-hook (lambda () (hl-line-mode -1))))
-
-
-(use-package goto-last-change
-  :straight t
-  :bind ("M-g i" . goto-last-change))
+;;; files and buffers
 
 (use-package super-save
   :straight t
@@ -647,6 +576,60 @@ Inserted by installing org-mode or when a release is made."
   (add-to-list 'super-save-triggers 'ace-window)
   :init
   (super-save-mode +1))
+
+(use-package recentf
+  :config
+  (setq recentf-exclude '("deft/" ".gpg")
+        recentf-max-saved-items 500)
+  :init
+  (recentf-mode t))
+
+(use-package uniquify
+  :config
+  (setq uniquify-buffer-name-style 'forward))
+
+(use-package dired-x
+  :bind ("C-c j" . dired-jump-other-window)
+  :init
+  (setq dired-bind-jump nil))
+
+(add-hook 'dired-mode-hook #'dired-hide-details-mode)
+
+(straight-use-package 'dired-sidebar)
+
+;;; text enhancement
+
+(use-package hl-todo
+  :straight t
+  :init (add-hook 'prog-mode-hook #'hl-todo-mode))
+
+(use-package highlight-numbers
+  :straight t
+  :config
+  (add-hook 'prog-mode-hook 'highlight-numbers-mode)
+  (add-hook 'yaml-mode-hook 'highlight-numbers-mode))
+
+
+
+;;; misc
+
+(use-package exec-path-from-shell
+  :straight t
+  :if (eq system-type 'darwin)
+  :init
+  (exec-path-from-shell-copy-env "GOPATH")
+  (exec-path-from-shell-initialize))
+
+(use-package deft
+  :straight t
+  :bind (:map my-custom-key-map ("d" . deft))
+  :init
+  (setq deft-extensions '("org")
+        deft-text-mode 'org-mode
+        deft-directory "~/.deft/"
+        deft-auto-save-interval 5.0)
+  (unless (file-exists-p deft-directory)
+    (mkdir deft-directory)))
 
 (use-package elfeed
   :straight t
@@ -663,80 +646,19 @@ Inserted by installing org-mode or when a release is made."
           "https://oremacs.com/atom.xml"
           "http://emacsninja.com/feed.atom")))
 
-(use-package deadgrep
-  :straight t
-  :bind ("C-c G" . deadgrep))
+;;; themes
 
+(mapc 'straight-use-package '(creamsody-theme
+                              darktooth-theme
+                              dracula-theme
+                              gruvbox-theme
+                              leuven-theme
+                              nord-theme
+                              solarized-theme
+                              tango-plus-theme
+                              spacemacs-theme
+                              doom-themes))
 
-(straight-use-package 'dockerfile-mode)
-
-(use-package my-no-repeat-mode
-  :load-path "lisp/"
-  :demand
-  :bind (:map my-toggle-prefix-map
-              ("q" . my-no-repeat-mode)
-              ("Q" . my-no-repeat-global-mode))
-
-  ;; (setq my-no-repeat-show-hint 't)
-  ;; (setq my-no-repeat-show-hint nil)
-  :config
-  (mapc
-   'my-no-repeat-kbd
-   '("C-n"
-     "C-p"
-     "C-f"
-     "C-b"
-     "C-v"
-     "M-v"
-     "M-f"
-     "M-b"
-     "M-a"
-     "M-e"
-     "C-M-a"
-     "C-M-e"
-     "C-k"
-     "C-d"
-     "M-d")))
-
-
-(bind-keys
- ("C-\\"  . hippie-expand)
- ("M-9"   . previous-buffer)
- ("M-0"   . next-buffer)
- ("M-1"   . delete-other-windows)
- ("M-2"   . company-complete)
- ("C-M-0" . delete-window)
- ("C-x O" . other-frame))
-
-(bind-keys :prefix-map my-file-stuff-prefix-map
-           :prefix "C-c f"
-           ("u" . revert-buffer)
-           ("f" . counsel-find-file)
-           ("r" . counsel-recentf)
-           ("s" . save-buffer)
-           ("b" . bookmark-set)
-           ("o" . find-file-other-window))
-
-(bind-keys :map my-toggle-prefix-map
-           ("l" . linum-mode)
-           ("h" . hl-line-mode)
-           ("b" . blink-cursor-mode)
-           ("v" . visual-line-mode)
-           ("w" . whitespace-mode))
-
-(progn
-  (straight-use-package 'apropospriate-theme)
-  (straight-use-package 'creamsody-theme)
-  (straight-use-package 'darktooth-theme)
-  (straight-use-package 'dracula-theme)
-  (straight-use-package 'gruvbox-theme)
-  (straight-use-package 'leuven-theme)
-  (straight-use-package 'nord-theme)
-  (straight-use-package 'solarized-theme)
-  (straight-use-package 'tango-plus-theme)
-  (straight-use-package 'spacemacs-theme)
-  (straight-use-package 'doom-themes)
-  (load-theme 'tango-plus t))
-
+;;; local settings
 
 (require 'local nil t)
