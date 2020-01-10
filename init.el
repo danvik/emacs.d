@@ -150,7 +150,8 @@
 
 (use-package swiper
   :straight t
-  :bind ("C-s" . swiper))
+  :bind (("C-s" . swiper-isearch)
+         ("M-s ." . swiper-isearch-thing-at-point)))
 
 (use-package counsel
   :straight t
