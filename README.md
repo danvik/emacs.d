@@ -111,6 +111,11 @@ Install [godef](github.com/rogpeppe/godef)
 Install [goimports](https://godoc.org/golang.org/x/tools/cmd/goimports)
 `go get golang.org/x/tools/cmd/goimports`
 
+go get -v github.com/ramya-rao-a/go-outline
+go get -v github.com/uudashr/gopkgs/cmd/gopkgs
+go get -v github.com/sqs/goreturns
+go get golang.org/x/tools/cmd/gorename
+
 Extend [company](http://company-mode.github.io/) with [company-go](https://github.com/nsf/gocode/blob/master/emacs-company/company-go.el) for completion.
 
 Help on functions with [go-eldoc](https://github.com/syohex/emacs-go-eldoc).
