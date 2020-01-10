@@ -559,10 +559,10 @@ Inserted by installing org-mode or when a release is made."
 
 (straight-use-package 'go-eldoc)
 (straight-use-package 'company-go)
+(straight-use-package 'go-rename)
+(straight-use-package 'go-playground)
 
 ;;; programming
-
-(straight-use-package 'clojure-mode)
 
 (use-package erlang
   :straight t
