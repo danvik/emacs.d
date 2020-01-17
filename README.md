@@ -1,14 +1,12 @@
-# Emacs configuration using [Cask](https://github.com/cask/cask) and [Pallet](https://github.com/rdallasgray/pallet)
+# Emacs configuration using [straight.el](https://github.com/raxod502/straight.el)
 
-## Setup for OS X with [Homebrew](http://brew.sh/)
+## Setup for macOS with [Homebrew](http://brew.sh/)
 
-### Install Emacs
+### Install Emacs with homebrew
 
-Get the latest `$ brew install emacs --with-cocoa --with-gnutls --HEAD`
+Install GUI version of emacs with
 
-### Install [Cask](https://github.com/cask/cask)
-
-`$ brew install cask`
+`brew cask install emacs`
 
 ### Initialize
 
@@ -39,7 +37,7 @@ alias et="emacsclient -a '' -t"
 ### General
 
 [Ivy](https://github.com/abo-abo/swiper) is used for input completion.
-Search in buffers with `C-s` using [Swiper](https://github.com/abo-abo/swiper).
+Search in buffers with `C-s` using [Swiper](https://github.com/abo-abo/swiper) and `swiper-isearch`.
 
 [counsel](https://github.com/abo-abo/swiper) uses [Ivy](https://github.com/abo-abo/swiper) and provides commands like `counsel-git-grep` for fast grep in a git repository and `counsel-M-x` that replaces emacs `execute-extended-command`.
 
@@ -61,8 +59,6 @@ Multiple cursors using [multiple-cursors](https://github.com/magnars/multiple-cu
 
 Text pairing with [smartparens](https://github.com/Fuco1/smartparens).
 
-Edit grep buffers and apply changes to files using [wgrep](https://github.com/mhayashi1120/Emacs-wgrep).
-
 ### Programming
 
 Source code completion is done with [company](http://company-mode.github.io/), use `M-2` for candidates.
@@ -75,9 +71,9 @@ Syntax check with [flycheck](http://www.flycheck.org/en/latest/) `C-c u f` to tu
 
 #### Projects
 
-Powerful package management with [Projectile](https://github.com/bbatsov/projectile). Prefix `C-c p`. Also `ivy-switch-project` is bound to `C-c u p` that provides more options with `M-o`.
+Package management with [Projectile](https://github.com/bbatsov/projectile) and extended using [counsel-projectile](https://github.com/ericdanan/counsel-projectile). Prefix `C-c p`.
 
-[magit](https://magit.vc/) for interfacing with git.
+[magit](https://magit.vc/) for interfacing with git. Use `C-c v` for `magit-status`. `C-c M-g` will open `magit-file-pop`.
 
 Apply project specific rules for code with [editorconfig](https://github.com/editorconfig/editorconfig-emacs).
 
@@ -85,15 +81,11 @@ Apply project specific rules for code with [editorconfig](https://github.com/edi
 
 Besides the built in `ruby-mode` some other packages makes editing Ruby code easier.
 
-[bundler](https://github.com/tobiassvn/bundler.el) interacts with Bundler for Ruby. Use `bundle-open` to open a dired buffer for specific gem.
-
 [yard-mode](https://github.com/pd/yard-mode.el) syntax highlighting and editing of [YARD](http://yardoc.org/) documentation.
 
 [inf-ruby](http://github.com/nonsequitur/inf-ruby) Ruby repl.
 
 Use the correct Ruby version for a buffer by calling `rvm-activate-corresponding-ruby` provided by  [rvm](https://github.com/senny/rvm.el).
-
-[rubocop](https://github.com/bbatsov/rubocop-emacs) for style checking.
 
 #### Go
 
@@ -151,22 +143,15 @@ Make comments like `TODO`, `NOTE` and others stand out with [hl-todo](http://git
 
 Make numbers standout with [highlight-numbers](https://github.com/Fanael/highlight-numbers).
 
-[smart-mode-line](http://github.com/Malabarba/smart-mode-line) makes the modeline pretty. No nead for setting the format for `projectile-mode-line`, `smart-mode-line` supports [Projectile](https://github.com/bbatsov/projectile).
-
 ### Windows / buffers / navigation
 
 Jump quickly to lines, characters, words with [avy](https://github.com/abo-abo/avy).
 
 Better window switching with [ace-window](https://github.com/abo-abo/ace-window).
 
-Manage popup windows and show them in a smaller window than normal with [popwin-el](https://github.com/m2ym/popwin-el).
-Make them go away with `C-g` and re-open them in their normal view with `C-c w C-o`.
-
 Window config handling using [eyebrowse](https://github.com/wasamasa/eyebrowse).
 
 Rotate window layout using [rotate](https://github.com/daichirata/emacs-rotate).
-
-Distraction free writing with [writeroom-mode](https://github.com/joostkremers/writeroom-mode) bound to `C-c u w`.
 
 ### Utils
 
@@ -178,13 +163,9 @@ Easy note taking using [deft](https://github.com/jrblevin/deft).
 
 Help on key bindings with [which-key](https://github.com/justbur/emacs-which-key).
 
-Stats on commands used [keyfreq](https://github.com/dacap/keyfreq).
-
 With [hydra](https://github.com/abo-abo/hydra) it is easy to bind shortcuts to just one prefix key.
 
 [undo-tree](http://www.dr-qubit.org/tags/computing-code-emacs.html) makes it easy to undo and redo.
-
-Sidebar tree view with [neotree](https://github.com/jaypei/emacs-neotree).
 
 ### Built in's
 
