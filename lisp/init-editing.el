@@ -5,6 +5,8 @@
 
 ;;; Code:
 
+(show-paren-mode 1)
+
 (use-package easy-kill
   :straight t
   :config
@@ -46,8 +48,6 @@
 
 (use-package smartparens
   :straight t
-  :bind (:map my-toggle-prefix-map
-              ("s" . smartparens-global-mode))
   :init
   (require 'smartparens-config)
   (smartparens-global-mode t))

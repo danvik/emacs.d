@@ -45,36 +45,13 @@
 (require 'init-themes)
 (require 'init-vc)
 (require 'init-window)
-
-
-;;; disable some ui settings
-
-(defun my-toggle-modes (arg modes)
-  (mapc (lambda (f) (funcall f arg)) modes))
-
-(defun my-enable-modes (modes)
-  (my-toggle-modes 1 modes))
-
-(defun my-disable-modes (modes)
-  (my-toggle-modes -1 modes))
-
-;; (my-disable-modes
-;;  '(scroll-bar-mode
-;;    tool-bar-mode
-;;    blink-cursor-mode))
-
-(my-enable-modes
- '(show-paren-mode
-   column-number-mode
-   line-number-mode
-   ))
+(require 'init-ui)
+(require 'init-completing)
 
 (setq ring-bell-function 'ignore
       inhibit-startup-message t)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
-
-
 
 (setq enable-local-variables t
       network-security-level 'paranoid
@@ -82,33 +59,6 @@
       epa-pinentry-mode 'loopback)
 
 
-
-
-(progn
-  (use-package selectrum
-    :straight (:host github :repo "raxod502/selectrum")
-    :defer t
-    :init
-    (selectrum-mode +1))
-
-  (use-package prescient
-    :straight t
-    :config
-    (prescient-persist-mode +1)
-    (setq prescient-history-length 1000))
-
-  (use-package selectrum-prescient
-    :straight (:host github :repo "raxod502/prescient.el"
-                     :files ("selectrum-prescient.el"))
-    :demand t
-    :after selectrum
-    :config
-    (selectrum-prescient-mode +1))
-
-
-  (setq
-   ;; https://github.com/raxod502/selectrum/issues/100
-   enable-recursive-minibuffers t))
 
 (use-package server
   :config
