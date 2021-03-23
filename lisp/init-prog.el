@@ -93,7 +93,12 @@
       lsp-signature-render-documentation t
       lsp-ui-peek-enable nil)
 
-
+(use-package flycheck
+  :straight t
+  :bind (:map my-toggle-prefix-map
+              ("f" . flycheck-mode))
+  :init (setq flycheck-checker-error-threshold 500
+              flycheck-check-syntax-automatically '(mode-enabled save)))
 
 
 

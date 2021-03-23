@@ -48,10 +48,15 @@
 (require 'init-ui)
 (require 'init-completing)
 
+(require 'init-search)
+(require 'init-utils)
+
 (setq ring-bell-function 'ignore
       inhibit-startup-message t)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+
 
 (setq enable-local-variables t
       network-security-level 'paranoid
@@ -59,18 +64,17 @@
       epa-pinentry-mode 'loopback)
 
 
-
 (use-package server
   :config
   (unless (server-running-p)
     (server-start)))
-
 
 (straight-use-package 'project)
 
 (use-package embark
   :straight t
   :bind ("C-c e" . embark-act))
+
 
 (use-package avy
   :straight t
@@ -91,27 +95,7 @@
         company-show-numbers t)
   (global-company-mode))
 
-(progn
-  (straight-use-package
-   '(ctrlf :host github :repo "raxod502/ctrlf"))
 
-  (ctrlf-mode +1))
-
-(use-package deadgrep
-  :straight t
-  :bind ("C-c g" . deadgrep))
-
-(use-package deft
-  :straight t
-  :bind (:map my-custom-key-map ("d" . deft))
-  :init
-  (setq deft-extensions '("org")
-        deft-text-mode 'org-mode
-        deft-directory "~/.deft/"
-        deft-auto-save-interval 5.0)
-  (unless (file-exists-p deft-directory)
-    (when (yes-or-no-p (format "Directory %s does not exists, create?" deft-directory))
-      (mkdir deft-directory))))
 
 (defun my-insert-current-time ()
   (interactive)
@@ -190,14 +174,6 @@
  ("o" . my-org-scratch-buffer)
  ("s" . my-toggle-statistic-cookie-type))
 
-
-
-(straight-use-package 'elfeed)
-
-
-
-
-
 (use-package exec-path-from-shell
   :straight t
   :if system-type-darwin
@@ -205,12 +181,7 @@
   (progn
     (exec-path-from-shell-initialize)))
 
-(use-package flycheck
-  :straight t
-  :bind (:map my-toggle-prefix-map
-              ("f" . flycheck-mode))
-  :init (setq flycheck-checker-error-threshold 500
-              flycheck-check-syntax-automatically '(mode-enabled save)))
+
 
 
 
