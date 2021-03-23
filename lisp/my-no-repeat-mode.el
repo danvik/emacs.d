@@ -3,6 +3,8 @@
 (defvar my-no-repeat-current-char nil)
 (defvar my-no-repeat-current-count nil)
 (defvar my-no-repeat-show-hint 't)
+(defvar my-no-repeat-global-repeat-key (kbd "."))
+
 
 (defun my-current-key-binding (key)
   (prog2 (my-no-repeat-mode -1) (key-binding (kbd key)) (my-no-repeat-mode +1)))
