@@ -14,8 +14,7 @@
     (load bootstrap-file nil 'nomessage))
   (add-to-list 'load-path (concat user-emacs-directory "lisp"))
 
-  (straight-use-package 'use-package)
-  (setq use-package-verbose t))
+  (straight-use-package 'use-package))
 
 ;;;
 

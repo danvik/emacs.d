@@ -10,7 +10,7 @@
   (setq uniquify-buffer-name-style 'forward))
 
 (use-package bufler
-  :straight (:host github :repo "alphapapa/bufler.el")
+  :straight (:host github :repo "alphapapa/bufler.el" :files (:defaults (:exclude "helm-bufler.el")))
   :config (bind-keys :prefix-map my-bufler-prefix-map
            :prefix "C-c b"
            ("l" . bufler-list)
