@@ -1,4 +1,4 @@
-;;; init-buffer.el --- Bufler
+;;; init-buffer.el --- buffer things
 
 ;;; Commentary:
 ;;

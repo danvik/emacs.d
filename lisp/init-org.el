@@ -5,8 +5,6 @@
 
 ;;; Code:
 
-
-
 (use-package org
   :straight t
   :config
@@ -28,7 +26,7 @@
   :config (add-hook 'org-mode-hook #'worf-mode))
 (straight-use-package 'htmlize)
 (straight-use-package 'ox-twbs)
-(require 'ox)
+;; (require 'ox)
 
 
 (straight-use-package 'ox-reveal)

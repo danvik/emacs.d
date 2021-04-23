@@ -83,6 +83,17 @@
   :straight t
   :config (global-undo-tree-mode t))
 
+(use-package multiple-cursors
+  :straight t
+  :bind
+  (("C->"         . mc/mark-next-like-this)
+   ("C-<"         . mc/mark-previous-like-this)
+   ("C-c C-<"     . mc/mark-all-like-this)
+   ("C-S-c C-S-c" . mc/edit-lines)))
+
+(use-package hippie-exp
+  :bind ("C-\\" . hippie-expand))
+
 (provide 'init-editing)
 
 ;;; init-editing.el ends here

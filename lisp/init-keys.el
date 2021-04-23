@@ -12,7 +12,6 @@
 (setq mac-option-modifier 'none
       mac-command-modifier 'meta)
 
-
 (provide 'init-keys)
 
 ;;; init-keys.el ends here

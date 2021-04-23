@@ -27,6 +27,17 @@
  ;; https://github.com/raxod502/selectrum/issues/100
  enable-recursive-minibuffers t)
 
+(use-package embark
+  :straight t
+  :bind ("C-c e" . embark-act))
+
+(progn
+  (straight-use-package '(marginalia :host github :repo "minad/marginalia" :branch "main"))
+  (marginalia-mode t))
+
+(straight-use-package '(consult :host github :repo "minad/consult" :branch "main"))
+
 (provide 'init-completing)
+
 
 ;;; init-completing.el ends here
