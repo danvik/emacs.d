@@ -17,6 +17,34 @@
 
 (straight-use-package 'elfeed)
 
+(use-package exec-path-from-shell
+  :straight t
+  :if system-type-darwin
+  :config (exec-path-from-shell-initialize))
+
+(use-package god-mode
+  :straight t
+  :bind (("<escape>" . god-local-mode)
+         :map my-toggle-prefix-map
+         ("g" . god-local-mode)
+         :map god-local-mode-map
+         ("i" . god-local-mode)
+         ("." . repeat))
+  :config
+  (add-hook 'god-mode-enabled-hook (lambda () (hl-line-mode 1)))
+  (add-hook 'god-mode-disabled-hook (lambda () (hl-line-mode -1))))
+
+(use-package which-key
+  :straight t
+  :config
+  (setq which-key-popup-type 'side-window
+        which-key-side-window-location 'bottom)
+  (which-key-mode))
+
+(use-package crux
+  :straight t)
+
+
 (provide 'init-utils)
 
 ;;; init-utils.el ends here

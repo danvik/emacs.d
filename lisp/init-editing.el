@@ -7,6 +7,13 @@
 
 (show-paren-mode 1)
 
+(set-language-environment 'utf-8)
+
+(setq delete-selection-mode t
+      sentence-end-double-space nil
+      save-interprogram-paste-before-kill t)
+
+
 (use-package easy-kill
   :straight t
   :config
@@ -27,17 +34,6 @@
   :straight t
   :config (editorconfig-mode +1))
 
-
-(setq delete-selection-mode t
-      sentence-end-double-space nil
-      save-interprogram-paste-before-kill t)
-
-(set-language-environment 'utf-8)
-;; (prefer-coding-system 'utf-8)
-;; (set-default-coding-systems 'utf-8)
-;; (set-terminal-coding-system 'utf-8)
-;; (set-keyboard-coding-system 'utf-8)
-
 (setq-default indent-tabs-mode nil
               tab-width 4
               fill-column 78)
@@ -52,16 +48,12 @@
   (require 'smartparens-config)
   (smartparens-global-mode t))
 
-
 (use-package browse-kill-ring
   :straight t
   :bind
   ("M-y" . browse-kill-ring))
 
-(use-package browse-kill-ring
-  :straight t
-  :bind
-  ("M-y" . browse-kill-ring))(use-package comment-dwim-2
+(use-package comment-dwim-2
   :straight t
   :bind
   ("M-;" . comment-dwim-2))
@@ -93,6 +85,15 @@
 
 (use-package hippie-exp
   :bind ("C-\\" . hippie-expand))
+
+(use-package avy
+  :straight t
+  :bind (("M-g w" . avy-goto-word-1)
+         ("M-g l" . avy-goto-line)
+         ("M-g f" . avy-goto-char-in-line)
+         ("M-g M-l" . avy-copy-line)
+         ("M-g g" . avy-goto-line))
+  :config (setq avy-all-windows nil))
 
 (provide 'init-editing)
 

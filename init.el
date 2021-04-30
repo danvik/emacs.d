@@ -26,9 +26,10 @@
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-(load local-settings-file nil)
+(load local-settings-file t)
 (load custom-file t)
 
+(require 'init-keys)
 (require 'init-ui)
 (require 'init-gui)
 (require 'init-emacs)
@@ -36,8 +37,8 @@
 (require 'init-dired)
 (require 'init-editing)
 (require 'init-files)
-(require 'init-keys)
 (require 'init-prog)
+(require 'init-project)
 (require 'init-themes)
 (require 'init-vc)
 (require 'init-window)
@@ -46,44 +47,3 @@
 (require 'init-search)
 (require 'init-utils)
 (require 'init-defuns)
-
-
-
-(use-package avy
-  :straight t
-  :bind
-  (("M-g w" . avy-goto-word-1)
-   ("M-g l" . avy-goto-line)
-   ("M-g f" . avy-goto-char-in-line)
-   ("M-g M-l" . avy-copy-line)
-   ("M-g g" . avy-goto-line))
-  :config (setq avy-all-windows nil))
-
-(use-package exec-path-from-shell
-  :straight t
-  :if system-type-darwin
-  :init
-  (progn
-    (exec-path-from-shell-initialize)))
-
-(use-package god-mode
-  :straight t
-  :bind (("C-c u g" . god-local-mode)
-         :map god-local-mode-map
-         ("i" . god-local-mode)
-         ("." . repeat))
-  :init (when (memq window-system '(mac ns))
-          (global-set-key (kbd "<escape>") 'god-local-mode))
-  :config
-  (add-hook 'god-mode-enabled-hook (lambda () (hl-line-mode 1)))
-  (add-hook 'god-mode-disabled-hook (lambda () (hl-line-mode -1))))
-
-(use-package which-key
-  :straight t
-  :config
-  (setq which-key-popup-type 'side-window
-        which-key-side-window-location 'bottom)
-  (which-key-mode))
-
-(use-package crux
-  :straight t)
