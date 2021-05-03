@@ -45,13 +45,6 @@
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-(defun my-print-variable ()
-  (interactive)
-  (condition-case nil
-      (message "%s" (eval (intern-soft (thing-at-point 'symbol t))))
-    (error "not a variable")))
-
-
 ;;; early key settings
 
 (define-prefix-command 'my-toggle-prefix-map)
@@ -79,11 +72,4 @@
 
 (provide 'init)
 
-;;; coding
-
-(require 'toggle)
-
-(make-toggler kanske next-line previous-line)
-
 ;;; init.el ends here
-;; NOTE: save folders for deadgrep

@@ -8,12 +8,6 @@
   (column-number-mode 1)
   (line-number-mode 1))
 
-(use-package scroll-bar
-  :config (scroll-bar-mode -1))
-
-(use-package tool-bar
-  :config (tool-bar-mode -1))
-
 (use-package frame
   :config (blink-cursor-mode -1))
 
@@ -67,8 +61,8 @@
               ("o" . olivetti-mode)))
 
 (when (and (display-graphic-p) (member "Iosevka" (font-family-list)))
-  (set-frame-font "Iosevka-14")
-  (add-to-list 'default-frame-alist '(font . "Iosevka-14")))
+  (set-frame-font "Iosevka-18")
+  (add-to-list 'default-frame-alist '(font . "Iosevka-18")))
 
 (provide 'init-ui)
 

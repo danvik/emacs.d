@@ -5,25 +5,18 @@
 
 ;;; Code:
 
-(mapc 'straight-use-package
-      '(nord-theme
-        solarized-theme
-        doom-themes
-        modus-operandi-theme
-        modus-vivendi-theme
-        apropospriate-theme))
+(straight-use-package 'nord-theme)
+(straight-use-package 'solarized-theme)
+(straight-use-package 'doom-themes)
+(straight-use-package 'modus-themes)
 
-(use-package challenger-deep-theme
-  :straight (:host github :repo "challenger-deep-theme/emacs" :local-repo "challenger-deep-theme"))
+(straight-use-package
+ '(challenger-deep-theme :host github :repo "challenger-deep-theme/emacs" :local-repo "challenger-deep-theme"))
 
-(use-package dracula-theme
-  :straight (:host github :repo "dracula/emacs" :local-repo "dracula-theme"))
-
-
+(straight-use-package
+ '(dracula-theme :host github :repo "dracula/emacs" :local-repo "dracula-theme"))
 
 (load-theme 'modus-operandi t)
-
-
 
 (provide 'init-themes)
 
