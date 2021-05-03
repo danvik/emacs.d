@@ -5,7 +5,6 @@
 
 (use-package deft
   :straight t
-  :bind (:map my-custom-key-map ("d" . deft))
   :init
   (setq deft-extensions '("org")
         deft-text-mode 'org-mode
@@ -16,11 +15,6 @@
       (mkdir deft-directory))))
 
 (straight-use-package 'elfeed)
-
-(use-package exec-path-from-shell
-  :straight t
-  :if system-type-darwin
-  :config (exec-path-from-shell-initialize))
 
 (use-package god-mode
   :straight t

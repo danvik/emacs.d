@@ -7,6 +7,8 @@
   :config
   (setq recentf-exclude '("deft/" ".gpg")
         recentf-max-saved-items 500)
+  (add-to-list 'recentf-exclude no-littering-var-directory)
+  (add-to-list 'recentf-exclude no-littering-etc-directory)
   :init
   (recentf-mode t))
 

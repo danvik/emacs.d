@@ -9,13 +9,13 @@
 
 (use-package rotate
   :straight t
-  :bind
-  (:map my-custom-key-map ("SPC" . rotate-layout)))
+  :bind ("C-c r" . rotate-layout))
 
 (use-package winner
   :config (winner-mode t))
 
 (setq recenter-positions '(top middle bottom))
+
 
 (provide 'init-window)
 

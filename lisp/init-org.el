@@ -15,6 +15,12 @@
    'org-babel-load-languages '((shell . t)
                                (emacs-lisp . t))))
 
+(eval-after-load 'org-clock
+  (setq org-clock-ask-before-exiting nil)
+  ;; (remove-hook 'kill-emacs-query-functions 'org-clock-kill-emacs-query)
+  )
+
+
 (use-package ox-md)
 
 (use-package orglink
@@ -24,11 +30,9 @@
 (use-package worf
   :straight t
   :config (add-hook 'org-mode-hook #'worf-mode))
+
 (straight-use-package 'htmlize)
 (straight-use-package 'ox-twbs)
-;; (require 'ox)
-
-
 (straight-use-package 'ox-reveal)
 
 (provide 'init-org)

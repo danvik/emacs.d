@@ -5,12 +5,14 @@
 
 ;;; Code:
 
+(use-package dired
+  :config
+  (add-hook 'dired-mode-hook #'dired-hide-details-mode))
+
 (use-package dired-x
   :bind ("C-c j" . dired-jump-other-window)
   :init
   (setq dired-bind-jump nil))
-
-(add-hook 'dired-mode-hook #'dired-hide-details-mode)
 
 (use-package dired-subtree
   :straight t
@@ -25,17 +27,12 @@
 
 (use-package dired-filter
   :straight t
-  :after dired
-
-  ;; :bind (:map dired-mode-map ("/" . dired-filter))
-  )
-;;
+  :after dired)
 
 (use-package dired-narrow
   :straight t
   :after dired
-  :bind (:map dired-mode-map
-              ("\\" . dired-narrow)))
+  :bind (:map dired-mode-map ("\\" . dired-narrow)))
 
 (provide 'init-dired)
 

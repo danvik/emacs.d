@@ -3,10 +3,9 @@
 ;;; Commentary:
 ;;
 
-(progn
-  (straight-use-package
-   '(ctrlf :host github :repo "raxod502/ctrlf"))
-
+(use-package ctrlf
+  :straight '(ctrlf :host github :repo "raxod502/ctrlf")
+  :init
   (ctrlf-mode +1))
 
 (use-package deadgrep

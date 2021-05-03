@@ -1,7 +1,5 @@
 ;;; init-vc.el --- Version control packages
 
-
-
 ;;; Commentary:
 ;;
 
