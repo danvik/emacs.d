@@ -34,12 +34,14 @@
 (defvar local-settings-file "~/.priv/elisp/local.el"
   "File used for private and local settings.")
 
-(load local-settings-file t)
+(when (file-exists-p local-settings-file)
+  (load local-settings-file))
 
 (straight-use-package 'no-littering)
 
 (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
-(load custom-file t)
+(when (file-exists-p local-settings-file)
+  (load custom-file))
 
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
