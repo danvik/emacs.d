@@ -18,24 +18,22 @@
 (use-package selectrum-prescient
   :straight (:host github :repo "raxod502/prescient.el"
                    :files ("selectrum-prescient.el"))
-  :demand t
   :after selectrum
   :config
   (selectrum-prescient-mode +1))
-
-(setq
- ;; https://github.com/raxod502/selectrum/issues/100
- enable-recursive-minibuffers t)
 
 (use-package embark
   :straight t
   :bind ("C-c e" . embark-act))
 
-(progn
-  (straight-use-package '(marginalia :host github :repo "minad/marginalia" :branch "main"))
+(use-package marginalia
+  :straight (:host github :repo "minad/marginalia" :branch "main")
+  :config (setq marginalia-annotators '(marginalia-annotators-heavy nil marginalia-annotators-light))
+  :init
   (marginalia-mode t))
 
-(straight-use-package '(consult :host github :repo "minad/consult" :branch "main"))
+(use-package consult
+  :straight (:host github :repo "minad/consult" :branch "main"))
 
 (provide 'init-completing)
 

@@ -60,9 +60,21 @@
   :bind (:map my-toggle-prefix-map
               ("o" . olivetti-mode)))
 
+
+(use-package doom-modeline
+  :straight t
+  :config (setq doom-modeline-minor-modes t))
+
+(use-package all-the-icons
+  :straight t
+  :config (setq all-the-icons-scale-factor 1.1)
+  :init
+  (unless (member "all-the-icons" (font-family-list))
+    (all-the-icons-install-fonts t)))
+
 (when (and (display-graphic-p) (member "Iosevka" (font-family-list)))
-  (set-frame-font "Iosevka-18")
-  (add-to-list 'default-frame-alist '(font . "Iosevka-18")))
+  (set-frame-font "Iosevka-14")
+  (add-to-list 'default-frame-alist '(font . "Iosevka-14")))
 
 (provide 'init-ui)
 

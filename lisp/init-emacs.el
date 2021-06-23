@@ -3,7 +3,9 @@
 ;;; Commentary:
 ;;
 
+(setq gc-cons-threshold 100000000)
 (setq ring-bell-function 'ignore)
+(setq ffap-machine-p-known 'reject)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 

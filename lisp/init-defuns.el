@@ -3,6 +3,8 @@
 ;;; Commentary:
 ;;
 
+;;; Code:
+
 (defun my-insert-current-time ()
   (interactive)
   (let ((time-str))
