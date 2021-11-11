@@ -11,10 +11,6 @@
 (use-package frame
   :config (blink-cursor-mode -1))
 
-(use-package minions
-  :straight t
-  :config (minions-mode 1))
-
 (use-package hl-todo
   :straight t
   :init (add-hook 'prog-mode-hook #'hl-todo-mode))
@@ -60,21 +56,21 @@
   :bind (:map my-toggle-prefix-map
               ("o" . olivetti-mode)))
 
-
 (use-package doom-modeline
   :straight t
-  :config (setq doom-modeline-minor-modes t))
+  :config (setq doom-modeline-buffer-encoding 'nondefault)
+  :init (doom-modeline-mode))
 
 (use-package all-the-icons
   :straight t
   :config (setq all-the-icons-scale-factor 1.1)
   :init
-  (unless (member "all-the-icons" (font-family-list))
+  (when (and (display-graphic-p) (not (member "all-the-icons" (font-family-list))))
     (all-the-icons-install-fonts t)))
 
 (when (and (display-graphic-p) (member "Iosevka" (font-family-list)))
-  (set-frame-font "Iosevka-14")
-  (add-to-list 'default-frame-alist '(font . "Iosevka-14")))
+  (set-frame-font "Iosevka-16")
+  (add-to-list 'default-frame-alist '(font . "Iosevka-16")))
 
 (provide 'init-ui)
 

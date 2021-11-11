@@ -23,6 +23,9 @@
          ("g" . god-local-mode)
          :map god-local-mode-map
          ("i" . god-local-mode)
+         ("[" . backward-paragraph)
+         ("]" . forward-paragraph)
+
          ("." . repeat))
   :config
   (add-hook 'god-mode-enabled-hook (lambda () (hl-line-mode 1)))
@@ -36,7 +39,9 @@
   (which-key-mode))
 
 (use-package crux
-  :straight t)
+  :straight t
+  :bind (("C-c d" . crux-duplicate-current-line-or-region)
+         ("C-c D" . crux-duplicate-and-comment-current-line-or-region)))
 
 
 (provide 'init-utils)

@@ -72,4 +72,17 @@
 
 (provide 'init)
 
-;;; init.el ends here
+;; Whether to colorize a bookmarked line.
+(setq bookmark-fontify nil)
+
+(defun my--buffer-gpg-p ()
+  (and (buffer-file-name)
+       (string= "gpg" (file-name-extension (buffer-file-name)))))
+
+(use-package dogears
+  :straight t
+  :config
+  (add-to-list 'dogears-hooks 'after-save-hook)
+  (add-to-list 'dogears-ignore-places-functions #'my--buffer-gpg-p)
+  :init
+  (dogears-mode))

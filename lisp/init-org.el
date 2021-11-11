@@ -11,9 +11,10 @@
   (setq org-hide-emphasis-markers t
         org-log-done 'time
         org-src-fontify-natively t)
-  (org-babel-do-load-languages
-   'org-babel-load-languages '((shell . t)
-                               (emacs-lisp . t))))
+  (with-eval-after-load 'org
+    (org-babel-do-load-languages
+     'org-babel-load-languages '((shell . t)
+                                 (emacs-lisp . t)))))
 
 (eval-after-load 'org-clock
   (setq org-clock-ask-before-exiting nil)

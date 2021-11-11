@@ -6,6 +6,7 @@
 (setq gc-cons-threshold 100000000)
 (setq ring-bell-function 'ignore)
 (setq ffap-machine-p-known 'reject)
+(setq confirm-kill-emacs #'yes-or-no-p)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 

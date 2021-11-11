@@ -28,7 +28,8 @@
   (setq lsp-enable-links nil
         lsp-signature-auto-activate t
         lsp-signature-doc-lines 1
-        lsp-signature-render-documentation t))
+        lsp-signature-render-documentation t
+        lsp-headerline-breadcrumb-enable nil))
 
 (use-package lsp-ui
   :straight t
@@ -75,6 +76,7 @@
   (global-company-mode))
 
 (straight-use-package 'lice)
+(straight-use-package 'impatient-mode)
 
 (provide 'init-prog)
 

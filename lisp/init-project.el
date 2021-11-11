@@ -4,7 +4,8 @@
 ;;
 
 
-(straight-use-package 'project)
+(use-package project
+  :straight t)
 
 (use-package projectile
   :straight t
