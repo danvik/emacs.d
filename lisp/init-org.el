@@ -33,8 +33,12 @@
   :config (add-hook 'org-mode-hook #'worf-mode))
 
 (straight-use-package 'htmlize)
-(straight-use-package 'ox-twbs)
-(straight-use-package 'ox-reveal)
+
+(use-package ox-twbs
+  :straight t)
+
+(use-package ox-reveal
+  :straight t)
 
 (provide 'init-org)
 
