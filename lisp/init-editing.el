@@ -20,6 +20,15 @@
 (use-package easy-kill
   :straight t
   :config
+  (bind-keys :map easy-kill-base-map
+             ("DEL" . (lambda ()
+                        (interactive)
+                        (easy-kill-mark-region)
+                        (call-interactively #'delete-region)))
+             (";" . (lambda ()
+                        (interactive)
+                        (easy-kill-mark-region)
+                        (call-interactively #'comment-dwim-2))))
   (global-set-key [remap kill-ring-save] 'easy-kill)
   (global-set-key [remap mark-sexp] 'easy-mark)
   (setq easy-kill-unhighlight-key (kbd "RET")))
