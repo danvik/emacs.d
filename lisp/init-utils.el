@@ -41,7 +41,14 @@
 (use-package crux
   :straight t
   :bind (("C-c d" . crux-duplicate-current-line-or-region)
-         ("C-c D" . crux-duplicate-and-comment-current-line-or-region)))
+         ("C-c D" . crux-duplicate-and-comment-current-line-or-region)
+         ("C-c <tab>" . crux-indent-defun)))
+
+(use-package drag-stuff
+  :straight t
+  :config
+  (drag-stuff-global-mode 1)
+  (drag-stuff-define-keys))
 
 
 (provide 'init-utils)
