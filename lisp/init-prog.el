@@ -67,14 +67,6 @@
 
 (straight-use-package 'gotest)
 
-(use-package company
-  :straight t
-  :bind ("M-2" . company-complete)
-  :config
-  (setq company-tooltip-align-annotations t
-        company-show-numbers t)
-  (global-company-mode))
-
 (straight-use-package 'lice)
 (straight-use-package 'impatient-mode)
 
