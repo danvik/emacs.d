@@ -26,15 +26,19 @@
 
   (straight-use-package 'use-package))
 
-
-
 ;;; local settings and variables
 
 (defconst system-type-darwin (eq system-type 'darwin)
   "Mac or not.")
 
+(defconst at-work (file-directory-p (concat (expand-file-name "~") "/work"))
+  "What computer is this.")
+
 (defvar local-settings-file "~/.priv/elisp/local.el"
   "File used for private and local settings.")
+
+(defvar org-bookmarks-file nil
+  "File used for org capture of book")
 
 (when (file-exists-p local-settings-file)
   (load local-settings-file ))
@@ -46,9 +50,7 @@
 (setq custom-file (no-littering-expand-etc-file-name "custom.el"))
 (load custom-file t)
 
-;; (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
-
-;;; early key settings
+;;; key settings
 
 (define-prefix-command 'my-toggle-prefix-map)
 (global-set-key (kbd "C-c t") my-toggle-prefix-map)
@@ -74,6 +76,8 @@
       ffap-machine-p-known 'reject
       confirm-kill-emacs #'yes-or-no-p)
 
+(setq recenter-positions '(top middle bottom))
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;;; emacs security
@@ -82,10 +86,6 @@
       network-security-level 'paranoid
       ffap-machine-p-known 'reject
       epa-pinentry-mode 'loopback)
-
-
-
-(setq recenter-positions '(top middle bottom))
 
 ;;; editing
 
@@ -149,8 +149,7 @@
 (straight-use-package 'rotate)
 (straight-use-package 'bufler)
 
-(use-package winner
-  :config (winner-mode t))
+(winner-mode t)
 
 (use-package uniquify
   :config
@@ -201,8 +200,6 @@
                        (call-interactively #'comment-dwim-2)))
               ("j" . easy-kill-expand)
               ("k" . easy-kill-shrink))
-
-
   :config
   (setq easy-kill-unhighlight-key (kbd "RET"))
 
@@ -314,9 +311,8 @@
 
 ;;; projects / vc
 
-;; TODO: add `project' with straight?
-
 (straight-use-package 'git-link)
+(straight-use-package 'project)
 
 (use-package projectile
   :straight t
@@ -334,31 +330,10 @@
   :config
   (setq magit-save-repository-buffers 'dontask))
 
-
-;; TODO: does this not work?
-;; (eval-after-load 'magit
-;;   (require 'magit-extras))
-
-;;; themes
-
-(dolist (package
-         '(dracula-theme
-           nord-theme
-           solarized-theme
-           doom-themes
-           modus-themes))
-  (straight-use-package package))
-
-(load-theme 'modus-operandi t)
-
-;;* completion
-
-;;** completion2
+;;; completion
 
 (use-package hippie-exp
   :bind ("C-\\" . hippie-expand))
-
-;;; *consult
 
 (use-package consult
   :straight t
@@ -425,23 +400,17 @@
 
 (progn
   (vertico-multiform-mode t)
-
-
-  (setq vertico-multiform-categories
-        '((file buffer)
-          (imenu buffer)
-          (grep buffer)))
+  ;; (setq vertico-multiform-categories
+  ;;       '((file buffer)
+  ;;         (imenu buffer)
+  ;;         (grep buffer)))
 
   (setq vertico-multiform-commands
         '((consult-imenu buffer)
           (consult-grep buffer)
-          (consult-xref buffer)
-          (consult-buffer buffer)
           (consult-outline buffer)
-          (find-file flat)
           (consult-git-grep buffer)
-          (execute-extended-command unobtrusive)))
-  )
+          (execute-extended-command unobtrusive))))
 
 (use-package orderless
   :straight t
@@ -497,14 +466,11 @@
 (dolist (export-package '(htmlize ox-twbs ox-reveal ox-pandoc))
   (straight-use-package export-package))
 
-(progn
+(unless at-work
   (use-package org-web-tools
     :straight t)
-  ;; https://github.com/alphapapa/org-web-tools
-  ;;
-  (setq org-default-notes-file "~/Dropbox/org/tasks.org"
-        org-agenda-files (directory-files-recursively "~/Dropbox/org/" "\\.org$")
-        org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
+
+  (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
 
   (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key (kbd "C-c a") 'org-agenda)
@@ -515,17 +481,7 @@
            entry (file+headline "" "Tasks")
            "* TODO %?\n  %u\n  %a")
 
-          ;; %?          After completing the template, position cursor here.
-          ;; %t          Time stamp, date only.  The time stamp is the current time,
-          ;;             except when called from agendas with ‘M-x org-agenda-capture’ or
-          ;;             with ‘org-capture-use-agenda-date’ set.
-          ;; %T          Time stamp as above, with date and time.
-          ;; %u, %U      Like the above, but inactive time stamps.
-
-          ;; %a          Annotation, normally the link created with ‘org-store-link’.
-
-
-          ("b" "Bookmark (Clipboard)" entry (file+headline "~/Dropbox/org/bookmarks.org" "new")
+          ("b" "Bookmark (Clipboard)" entry (file+headline  "new")
            "** %(org-web-tools--org-link-for-url)\n:PROPERTIES:\n:TIMESTAMP: %t\n:END:%?\n" :empty-lines 1 :prepend t))))
 
 ;;; search and grep
@@ -614,11 +570,6 @@
       (switch-to-buffer-other-window buffer))
     (org-mode)))
 
-
-
-;;; buffers
-
-
 ;;; programming
 
 
@@ -642,7 +593,7 @@
 
 (use-package lispy
   :straight t
-  :hook (emacs-lisp-mode . lispy-use))
+  :hook (emacs-lisp-mode . lispy-mode))
 
 (use-package go-mode
   :straight t
@@ -668,8 +619,14 @@
 
 (repeat-mode)
 
-(find-file user-init-file)
+;;; themes
 
+(dolist (package
+         '(dracula-theme
+           nord-theme
+           solarized-theme
+           doom-themes
+           modus-themes))
+  (straight-use-package package))
 
-
-;; for i in (seq 10); set format (printf '%dd' $i); date -v $format +'%A'; end;
+(load-theme 'modus-operandi t)
