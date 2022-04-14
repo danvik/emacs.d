@@ -200,7 +200,7 @@
                        (call-interactively #'comment-dwim-2)))
               ("j" . easy-kill-expand)
               ("k" . easy-kill-shrink))
-  :config
+  :init
   (setq easy-kill-unhighlight-key (kbd "RET"))
 
   (global-set-key [remap kill-ring-save] 'easy-kill)
@@ -589,7 +589,7 @@
 
 (use-package dumb-jump
   :straight t
-  :hook (xref-backend-functions . dumb-jump-xref-activate))
+  :config (add-hook 'xref-backend-functions 'dumb-jump-xref-activate))
 
 (use-package lispy
   :straight t
