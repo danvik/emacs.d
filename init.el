@@ -481,7 +481,7 @@
            entry (file+headline "" "Tasks")
            "* TODO %?\n  %u\n  %a")
 
-          ("b" "Bookmark (Clipboard)" entry (file+headline  "new")
+          ("b" "Bookmark (Clipboard)" entry (file+headline org-bookmarks-file "new")
            "** %(org-web-tools--org-link-for-url)\n:PROPERTIES:\n:TIMESTAMP: %t\n:END:%?\n" :empty-lines 1 :prepend t))))
 
 ;;; search and grep
