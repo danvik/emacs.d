@@ -321,14 +321,15 @@
   :config
   (setq projectile-use-git-grep t
         projectile-completion-system 'default
-        projectile-switch-project-action #'projectile-commander)
+        projectile-switch-project-action #'magit-status)
   (projectile-mode))
 
 (use-package magit
   :straight t
   :bind ("C-c v" . magit-status)
   :config
-  (setq magit-save-repository-buffers 'dontask))
+  (setq magit-save-repository-buffers 'dontask
+        magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
 
 ;;; completion
 
