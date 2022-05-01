@@ -473,8 +473,10 @@
 
   (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
 
-  (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "C-c a") 'org-agenda)
+  (bind-keys :prefix "C-c o"
+             :prefix-map my-org-prefix-map
+             ("c" . org-capture)
+             ("a" . org-agenda))
 
   (setq org-capture-templates
         '(
@@ -631,3 +633,16 @@
   (straight-use-package package))
 
 (load-theme 'modus-operandi t)
+
+;; (display-time-mode -1)
+
+(defun my-simple-edit (beginning end)
+  (interactive "r")
+  (when (region-active-p)
+    (read-string "Edit: " (buffer-substring-no-properties beginning end))))
+
+
+(straight-use-package 'embrace)
+
+;; works better with corfu
+(setq orderless-smart-case nil)
