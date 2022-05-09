@@ -103,7 +103,7 @@
 
 (use-package page-break-lines
   :straight t
-  :hook (emacs-lisp-mode . page-break-lines-mode))
+  :init (global-page-break-lines-mode))
 
 (use-package hl-todo
   :straight t
