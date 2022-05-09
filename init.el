@@ -351,6 +351,7 @@
          ("M-s l" . consult-line)
          ("M-s M-l" . consult-line-multi)
          ("M-g SPC" . consult-mark)
+         ("M-g M-g" . consult-goto-line)
          :map org-mode-map
          ("M-g o" . consult-org-heading))
   :config
