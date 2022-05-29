@@ -99,6 +99,86 @@
               tab-width 4
               fill-column 78)
 
+(show-paren-mode 1)
+
+(use-package easy-kill
+  :straight t
+  :bind (:map easy-kill-base-map
+              ("DEL" . (lambda ()
+                         (interactive)
+                         (easy-kill-mark-region)
+                         (call-interactively #'delete-region)))
+              (";" . (lambda ()
+                       (interactive)
+                       (easy-kill-mark-region)
+                       (call-interactively #'comment-dwim-2)))
+              ("j" . easy-kill-expand)
+              ("k" . easy-kill-shrink))
+  :init
+  (setq easy-kill-unhighlight-key (kbd "RET"))
+
+  (global-set-key [remap kill-ring-save] 'easy-kill)
+  (global-set-key [remap mark-sexp] 'easy-mark))
+
+(use-package editorconfig
+  :straight t
+  :config (editorconfig-mode +1))
+
+(use-package drag-stuff
+  :straight t
+  :config
+  (drag-stuff-global-mode 1)
+  (drag-stuff-define-keys))
+
+(use-package ispell
+  :config
+  (when (executable-find "aspell")
+    (setq-default ispell-program-name "aspell")))
+
+(use-package smartparens
+  :straight t
+  :init
+  (require 'smartparens-config)
+  (smartparens-global-mode t))
+
+(use-package comment-dwim-2
+  :straight t
+  :bind ("M-;" . comment-dwim-2))
+
+(use-package expand-region
+  :straight t
+  :bind ("C-=" . er/expand-region))
+
+(use-package iedit
+  :straight t
+  :bind ("C-;" . iedit-mode))
+
+(use-package goto-last-change
+  :straight t
+  :bind ("M-g ." . goto-last-change))
+
+(use-package multiple-cursors
+  :straight t
+  :bind
+  (("C->"         . mc/mark-next-like-this)
+   ("C-<"         . mc/mark-previous-like-this)
+   ("C-c C-<"     . mc/mark-all-like-this)
+   ("C-S-c C-S-c" . mc/edit-lines)))
+
+(use-package avy
+  :straight t
+  :bind (("M-g w" . avy-goto-word-1)
+         ("M-g l" . avy-goto-line)
+         ("M-g f" . avy-goto-char-in-line)
+         ("M-g M-l" . avy-copy-line)
+         ("M-g g" . avy-goto-line))
+  :config (setq avy-all-windows nil))
+
+(use-package embrace
+  :straight t
+  :bind (("C-c e" . embrace-change)
+         ("C-c E" . embrace-commander)))
+
 ;;; visual aid
 
 (use-package page-break-lines
@@ -186,83 +266,6 @@
   :straight t
   :after dired
   :bind (:map dired-mode-map ("\\" . dired-narrow)))
-
-;;; editing
-
-(show-paren-mode 1)
-
-(use-package easy-kill
-  :straight t
-  :bind (:map easy-kill-base-map
-              ("DEL" . (lambda ()
-                         (interactive)
-                         (easy-kill-mark-region)
-                         (call-interactively #'delete-region)))
-              (";" . (lambda ()
-                       (interactive)
-                       (easy-kill-mark-region)
-                       (call-interactively #'comment-dwim-2)))
-              ("j" . easy-kill-expand)
-              ("k" . easy-kill-shrink))
-  :init
-  (setq easy-kill-unhighlight-key (kbd "RET"))
-
-  (global-set-key [remap kill-ring-save] 'easy-kill)
-  (global-set-key [remap mark-sexp] 'easy-mark))
-
-(use-package editorconfig
-  :straight t
-  :config (editorconfig-mode +1))
-
-(use-package drag-stuff
-  :straight t
-  :config
-  (drag-stuff-global-mode 1)
-  (drag-stuff-define-keys))
-
-(use-package ispell
-  :config
-  (when (executable-find "aspell")
-    (setq-default ispell-program-name "aspell")))
-
-(use-package smartparens
-  :straight t
-  :init
-  (require 'smartparens-config)
-  (smartparens-global-mode t))
-
-(use-package comment-dwim-2
-  :straight t
-  :bind ("M-;" . comment-dwim-2))
-
-(use-package expand-region
-  :straight t
-  :bind ("C-=" . er/expand-region))
-
-(use-package iedit
-  :straight t
-  :bind ("C-;" . iedit-mode))
-
-(use-package goto-last-change
-  :straight t
-  :bind ("M-g ." . goto-last-change))
-
-(use-package multiple-cursors
-  :straight t
-  :bind
-  (("C->"         . mc/mark-next-like-this)
-   ("C-<"         . mc/mark-previous-like-this)
-   ("C-c C-<"     . mc/mark-all-like-this)
-   ("C-S-c C-S-c" . mc/edit-lines)))
-
-(use-package avy
-  :straight t
-  :bind (("M-g w" . avy-goto-word-1)
-         ("M-g l" . avy-goto-line)
-         ("M-g f" . avy-goto-char-in-line)
-         ("M-g M-l" . avy-copy-line)
-         ("M-g g" . avy-goto-line))
-  :config (setq avy-all-windows nil))
 
 ;;; files
 
@@ -638,16 +641,3 @@
   (straight-use-package package))
 
 (load-theme 'modus-operandi t)
-
-;; (display-time-mode -1)
-
-(defun my-simple-edit (beginning end)
-  (interactive "r")
-  (when (region-active-p)
-    (read-string "Edit: " (buffer-substring-no-properties beginning end))))
-
-
-(straight-use-package 'embrace)
-
-;; works better with corfu
-(setq orderless-smart-case nil)

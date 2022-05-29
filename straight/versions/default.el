@@ -35,6 +35,7 @@
  ("emacs-web-server" . "22ce66ea43e0eadb9ec1d691a35d9695fc29cee6")
  ("emacs-which-key" . "4790a14683a2f3e4f72ade197c78e4c0af1cdd4b")
  ("embark" . "ed8cd7dc81026a9e123c52d8c78fdb5f9329ee33")
+ ("embrace.el" . "dd5da196e5bcc5e6d87e1937eca0c21da4334ef2")
  ("epkgs" . "ffe236e983b1006e4e91ec141e5e3d3bc2440d23")
  ("epl" . "78ab7a85c08222cd15582a298a364774e3282ce6")
  ("esxml" . "f88a323bd15ad7bd94eda684e1a36525ba81a089")
