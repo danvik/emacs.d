@@ -126,8 +126,8 @@
 
 (use-package drag-stuff
   :straight t
+  :hook (prog-mode . drag-stuff-mode)
   :config
-  (drag-stuff-global-mode 1)
   (drag-stuff-define-keys))
 
 (use-package ispell
