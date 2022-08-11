@@ -560,9 +560,7 @@
   :straight t
   :bind (("C-c d" . crux-duplicate-current-line-or-region)
          ("C-c D" . crux-duplicate-and-comment-current-line-or-region)
-         ("C-c <tab>" . crux-indent-defun)
-         ("C-c j" . crux-top-join-line)))
-
+         ("C-c <tab>" . crux-indent-defun)))
 
 ;;; defuns
 
