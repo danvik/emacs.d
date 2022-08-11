@@ -87,6 +87,13 @@
       ffap-machine-p-known 'reject
       epa-pinentry-mode 'loopback)
 
+;;; env
+
+(use-package exec-path-from-shell
+  :if system-type-darwin
+  :straight t
+  :config (exec-path-from-shell-initialize))
+
 ;;; editing
 
 (set-language-environment 'utf-8)
@@ -623,10 +630,13 @@
   (when (and system-type-darwin (executable-find "erl") (executable-find "brew"))
     (setq erlang-root-dir (replace-regexp-in-string "\n$" "" (shell-command-to-string "brew --prefix erlang")))))
 
-(use-package exec-path-from-shell
-  :if system-type-darwin
+(use-package rust-mode
   :straight t
-  :config (exec-path-from-shell-initialize))
+  :hook (rust-mode . lsp))
+
+(use-package cargo
+  :straight t
+  :hook (rust-mode . cargo-minor-mode))
 
 (repeat-mode)
 
