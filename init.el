@@ -387,9 +387,6 @@
         xref-show-definitions-function #'consult-xref))
 
 
-(use-package embark-consult
-  :after (embark consult))
-
 (use-package consult-dir
   :straight t
   :bind (("C-x C-d" . consult-dir)
@@ -397,10 +394,13 @@
          ("C-x C-d" . consult-dir)
          ("C-x C-j" . consult-dir-jump-file)))
 
-
 (use-package embark
   :straight t
   :bind ("C-." . embark-act))
+
+
+(use-package embark-consult
+  :after (embark consult))
 
 (use-package marginalia
   :straight t
@@ -426,7 +426,7 @@
           (consult-grep buffer)
           (consult-outline buffer)
           (consult-git-grep buffer)
-          (execute-extended-command unobtrusive))))
+          )))
 
 (use-package orderless
   :straight t
