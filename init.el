@@ -482,6 +482,9 @@
 (dolist (export-package '(htmlize ox-twbs ox-reveal ox-pandoc))
   (straight-use-package export-package))
 
+(with-eval-after-load 'ox
+  (require 'ox-pandoc))
+
 (unless at-work
   (use-package org-web-tools
     :straight t)
