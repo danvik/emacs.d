@@ -425,8 +425,7 @@
         '((consult-imenu buffer)
           (consult-grep buffer)
           (consult-outline buffer)
-          (consult-git-grep buffer)
-          )))
+          (consult-git-grep buffer))))
 
 (use-package orderless
   :straight t
