@@ -120,7 +120,8 @@
                        (easy-kill-mark-region)
                        (call-interactively #'comment-dwim-2)))
               ("j" . easy-kill-expand)
-              ("k" . easy-kill-shrink))
+              ("k" . easy-kill-shrink)
+              ("m" . easy-kill-mark-region))
   :init
   (setq easy-kill-unhighlight-key (kbd "RET"))
 
