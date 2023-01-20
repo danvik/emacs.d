@@ -11,7 +11,7 @@
   (defvar bootstrap-version)
   (let ((bootstrap-file
          (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-        (bootstrap-version 5))
+        (bootstrap-version 6))
     (unless (file-exists-p bootstrap-file)
       (with-current-buffer
           (url-retrieve-synchronously
@@ -400,8 +400,7 @@
   :bind ("C-." . embark-act))
 
 
-(use-package embark-consult
-  :after (embark consult))
+(straight-use-package 'embark-consult)
 
 (use-package marginalia
   :straight t
@@ -411,7 +410,15 @@
 
 (use-package vertico
   :straight (:files (:defaults "extensions/*"))
-  :config (setq vertico-resize 'grow-only)
+  :config
+  (setq vertico-resize 'grow-only)
+  ;; https://github.com/minad/consult#miscellaneous
+  (setq completion-in-region-function
+        (lambda (&rest args)
+          (apply (if vertico-mode
+                     #'consult-completion-in-region
+                   #'completion--in-region)
+                 args)))
   :init
   (vertico-mode))
 
@@ -431,7 +438,7 @@
 (use-package orderless
   :straight t
   :init
-  (setq completion-styles '(orderless)
+  (setq completion-styles '(orderless basic)
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
 
@@ -457,8 +464,7 @@
 (use-package org
   :straight t
   :config
-  (setq org-hide-emphasis-markers t
-        org-log-done 'time
+  (setq org-log-done 'time
         org-src-fontify-natively t)
   (with-eval-after-load 'org
     (org-babel-do-load-languages
@@ -537,13 +543,26 @@
          ("i" . god-local-mode)
          ("[" . backward-paragraph)
          ("]" . forward-paragraph)
-
+         ("/" . isearch-forward)
+         ("?" . isearch-backward)
+         ("u" . undo)
          ("." . repeat))
   :config
   (add-hook 'god-mode-enabled-hook (lambda () (hl-line-mode 1)))
   (add-hook 'god-mode-disabled-hook (lambda () (hl-line-mode -1))))
 
-;;; help
+(defun my-god-mode-after-save-hook ()
+  (unless god-local-mode
+    (god-local-mode)))
+
+(defun my-god-mode-after-save-hook ()
+  (unless god-local-mode
+    (god-local-mode)))
+
+;; (add-hook 'after-save-hook 'my-god-mode-after-save-hook)
+;; (add-hook 'prog-mode-hook 'god-local-mode)
+
+;;; h(add-hook 'prog-mode-hook 'god-local-mode)elp
 
 (use-package which-key
   :straight t
