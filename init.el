@@ -551,19 +551,6 @@
   (add-hook 'god-mode-enabled-hook (lambda () (hl-line-mode 1)))
   (add-hook 'god-mode-disabled-hook (lambda () (hl-line-mode -1))))
 
-(defun my-god-mode-after-save-hook ()
-  (unless god-local-mode
-    (god-local-mode)))
-
-(defun my-god-mode-after-save-hook ()
-  (unless god-local-mode
-    (god-local-mode)))
-
-;; (add-hook 'after-save-hook 'my-god-mode-after-save-hook)
-;; (add-hook 'prog-mode-hook 'god-local-mode)
-
-;;; h(add-hook 'prog-mode-hook 'god-local-mode)elp
-
 (use-package which-key
   :straight t
   :config
