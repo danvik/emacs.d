@@ -341,7 +341,8 @@
 
 (use-package magit
   :straight t
-  :bind ("C-c v" . magit-status)
+  :bind (("C-c v" . magit-status)
+         ("C-c V" . magit-file-dispatch))
   :config
   (setq magit-save-repository-buffers 'dontask
         magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
