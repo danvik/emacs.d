@@ -451,14 +451,11 @@
         corfu-count 10)
   (setq tab-always-indent 'complete)
   :init
-  (corfu-global-mode))
+  (global-corfu-mode))
 
-(use-package cape
-  :straight t)
+(use-package cape :straight t)
 
-(use-package savehist
-  :init
-  (savehist-mode))
+(savehist-mode)
 
 ;;; org
 
@@ -486,11 +483,9 @@
 
 ;; brew install pandoc
 ;; brew cask install basictex
-(dolist (export-package '(htmlize ox-twbs ox-reveal ox-pandoc))
-  (straight-use-package export-package))
-
-(with-eval-after-load 'ox
-  (require 'ox-pandoc))
+(use-package htmlize :straight t)
+(use-package ox-reveal :straight t)
+(use-package ox-pandoc :straight t)
 
 (unless at-work
   (use-package org-web-tools
