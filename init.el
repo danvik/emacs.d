@@ -654,3 +654,8 @@
   (straight-use-package package))
 
 (load-theme 'modus-operandi t)
+
+(progn
+  (cd user-emacs-directory)
+  (find-file user-init-file)
+  (delete-other-windows))
