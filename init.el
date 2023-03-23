@@ -8,6 +8,7 @@
 ;;; bootstrap `straight-use-package'
 
 (progn
+  (setq straight-repository-branch "develop")
   (defvar bootstrap-version)
   (let ((bootstrap-file
          (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -24,7 +25,9 @@
   ;; https://github.com/raxod502/straight.el/issues/700
   (setq straight-recipes-emacsmirror-use-mirror nil)
 
-  (straight-use-package 'use-package))
+  (straight-use-package 'use-package)
+
+  (add-to-list 'straight-built-in-pseudo-packages 'project))
 
 ;;; local settings and variables
 
