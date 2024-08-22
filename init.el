@@ -25,7 +25,11 @@
   ;; https://github.com/raxod502/straight.el/issues/700
   (setq straight-recipes-emacsmirror-use-mirror nil)
 
-  (straight-use-package 'use-package)
+  (if (fboundp 'use-package)
+      (add-to-list 'straight-built-in-pseudo-packages 'use-package)
+    (straight-use-package 'use-package))
+
+  (setq use-package-verbose 't)
 
   (add-to-list 'straight-built-in-pseudo-packages 'project))
 
@@ -34,7 +38,7 @@
 (defconst system-type-darwin (eq system-type 'darwin)
   "Mac or not.")
 
-(defconst at-work (file-directory-p (concat (expand-file-name "~") "/work"))
+(defconst at-work (file-directory-p (file-name-concat (expand-file-name "~") "/work"))
   "What computer is this.")
 
 (defvar local-settings-file "~/.priv/elisp/local.el"
@@ -76,10 +80,8 @@
 
 (setq gc-cons-threshold 100000000
       ring-bell-function 'ignore
-      ffap-machine-p-known 'reject
+      recenter-positions '(top middle bottom)
       confirm-kill-emacs #'yes-or-no-p)
-
-(setq recenter-positions '(top middle bottom))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -97,12 +99,20 @@
   :straight t
   :config (exec-path-from-shell-initialize))
 
+(use-package server
+  :config
+  (unless (server-running-p)
+    (server-start)))
+
 ;;; editing
 
-(set-language-environment 'utf-8)
+(repeat-mode)
 
-(setq delete-selection-mode t
-      sentence-end-double-space nil
+(set-language-environment 'utf-8)
+(delete-selection-mode t)
+(electric-pair-mode)
+
+(setq sentence-end-double-space nil
       save-interprogram-paste-before-kill t)
 
 (setq-default indent-tabs-mode nil
@@ -111,70 +121,13 @@
 
 (show-paren-mode 1)
 
-(use-package easy-kill
-  :straight t
-  :bind (:map easy-kill-base-map
-              ("DEL" . (lambda ()
-                         (interactive)
-                         (easy-kill-mark-region)
-                         (call-interactively #'delete-region)))
-              (";" . (lambda ()
-                       (interactive)
-                       (easy-kill-mark-region)
-                       (call-interactively #'comment-dwim-2)))
-              ("j" . easy-kill-expand)
-              ("k" . easy-kill-shrink)
-              ("m" . easy-kill-mark-region))
-  :init
-  (setq easy-kill-unhighlight-key (kbd "RET"))
-
-  (global-set-key [remap kill-ring-save] 'easy-kill)
-  (global-set-key [remap mark-sexp] 'easy-mark))
-
 (use-package editorconfig
   :straight t
   :config (editorconfig-mode +1))
 
-(use-package drag-stuff
-  :straight t
-  :hook (prog-mode . drag-stuff-mode)
-  :config
-  (drag-stuff-define-keys))
-
-(use-package ispell
-  :config
-  (when (executable-find "aspell")
-    (setq-default ispell-program-name "aspell")))
-
-(use-package smartparens
-  :straight t
-  :init
-  (require 'smartparens-config)
-  (smartparens-global-mode t))
-
-(use-package comment-dwim-2
-  :straight t
-  :bind ("M-;" . comment-dwim-2))
-
-(use-package expand-region
-  :straight t
-  :bind ("C-=" . er/expand-region))
-
-(use-package iedit
-  :straight t
-  :bind ("C-;" . iedit-mode))
-
 (use-package goto-last-change
   :straight t
   :bind ("M-g ." . goto-last-change))
-
-(use-package multiple-cursors
-  :straight t
-  :bind
-  (("C->"         . mc/mark-next-like-this)
-   ("C-<"         . mc/mark-previous-like-this)
-   ("C-c C-<"     . mc/mark-all-like-this)
-   ("C-S-c C-S-c" . mc/edit-lines)))
 
 (use-package avy
   :straight t
@@ -185,16 +138,7 @@
          ("M-g g" . avy-goto-line))
   :config (setq avy-all-windows nil))
 
-(use-package embrace
-  :straight t
-  :bind (("C-c e" . embrace-change)
-         ("C-c E" . embrace-commander)))
-
 ;;; visual aid
-
-(use-package page-break-lines
-  :straight t
-  :init (global-page-break-lines-mode))
 
 (use-package hl-todo
   :straight t
@@ -204,36 +148,27 @@
   :straight t
   :hook ((prog-mode yaml-mode) . highlight-numbers-mode))
 
-(use-package hl-line
-  :bind (:map my-toggle-prefix-map ("h" . hl-line-mode)))
-
 (use-package display-line-numbers
   :bind (:map my-toggle-prefix-map ("l" . display-line-numbers-mode)))
 
 (use-package olivetti
   :straight t
-  :config (setq-default olivetti-body-width 0.5)
+  :config (setq-default olivetti-body-width 0.7)
   :bind (:map my-toggle-prefix-map
               ("o" . olivetti-mode)))
 
-(use-package all-the-icons
+(use-package mood-line
   :straight t
-  :config (setq all-the-icons-scale-factor 1.1)
-  :init
-  (when (and (display-graphic-p) (not (member "all-the-icons" (font-family-list))))
-    (all-the-icons-install-fonts nil)))
+  :custom (mood-line-format mood-line-format-default)
+  :config (mood-line-mode))
 
-(use-package doom-modeline
-  :requires all-the-icons
+(use-package spacious-padding
   :straight t
-  :config (setq doom-modeline-buffer-encoding 'nondefault)
-  :init (doom-modeline-mode))
+  :config (spacious-padding-mode))
 
-(use-package server
-  :config
-  (unless (server-running-p)
-    (server-start)))
-
+(use-package page-break-lines
+  :straight t
+  :hook (emacs-lisp-mode page-break-lines-mode))
 
 ;;; buffers / windows
 
@@ -280,6 +215,8 @@
 
 ;;; files
 
+(setq delete-by-moving-to-trash t)
+
 (use-package recentf
   :config
   (setq recentf-exclude '("deft/" ".gpg")
@@ -301,25 +238,10 @@
   :init
   (super-save-mode +1))
 
-;;; lsp
-
-(use-package lsp-mode
-  :straight t
-  :config
-  (setq lsp-enable-links nil
-        lsp-signature-auto-activate t
-        lsp-signature-doc-lines 1
-        lsp-signature-render-documentation t
-        lsp-headerline-breadcrumb-enable nil))
-
-(use-package lsp-ui
-  :straight t
-  :config
-  (setq lsp-ui-peek-enable nil))
-
 ;;; flycheck
 
 (use-package flycheck
+  ;; NOTE: replace with builtin flymake?
   :straight t
   :bind (:map my-toggle-prefix-map
               ("f" . flycheck-mode))
@@ -329,26 +251,18 @@
 
 ;;; projects / vc
 
-(straight-use-package 'git-link)
-(straight-use-package 'project)
+(setq project-vc-extra-root-markers '(".project.el"))
 
-(use-package projectile
+(use-package git-link
   :straight t
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
-  :config
-  (setq projectile-use-git-grep t
-        projectile-completion-system 'default
-        projectile-switch-project-action #'magit-status)
-  (projectile-mode))
+  :custom (git-link-default-branch "main"))
 
 (use-package magit
   :straight t
-  :bind (("C-c v" . magit-status)
-         ("C-c V" . magit-file-dispatch))
+  :bind ("C-c v" . magit-status)
   :config
   (setq magit-save-repository-buffers 'dontask
-        magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1))
+        magit-display-buffer-function #'display-buffer))
 
 ;;; completion
 
@@ -361,8 +275,6 @@
          ("M-g i" . consult-imenu)
          ("M-g I" . consult-imenu-multi)
          ("M-g o" . consult-outline)
-         ("C-c r" . consult-register)
-         ("C-c R" . consult-register-store)
          ("M-s l" . consult-line)
          ("M-s M-l" . consult-line-multi)
          ("M-g SPC" . consult-mark)
@@ -386,14 +298,16 @@
                                                      (and buffer-undo-list (buffer-file-name)))))))
     "Edited buffers candidate source for `consult-buffer'.")
 
-  (add-to-list 'consult-buffer-sources 'my-consult--source-edited-buffers)
+  ;; NOTE: feels like always `edited' is on top of the list but `buffer' would
+  ;; be nicer?
+  (add-to-list 'consult-buffer-sources 'my-consult--source-edited-buffers t)
 
   (setq xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref))
 
-
 (use-package consult-dir
   :straight t
+  :config (setq consult-dir-default-command #'dired)
   :bind (("C-x C-d" . consult-dir)
          :map vertico-map
          ("C-x C-d" . consult-dir)
@@ -426,19 +340,6 @@
   :init
   (vertico-mode))
 
-(progn
-  (vertico-multiform-mode t)
-  ;; (setq vertico-multiform-categories
-  ;;       '((file buffer)
-  ;;         (imenu buffer)
-  ;;         (grep buffer)))
-
-  (setq vertico-multiform-commands
-        '((consult-imenu buffer)
-          (consult-grep buffer)
-          (consult-outline buffer)
-          (consult-git-grep buffer))))
-
 (use-package orderless
   :straight t
   :init
@@ -446,7 +347,20 @@
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
 
+(progn
+  (vertico-multiform-mode t)
+  (setq vertico-multiform-commands
+        '((consult-imenu buffer)
+          (consult-grep buffer)
+          (consult-outline buffer)
+          (consult-git-grep buffer)
+          (consult-line buffer)
+
+          (execute-extended-command unobtrusive))))
+
+
 (use-package corfu
+  ;; Enable `corfu-popupinfo-mode' to get info popup about selected candidate
   :straight t
   :config
   (setq corfu-auto t
@@ -474,21 +388,14 @@
 
 (use-package ox-md)
 
-;; TODO: check `orglink-activate-in-modes'
+(use-package ox-pandoc
+  :if (executable-find "pandoc")
+  :straight t)
 
 (use-package orglink
+  ;; TODO: check `orglink-activate-in-modes'
   :straight t
   :config (global-orglink-mode))
-
-(use-package worf
-  :straight t
-  :hook (org-mode . worf-mode))
-
-;; brew install pandoc
-;; brew cask install basictex
-(use-package htmlize :straight t)
-(use-package ox-reveal :straight t)
-(use-package ox-pandoc :straight t)
 
 (unless at-work
   (use-package org-web-tools
@@ -516,61 +423,16 @@
   :straight t
   :bind ("C-c g" . deadgrep))
 
+(use-package wgrep
+  :straight t)
+
 ;;; util apps
 
-(use-package deft
+(use-package elfeed
   :straight t
-  :init
-  (setq deft-extensions '("org")
-        deft-text-mode 'org-mode
-        deft-directory "~/.deft/"
-        deft-auto-save-interval 5.0)
-  (unless (file-exists-p deft-directory)
-    (when (yes-or-no-p (format "Directory %s does not exists, create?" deft-directory))
-      (mkdir deft-directory))))
-
-(straight-use-package 'elfeed)
-
-;;; god
-
-(use-package god-mode
-  :straight t
-  :bind (("<escape>" . god-local-mode)
-         :map my-toggle-prefix-map
-         ("g" . god-local-mode)
-         :map god-local-mode-map
-         ("i" . god-local-mode)
-         ("[" . backward-paragraph)
-         ("]" . forward-paragraph)
-         ("/" . isearch-forward)
-         ("?" . isearch-backward)
-         ("u" . undo)
-         ("." . repeat))
-  :config
-  (add-hook 'god-mode-enabled-hook (lambda () (hl-line-mode 1)))
-  (add-hook 'god-mode-disabled-hook (lambda () (hl-line-mode -1))))
-
-(use-package which-key
-  :straight t
-  :config
-  (setq which-key-popup-type 'side-window
-        which-key-side-window-location 'bottom)
-  (which-key-mode))
-
-;;; crux
-
-(use-package crux
-  :straight t
-  :bind (("C-c d" . crux-duplicate-current-line-or-region)
-         ("C-c D" . crux-duplicate-and-comment-current-line-or-region)
-         ("C-c <tab>" . crux-indent-defun)))
+  :bind (:map elfeed-search-mode-map ("l" . recenter-top-bottom)))
 
 ;;; defuns
-
-(defun my-insert-current-time ()
-  (interactive)
-  (let ((time-str))
-    (insert (format-time-string "%R "))))
 
 (defun my-paste-to-new-buffer ()
   (interactive)
@@ -591,24 +453,17 @@
 
 ;;; programming
 
-
 (add-hook 'ruby-mode-hook 'superword-mode)
 
 (dolist (package
          '(dockerfile-mode
            fish-mode
-           impatient-mode
            know-your-http-well
-           lice
            markdown-mode
            nim-mode
-           php-mode
+           erlang
            yaml-mode))
   (straight-use-package package))
-
-(use-package dumb-jump
-  :straight t
-  :config (add-hook 'xref-backend-functions 'dumb-jump-xref-activate))
 
 (use-package lispy
   :straight t
@@ -616,44 +471,160 @@
 
 (use-package go-mode
   :straight t
-  :hook (go-mode . lsp-deferred)
-  :config
-  (defun lsp-go-install-save-hooks ()
-    (add-hook 'before-save-hook #'lsp-format-buffer t t)
-    (add-hook 'before-save-hook #'lsp-organize-imports t t))
-
-  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
-
-(use-package erlang
-  :straight t
-  :disabled t
-  :config
-  (when (and system-type-darwin (executable-find "erl") (executable-find "brew"))
-    (setq erlang-root-dir (replace-regexp-in-string "\n$" "" (shell-command-to-string "brew --prefix erlang")))))
+  :hook (go-mode . eglot-ensure))
 
 (use-package rust-mode
   :straight t
-  :hook (rust-mode . lsp))
+  :hook (rust-mode . eglot-ensure))
 
 (use-package cargo
   :straight t
   :hook (rust-mode . cargo-minor-mode))
 
-(repeat-mode)
-
 ;;; themes
 
-(dolist (package
-         '(dracula-theme
-           nord-theme
-           solarized-theme
-           doom-themes
-           ef-themes))
-  (straight-use-package package))
+(straight-use-package 'ef-themes)
+(straight-use-package 'doom-themes)
 
-(load-theme 'modus-operandi t)
+(load-theme 'ef-frost t)
 
 (progn
-  (cd user-emacs-directory)
-  (find-file user-init-file)
-  (delete-other-windows))
+  ;; TODO: set `meow-use-clipboard' to have `p' paste from system clipboard
+  ;; https://www.youtube.com/watch?v=MPSkyfOp5H8&t=4624s
+  (use-package meow
+    :straight t)
+  (defun meow-setup ()
+    (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+    ;; NOTE: this thing messes with `magit'
+    ;; (meow-motion-overwrite-define-key
+    ;;  '("j" . meow-next)
+    ;;  '("k" . meow-prev)
+    ;;  '("<escape>" . ignore))
+    (meow-leader-define-key
+     ;; bindings for `SPC'
+     ;; SPC runs the command meow-keypad
+     '("j" . dired-jump)
+     '("k" . kill-buffer)
+     '("w" . avy-goto-word-1)
+     '("b" . consult-buffer)
+     '("i" . consult-imenu)
+     '("o" . other-window)
+     '("." . embark-act)
+     ;; '("p" . "C-x p")
+     (cons "p" project-prefix-map)
+     ;; Use SPC (0-9) for digit arguments.
+     '("1" . meow-digit-argument)
+     '("2" . meow-digit-argument)
+     '("3" . meow-digit-argument)
+     '("4" . meow-digit-argument)
+     '("5" . meow-digit-argument)
+     '("6" . meow-digit-argument)
+     '("7" . meow-digit-argument)
+     '("8" . meow-digit-argument)
+     '("9" . meow-digit-argument)
+     '("0" . meow-digit-argument)
+     '("/" . meow-keypad-describe-key)
+     '("?" . meow-cheatsheet))
+    (meow-normal-define-key
+     '("0" . meow-expand-0)
+     '("9" . meow-expand-9)
+     '("8" . meow-expand-8)
+     '("7" . meow-expand-7)
+     '("6" . meow-expand-6)
+     '("5" . meow-expand-5)
+     '("4" . meow-expand-4)
+     '("3" . meow-expand-3)
+     '("2" . meow-expand-2)
+     '("1" . meow-expand-1)
+     '("-" . negative-argument)
+     '(";" . meow-reverse)
+     '("," . meow-inner-of-thing)
+     '("." . meow-bounds-of-thing)
+     '("[" . meow-beginning-of-thing)
+     '("]" . meow-end-of-thing)
+     '("a" . meow-append)
+     '("A" . meow-open-below)
+     '("b" . meow-back-word)
+     '("B" . meow-back-symbol)
+     '("c" . meow-change)
+     '("d" . meow-delete)
+     '("D" . meow-backward-delete)
+     '("e" . meow-next-word)
+     '("E" . meow-next-symbol)
+     '("f" . meow-find)
+     '("g" . meow-cancel-selection)
+     '("G" . meow-grab)
+     '("h" . meow-left)
+     '("H" . meow-left-expand)
+     '("i" . meow-insert)
+     '("I" . meow-open-above)
+     '("j" . meow-next)
+     '("J" . meow-next-expand)
+     '("k" . meow-prev)
+     '("K" . meow-prev-expand)
+     '("l" . meow-right)
+     '("L" . meow-right-expand)
+     '("m" . meow-join)
+     '("n" . meow-search)
+     '("o" . meow-block)
+     '("O" . meow-to-block)
+     '("p" . meow-yank)
+     '("q" . meow-quit)
+     '("Q" . meow-goto-line)
+     '("r" . meow-replace)
+     '("R" . meow-swap-grab)
+     '("s" . meow-kill)
+     '("t" . meow-till)
+     '("u" . meow-undo)
+     '("U" . meow-undo-in-selection)
+     '("v" . meow-visit)
+     '("w" . meow-mark-word)
+     '("W" . meow-mark-symbol)
+     '("x" . meow-line)
+     '("X" . meow-goto-line)
+     '("y" . meow-save)
+     '("Y" . meow-sync-grab)
+     '("z" . meow-pop-selection)
+     '("'" . repeat)
+     '("<escape>" . ignore)))
+  (meow-setup)
+  (meow-global-mode 1)
+  ;; https://www.reddit.com/r/emacs/comments/ra3w6n/comment/hnnoie7/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+  )
+
+(defun my-move-to-scratch ()
+  (interactive)
+  (when (region-active-p)
+    (kill-region (region-beginning) (region-end))
+    (let ((scratch-file (expand-file-name "scratch.el" user-emacs-directory)))
+      (with-current-buffer (or (get-file-buffer scratch-file) (find-file-other-window scratch-file))
+        (goto-char (point-max))
+        (insert "\n")
+        (yank)))))
+
+(use-package activities
+  :disabled
+  :straight t
+  :init
+  (activities-mode)
+  (activities-tabs-mode)
+  ;; Prevent `edebug' default bindings from interfering.
+  (setq edebug-inhibit-emacs-lisp-mode-bindings t)
+
+  :bind
+  (("C-x C-a C-n" . activities-new)
+   ("C-x C-a C-d" . activities-define)
+   ("C-x C-a C-a" . activities-resume)
+   ("C-x C-a C-s" . activities-suspend)
+   ("C-x C-a C-k" . activities-kill)
+   ("C-x C-a RET" . activities-switch)
+   ("C-x C-a b" . activities-switch-buffer)
+   ("C-x C-a g" . activities-revert)
+   ("C-x C-a l" . activities-list)))
+
+(use-package substitute
+  :straight t)
+
+(call-interactively 'use-package-report)
+
+;; (eshell/alias "clear" "clear t")

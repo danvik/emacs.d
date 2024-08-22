@@ -5,7 +5,7 @@
 ### Install Emacs with homebrew
 
 Install GUI version of emacs with
-
+https://github.com/d12frosted/homebrew-emacs-plus
 `brew install emacs-plus@28 --with-native-comp`
 
 ### Run Emacs as service
