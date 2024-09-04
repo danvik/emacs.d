@@ -114,6 +114,10 @@
 
 (show-paren-mode 1)
 
+(use-package comment-dwim-2
+  :straight t
+  :bind ("M-;" . comment-dwim-2))
+
 (use-package editorconfig
   :straight t
   :config (editorconfig-mode +1))
