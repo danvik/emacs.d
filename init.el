@@ -238,16 +238,12 @@
   :init
   (super-save-mode +1))
 
-;;; flycheck
 
-(use-package flycheck
-  ;; NOTE: replace with builtin flymake?
-  :straight t
+;; flymake
+
+(use-package flymake
   :bind (:map my-toggle-prefix-map
-              ("f" . flycheck-mode))
-  :init
-  (setq flycheck-checker-error-threshold 500
-        flycheck-check-syntax-automatically '(mode-enabled save)))
+              ("f" . flymake-mode)))
 
 ;;; projects / vc
 
