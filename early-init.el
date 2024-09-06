@@ -8,9 +8,9 @@
       frame-inhibit-implied-resize t
       inhibit-startup-screen t)
 
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
+(push '(menu-bar-lines . 0) default-frame-alist)
+(push '(tool-bar-lines . 0) default-frame-alist)
+(push '(vertical-scroll-bars) default-frame-alist)
 
 (provide 'early-init)
 
