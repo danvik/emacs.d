@@ -43,6 +43,12 @@
 (when (file-exists-p local-settings-file)
   (load local-settings-file ))
 
+(use-package esup
+  :straight t
+  :init
+  ;; https://github.com/progfolio/elpaca/issues/23
+  (setq esup-depth 0))
+
 ;;; custom
 
 (straight-use-package 'no-littering)
