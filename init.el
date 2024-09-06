@@ -617,7 +617,3 @@
 
 (use-package substitute
   :straight t)
-
-(call-interactively 'use-package-report)
-
-;; (eshell/alias "clear" "clear t")
