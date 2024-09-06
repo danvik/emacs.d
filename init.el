@@ -165,7 +165,7 @@
 
 (use-package page-break-lines
   :straight t
-  :hook (emacs-lisp-mode page-break-lines-mode))
+  :config (global-page-break-lines-mode))
 
 ;;; buffers / windows
 
