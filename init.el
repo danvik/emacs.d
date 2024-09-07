@@ -305,22 +305,21 @@
   (add-to-list 'consult-buffer-sources 'my-consult--source-edited-buffers t)
 
   (setq xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref))
+        xref-show-definitions-function #'consult-xref)
 
-(use-package consult-dir
-  :straight t
-  :config (setq consult-dir-default-command #'dired)
-  :bind (("C-x C-d" . consult-dir)
-         :map vertico-map
-         ("C-x C-d" . consult-dir)
-         ("C-x C-j" . consult-dir-jump-file)))
+  (use-package consult-dir
+    :straight t
+    :config (setq consult-dir-default-command #'dired)
+    :bind (("C-x C-d" . consult-dir)
+           :map vertico-map
+           ("C-x C-d" . consult-dir)
+           ("C-x C-j" . consult-dir-jump-file)))
+
+  (straight-use-package 'embark-consult))
 
 (use-package embark
   :straight t
   :bind ("C-." . embark-act))
-
-
-(straight-use-package 'embark-consult)
 
 (use-package marginalia
   :straight t
