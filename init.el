@@ -472,11 +472,11 @@
 
 (use-package rust-mode
   :straight t
-  :hook (rust-mode . eglot-ensure))
-
-(use-package cargo
-  :straight t
-  :hook (rust-mode . cargo-minor-mode))
+  :hook (rust-mode . eglot-ensure)
+  :config
+  (use-package cargo
+    :straight t
+    :hook (rust-mode . cargo-minor-mode)))
 
 ;;; themes
 
