@@ -338,27 +338,23 @@
                      #'consult-completion-in-region
                    #'completion--in-region)
                  args)))
-  :init
-  (vertico-mode))
-
-(use-package orderless
-  :straight t
-  :init
-  (setq completion-styles '(orderless basic)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion)))))
-
-(progn
-  (vertico-multiform-mode t)
   (setq vertico-multiform-commands
         '((consult-imenu buffer)
           (consult-grep buffer)
           (consult-outline buffer)
           (consult-git-grep buffer)
           (consult-line buffer)
+          (execute-extended-command unobtrusive)))
+  :init
+  (vertico-mode)
+  (vertico-multiform-mode t)
 
-          (execute-extended-command unobtrusive))))
-
+  (use-package orderless
+    :straight t
+    :init
+    (setq completion-styles '(orderless basic)
+          completion-category-defaults nil
+          completion-category-overrides '((file (styles partial-completion))))))
 
 (use-package corfu
   ;; Enable `corfu-popupinfo-mode' to get info popup about selected candidate
