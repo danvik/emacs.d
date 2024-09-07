@@ -278,7 +278,11 @@
          ("M-g SPC" . consult-mark)
          ("M-g M-g" . consult-goto-line)
          :map org-mode-map
-         ("M-g o" . consult-org-heading))
+         ("M-g o" . consult-org-heading)
+         :map minibuffer-local-map
+         ("M-r" . consult-history)
+         :map project-prefix-map
+         ("b" . consult-project-buffer))
   :config
   (defvar my-consult--source-edited-buffers
     `(:name "Edited"
