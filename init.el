@@ -377,6 +377,7 @@
         corfu-count 10)
   (setq tab-always-indent 'complete)
   :init
+  (corfu-popupinfo-mode t)
   (global-corfu-mode))
 
 (savehist-mode)
