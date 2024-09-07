@@ -363,13 +363,7 @@
     :init
     (marginalia-mode t)))
 
-
-
-
-
-
 (use-package corfu
-  ;; Enable `corfu-popupinfo-mode' to get info popup about selected candidate
   :straight t
   :config
   (setq corfu-auto t
