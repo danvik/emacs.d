@@ -42,13 +42,11 @@
 (defvar org-bookmarks-file nil
   "File used for org capture of book")
 
-(when (file-exists-p local-settings-file)
-  (load local-settings-file ))
+(load local-settings-file t)
 
 (use-package esup
   :straight t
   :init
-  ;; https://github.com/progfolio/elpaca/issues/23
   (setq esup-depth 0))
 
 ;;; custom
