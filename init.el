@@ -446,7 +446,8 @@
            markdown-mode
            nim-mode
            erlang
-           yaml-mode))
+           yaml-mode
+           lua-mode))
   (straight-use-package package))
 
 (use-package lispy
