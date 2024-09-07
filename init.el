@@ -367,8 +367,6 @@
   :init
   (global-corfu-mode))
 
-(use-package cape :straight t)
-
 (savehist-mode)
 
 ;;; org
