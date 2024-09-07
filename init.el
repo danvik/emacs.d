@@ -8,6 +8,8 @@
 ;;; bootstrap `straight-use-package'
 
 (defvar bootstrap-version)
+(setq straight-check-for-modifications '(check-on-save))
+
 (let ((bootstrap-file
        (expand-file-name
         "straight/repos/straight.el/bootstrap.el"
