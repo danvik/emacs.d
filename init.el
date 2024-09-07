@@ -253,8 +253,7 @@
 (setq project-vc-extra-root-markers '(".project.el"))
 
 (use-package git-link
-  :straight t
-  :custom (git-link-default-branch "main"))
+  :straight t)
 
 (use-package magit
   :straight t
