@@ -229,7 +229,9 @@
   (add-to-list 'recentf-exclude no-littering-var-directory)
   (add-to-list 'recentf-exclude no-littering-etc-directory)
   :init
-  (recentf-mode t))
+  (recentf-mode t)
+  (use-package consult
+    :bind ("C-x C-r" . consult-recent-file)))
 
 (use-package super-save
   :straight t
