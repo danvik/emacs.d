@@ -328,12 +328,6 @@
   :straight t
   :bind ("C-." . embark-act))
 
-(use-package marginalia
-  :straight t
-  :bind (:map minibuffer-local-map ("M-A" . marginalia-cycle))
-  :init
-  (marginalia-mode t))
-
 (use-package vertico
   :straight (:files (:defaults "extensions/*"))
   :config
@@ -361,7 +355,18 @@
     :init
     (setq completion-styles '(orderless basic)
           completion-category-defaults nil
-          completion-category-overrides '((file (styles partial-completion))))))
+          completion-category-overrides '((file (styles partial-completion)))))
+
+  (use-package marginalia
+    :straight t
+    :bind (:map minibuffer-local-map ("M-A" . marginalia-cycle))
+    :init
+    (marginalia-mode t)))
+
+
+
+
+
 
 (use-package corfu
   ;; Enable `corfu-popupinfo-mode' to get info popup about selected candidate
