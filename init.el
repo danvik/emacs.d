@@ -376,41 +376,30 @@
   :config
   (setq org-log-done 'time
         org-src-fontify-natively t)
-  (with-eval-after-load 'org
-    (org-babel-do-load-languages
-     'org-babel-load-languages '((shell . t)
-                                 (emacs-lisp . t)))))
 
-(use-package ox-md)
-
-(use-package ox-pandoc
-  :if (executable-find "pandoc")
-  :straight t)
-
-(use-package orglink
-  ;; TODO: check `orglink-activate-in-modes'
-  :straight t
-  :config (global-orglink-mode))
-
-(unless at-work
-  (use-package org-web-tools
+  (use-package ox-pandoc
+    :if (executable-find "pandoc")
     :straight t)
 
-  (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
+  (unless at-work
+    (use-package org-web-tools
+      :straight t)
 
-  (bind-keys :prefix "C-c o"
-             :prefix-map my-org-prefix-map
-             ("c" . org-capture)
-             ("a" . org-agenda))
+    (setq org-refile-targets '((org-agenda-files . (:maxlevel . 6))))
 
-  (setq org-capture-templates
-        '(
-          ("t" "Task"
-           entry (file+headline "" "Tasks")
-           "* TODO %?\n  %u\n  %a")
+    (bind-keys :prefix "C-c o"
+               :prefix-map my-org-prefix-map
+               ("c" . org-capture)
+               ("a" . org-agenda))
 
-          ("b" "Bookmark (Clipboard)" entry (file+headline org-bookmarks-file "new")
-           "** %(org-web-tools--org-link-for-url)\n:PROPERTIES:\n:TIMESTAMP: %t\n:END:%?\n" :empty-lines 1 :prepend t))))
+    (setq org-capture-templates
+          '(
+            ("t" "Task"
+             entry (file+headline "" "Tasks")
+             "* TODO %?\n  %u\n  %a")
+
+            ("b" "Bookmark (Clipboard)" entry (file+headline org-bookmarks-file "new")
+             "** %(org-web-tools--org-link-for-url)\n:PROPERTIES:\n:TIMESTAMP: %t\n:END:%?\n" :empty-lines 1 :prepend t)))))
 
 ;;; grep
 
