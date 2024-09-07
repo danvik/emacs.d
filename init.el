@@ -246,11 +246,14 @@
   (super-save-mode +1))
 
 
-;; flymake
+;;; flymake
 
 (use-package flymake
   :bind (:map my-toggle-prefix-map
-              ("f" . flymake-mode)))
+              ("f" . flymake-mode))
+  :init
+  (use-package consult
+    :bind ("C-c f" . consult-flymake)))
 
 ;;; projects / vc
 
