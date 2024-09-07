@@ -26,7 +26,6 @@
   (load bootstrap-file nil 'nomessage))
 
 (add-to-list 'straight-built-in-pseudo-packages 'project)
-(setq use-package-enable-imenu-support t)
 
 ;;; local settings and variables
 
@@ -48,6 +47,9 @@
   :straight t
   :init
   (setq esup-depth 0))
+
+(use-package use-package
+  :custom (use-package-enable-imenu-support t))
 
 ;;; custom
 
