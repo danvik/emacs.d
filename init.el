@@ -158,7 +158,7 @@
 
 (use-package olivetti
   :straight t
-  :config (setq-default olivetti-body-width 0.7)
+  :config (setq-default olivetti-body-width 0.5)
   :bind (:map my-toggle-prefix-map
               ("o" . olivetti-mode)))
 
