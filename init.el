@@ -132,15 +132,16 @@
 
 (use-package goto-last-change
   :straight t
-  :bind ("M-g ." . goto-last-change))
+  :bind ("M-g ." . goto-last-change)
+  :config
+  (defvar-keymap goto-last-change-repeat-map
+    :repeat t
+    "." #'goto-last-change))
 
 (use-package avy
   :straight t
   :bind (("M-g w" . avy-goto-word-1)
-         ("M-g l" . avy-goto-line)
-         ("M-g f" . avy-goto-char-in-line)
-         ("M-g M-l" . avy-copy-line)
-         ("M-g g" . avy-goto-line))
+         ("M-g l" . avy-goto-line))
   :config (setq avy-all-windows nil))
 
 ;;; visual aid
