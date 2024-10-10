@@ -195,10 +195,6 @@
   (setq uniquify-after-kill-buffer-p t)
   (setq uniquify-ignore-buffers-re "^\\*"))
 
-(use-package ace-window
-  :straight t
-  :bind ("C-x O" . ace-window))
-
 ;;; dired
 
 (use-package dired
