@@ -259,7 +259,7 @@
               ("f" . flymake-mode))
   :init
   (use-package consult
-    :bind ("C-c f" . consult-flymake)))
+    :bind ("C-c !" . consult-flymake)))
 
 ;;; projects / vc
 
@@ -290,6 +290,7 @@
          ("M-s M-l" . consult-line-multi)
          ("M-g SPC" . consult-mark)
          ("M-g M-g" . consult-goto-line)
+         ("C-c f" . consult-fd)
          :map org-mode-map
          ("M-g o" . consult-org-heading)
          :map minibuffer-local-map
