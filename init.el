@@ -259,7 +259,11 @@
 
 ;;; projects / vc
 
-(setq project-vc-extra-root-markers '(".project.el"))
+(use-package project
+  :bind (:map project-prefix-map
+              ("C-b" . consult-project-buffer))
+  :config
+  (setq project-vc-extra-root-markers '(".project.el")))
 
 (use-package git-link
   :straight t)
