@@ -178,8 +178,13 @@
 
 ;;; buffers / windows
 
-(straight-use-package 'rotate)
-(straight-use-package 'bufler)
+(use-package rotate
+  :straight t
+  :bind ("C-c r" . rotate-layout)
+  :config
+  (defvar-keymap rotate-repeat-map
+    :repeat t
+    "r" #'rotate-layout))
 
 (winner-mode t)
 
