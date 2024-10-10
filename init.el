@@ -74,12 +74,12 @@
 (blink-cursor-mode -1)
 
 (when (and (display-graphic-p) (member "Iosevka" (font-family-list)))
-  (set-frame-font "Iosevka-16")
-  (add-to-list 'default-frame-alist '(font . "Iosevka-16")))
+  (set-frame-font "Iosevka-14")
+  (add-to-list 'default-frame-alist '(font . "Iosevka-14")))
 
 ;;; general emacs settings
 
-(setq gc-cons-threshold 100000000
+(setq gc-cons-threshold most-positive-fixnum
       ring-bell-function 'ignore
       recenter-positions '(top middle bottom)
       confirm-kill-emacs #'yes-or-no-p)
