@@ -25,6 +25,7 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 
+(straight-use-package 'org)
 (add-to-list 'straight-built-in-pseudo-packages 'project)
 
 ;;; local settings and variables
